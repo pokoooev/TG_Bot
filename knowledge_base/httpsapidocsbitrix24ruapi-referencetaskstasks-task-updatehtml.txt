@@ -1,0 +1,312 @@
+# https://apidocs.bitrix24.ru/api-reference/tasks/tasks-task-update.html
+URL: https://apidocs.bitrix24.ru/api-reference/tasks/tasks-task-update.html
+
+## ОПИСАНИЕ
+Scope: task Кто может выполнять метод: Метод tasks.task.update обновляет задачу. Обязательные параметры отмечены * Название
+тип Описание taskId*
+integer Идентификатор задачи. Идентификатор задачи можно получить при создании новой задачи или методом получения списка задач fields*
+object Значения полей задачи. В параметре нужно передать хотя бы одно поле, иначе метод вернет ошибку. В метод можно передать параметр SE_PARAMETER — список объектов с дополнительными параметрами задачи. Возможные значения кодов CODE: Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+object Объект с данными ответа task
+object Объект с описанием задачи после выполнения операции time
+time Информация о времени выполнения запроса HTTP-статус: 400 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Описание Значение 0 wrong task id В параметре taskId указано значение неверного типа 100 CTaskItem All parameters in the constructor must have real class type (internal error) Не передан обязательный параметр taskId 0 Действие над задачей не разрешено (internal error) У пользователя нет прав обновление задачи или нет доступа к задаче 100 Could not find value for parameter {fields} (internal error) Не передан параметр fields или передан пустой ERROR_CORE Пользователь указанный в поле \u0026quot;Исполнитель\u0026quot; не найден\u003Cbr\u003E В поле RESPONSIBLE_ID указан идентификатор несуществующего пользователя ERROR_CORE Некорректный статус\u003Cbr\u003E Указано некорректное значение в поле STATUS ERROR_CORE Задача указанная в поле \u0026quot;Надзадача\u0026quot; не найдена\u003Cbr\u003E В поле PARENT_ID указан идентификатор несуществующей задачи ERROR_CORE Невозможно привязать узел к самому себе\u003Cbr\u003E В поле PARENT_ID указан идентификатор той же задачи, что и в параметре taskId ERROR_CORE Создание зацикленных связей в задачах запрещено\u003Cbr\u003E В поле PARENT_ID указан идентификатор подзадачи taskId. Подзадача не может стать базовой задачей ERROR_CORE В планировании сроков указана дата окончания меньшая даты старта\u003Cbr\u003E Дата и время в поле END_DATE_PLAN указано меньше, чем в START_DATE_PLAN ERROR_CORE В планировании сроков указана слишком большая длительность задачи\u003Cbr\u003E В значении поля END_DATE_PLAN указана слишком большая дата HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+SE_PARAMETER: [
+    {
+        VALUE: 'Y',
+        CODE: 3
+    },
+    {
+        VALUE: 'Y',
+        CODE: 2
+    }
+]
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"taskId":11,"fields":{"UF_CRM_TASK":["L_4","C_7","CO_5","D_10"],"UF_TASK_WEBDAV_FILES":["n12345","n67890"],"RESPONSIBLE_ID":123}}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/tasks.task.update
+---
+
+{
+    "result": {
+        "task": {
+            "id": "8157",
+            "title": "Пример задачи",
+            "description": "Описание задачи с [B]форматированием[/B]",
+            "description": "",
+            "mark": null,
+            "priority": "1",
+            "multitask": "N",
+            "notViewed": "N",
+            "replicate": "N",
+            "stageId": "0",
+            "sprintId": null,
+            "backlogId": null,
+            "createdBy": "503",
+            "createdDate": "2025-10-06T17:40:12+03:00",
+            "responsibleId": "503",
+            "changedBy": "503",
+            "changedDate": "2025-10-07T16:32:02+03:00",
+            "statusChangedBy": "503",
+            "closedBy": "0",
+            "closedDate": null,
+            "activityDate": "2025-10-07T16:29:55+03:00",
+            "dateStart": null,
+            "deadline": "2025-12-31T23:59:00+03:00",
+            "startDatePlan": "2024-11-02T11:06:00+03:00",
+            "endDatePlan": "2024-11-02T19:06:00+03:00",
+            "guid": "{1a90e51d-5423-4c1e-b1a2-664a519b4612}",
+            "xmlId": null,
+            "commentsCount": "4",
+            "serviceCommentsCount": "4",
+            "allowChangeDeadline": "N",
+            "allowTimeTracking": "N",
+            "taskControl": "N",
+            "addInReport": "N",
+            "forkedByTemplateId": null,
+            "timeEstimate": "0",
+            "timeSpentInLogs": null,
+            "matchWorkTime": "N",
+            "forumTopicId": "1439",
+            "forumId": "11",
+            "siteId": "s1",
+            "subordinate": "Y",
+            "exchangeModified": null,
+            "exchangeId": null,
+            "outlookVersion": "8",
+            "viewedDate": "2025-10-07T16:30:34+03:00",
+            "sorting": null,
+            "durationFact": null,
+            "isMuted": "N",
+            "isPinned": "N",
+            "isPinnedInGroup": "N",
+            "flowId": null,
+            "descriptionInBbcode": "Y",
+            "status": "2",
+            "statusChangedDate": "2025-10-07T16:22:24+03:00",
+            "durationPlan": "0",
+            "durationType": "days",
+            "favorite": "N",
+            "groupId": "0",
+            "auditors": ["503", "547"],
+            "accomplices": [],
+            "checklist": [],
+            "group": [],
+            "creator": {
+                "id": "503",
+                "name": "Мария Иванова",
+                "link": "/company/personal/user/503/",
+                "icon": "https://mysite.ru/b17053/resize_cache/45749/c0120a8d7c10d63c83e32398d1ec4d9e/main/c89/c89c6b7301880958ea704b5a8470635c/4R5A1256.png",
+                "workPosition": "Администратор"
+            },
+            "responsible": {
+                "id": "503",
+                "name": "Мария Иванова",
+                "link": "/company/personal/user/503/",
+                "icon": "https://mysite.ru/b17053/resize_cache/45749/c0120a8d7c10d63c83e32398d1ec4d9e/main/c89/c89c6b7301880958ea704b5a8470635c/4R5A1256.png",
+                "workPosition": "Администратор"
+            },
+            "accomplicesData": [],
+            "auditorsData": {
+                "547": {
+                    "id": "547",
+                    "name": "Елена",
+                    "link": "/company/personal/user/547/",
+                    "icon": "/bitrix/images/tasks/default_avatar.png",
+                    "workPosition": "Юрист"
+                }
+            },
+            "newCommentsCount": 0,
+            "action": {
+                "accept": false,
+                "decline": false,
+                "complete": true,
+                "approve": false,
+                "disapprove": false,
+                "start": true,
+                "pause": false,
+                "delegate": true,
+                "remove": true,
+                "edit": true,
+                "defer": true,
+                "renew": false,
+                "create": true,
+                "changeDeadline": true,
+                "checklistAddItems": true,
+                "addFavorite": true,
+                "deleteFavorite": false,
+                "rate": true,
+                "take": false,
+                "edit.originator": false,
+                "checklist.reorder": true,
+                "elapsedtime.add": true,
+                "dayplan.timer.toggle": false,
+                "edit.plan": true,
+                "checklist.add": true,
+                "favorite.add": true,
+                "favorite.delete": false
+            },
+            "checkListTree": {
+                "nodeId": 0,
+                "fields": {
+                    "id": null,
+                    "copiedId": null,
+                    "entityId": null,
+                    "userId": 503,
+                    "createdBy": null,
+                    "parentId": null,
+                    "title": "",
+                    "sortIndex": null,
+                    "displaySortIndex": "",
+                    "isComplete": false,
+                    "isImportant": false,
+                    "completedCount": 0,
+                    "members": [],
+                    "attachments": [],
+                    "nodeId": null
+                },
+                "action": [],
+                "descendants": []
+            },
+            "checkListCanAdd": true
+        }
+    },
+    "time": {
+        "start": 1759843922,
+        "finish": 1759843922.725389,
+        "duration": 0.7253890037536621,
+        "processing": 0,
+        "date_start": "2025-10-07T16:32:02+03:00",
+        "date_finish": "2025-10-07T16:32:02+03:00",
+        "operating_reset_at": 1759844522,
+        "operating": 0.4929828643798828
+    }
+}
+---
+
+{
+    "error": "ERROR_CORE",
+    "error_description": "Невозможно привязать узел к самому себе\u003Cbr\u003E"
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+taskId*
+integer | Идентификатор задачи.
+Идентификатор задачи можно получить при создании новой задачи или методом получения списка задач
+fields*
+object | Значения полей задачи. В параметре нужно передать хотя бы одно поле, иначе метод вернет ошибку.
+В метод можно передать параметр SE_PARAMETER — список объектов с дополнительными параметрами задачи. Возможные значения кодов CODE:
+1 — сроки определяются сроками подзадач
+2 — автоматически завершать задачу при завершении подзадач (и наоборот)
+3 — не завершать задачу без результата
+SE_PARAMETER: [
+    {
+        VALUE: 'Y',
+        CODE: 3
+    },
+    {
+        VALUE: 'Y',
+        CODE: 2
+    }
+]
+
+Таблица 1:
+result
+object | Объект с данными ответа
+task
+object | Объект с описанием задачи после выполнения операции
+time
+time | Информация о времени выполнения запроса
+
+Таблица 2:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 3:
+0 | wrong task id | В параметре taskId указано значение неверного типа
+100 | CTaskItem All parameters in the constructor must have real class type (internal error) | Не передан обязательный параметр taskId
+0 | Действие над задачей не разрешено (internal error) | У пользователя нет прав обновление задачи или нет доступа к задаче
+100 | Could not find value for parameter {fields} (internal error) | Не передан параметр fields или передан пустой
+ERROR_CORE | Пользователь указанный в поле \u0026quot;Исполнитель\u0026quot; не найден\u003Cbr\u003E | В поле RESPONSIBLE_ID указан идентификатор несуществующего пользователя
+ERROR_CORE | Некорректный статус\u003Cbr\u003E | Указано некорректное значение в поле STATUS
+ERROR_CORE | Задача указанная в поле \u0026quot;Надзадача\u0026quot; не найдена\u003Cbr\u003E | В поле PARENT_ID указан идентификатор несуществующей задачи
+ERROR_CORE | Невозможно привязать узел к самому себе\u003Cbr\u003E | В поле PARENT_ID указан идентификатор той же задачи, что и в параметре taskId
+ERROR_CORE | Создание зацикленных связей в задачах запрещено\u003Cbr\u003E | В поле PARENT_ID указан идентификатор подзадачи taskId. Подзадача не может стать базовой задачей
+ERROR_CORE | В планировании сроков указана дата окончания меньшая даты старта\u003Cbr\u003E | Дата и время в поле END_DATE_PLAN указано меньше, чем в START_DATE_PLAN
+ERROR_CORE | В планировании сроков указана слишком большая длительность задачи\u003Cbr\u003E | В значении поля END_DATE_PLAN указана слишком большая дата
+
+Таблица 4:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

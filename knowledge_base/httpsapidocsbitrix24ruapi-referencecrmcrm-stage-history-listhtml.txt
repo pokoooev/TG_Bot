@@ -1,0 +1,234 @@
+# https://apidocs.bitrix24.ru/api-reference/crm/crm-stage-history-list.html
+URL: https://apidocs.bitrix24.ru/api-reference/crm/crm-stage-history-list.html
+
+## ОПИСАНИЕ
+Scope: crm Кто может выполнять метод: любой пользователь Метод crm.stagehistory.list возвращает записи об истории движения по стадиям для элементов: Название
+тип Описание entityTypeId
+integer Идентификатор типа объекта. Может принимать значения: order
+object Список для сортировки, где ключ — поле, а значение — ASC или DESC filter
+object Список для фильтрации. Фильтр поддерживает использование точных значений, массивов значений, а также модификаторы: select
+object Список получаемых полей start
+integer Сдвиг для постраничной навигации. Логика работы с постраничной навигацией стандартная для списочных методов Как использовать примеры в документации Получить историю движения по стадиям для сделки с ID=1 Получить историю движения по стадиям для смарт-процесса с entityTypeId=130 и элементом OWNER_ID=29 HTTP-статус: 200 Название
+тип Описание result
+array Корневой элемент ответа, содержит массив записей items. Каждый объект — массив с ключами time
+time Информация о времени выполнения запроса Название
+тип Описание ID
+int Идентификатор записи TYPE_ID
+int Тип записи. Может принимать значения: OWNER_ID
+int Идентификатор объекта, в котором изменилась стадия CREATED_TIME
+datetime Идентификатор созданного элемента, равен времени перевода элемента на стадию Дополнительно есть специфичные для разных типов объектов поля: Название
+тип Описание STATUS_SEMANTIC_ID
+int Cемантика стадии: STATUS_ID
+int Идентификатор стадии HTTP-статус: 401, 400 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Статус Код Описание Значение 403 allowed_only_intranet_user Действие разрешено только интранет-пользователям Пользователь не является интранет-пользователем 400 ENTITY_TYPE_NOT_SUPPORTED Entity type TYPE is not supported Возникает при передаче невалидного entityTypeId 400 INVALID_ARG_VALUE Invalid filter: field 'field' is not allowed in filter Переданное в filter поле field недоступно для фильтрации 400 INVALID_ARG_VALUE Invalid filter: field 'field' has invalid value Переданное значение для поля field в filter некорректно 400 INVALID_ARG_VALUE Invalid order: field 'field' is not allowed in order Переданное в order поле field недоступно для сортировки 400 INVALID_ARG_VALUE Invalid order: allowed sort directions are ASC, DESC. But got 'orderValue' for field 'field' Переданное значение orderValue для поля field в параметр order некорректно HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+crm.stagehistory.list
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"entityTypeId":2,"order":{"ID":"ASC"},"filter":{"OWNER_ID":1},"select":["ID","STAGE_ID","CREATED_TIME"]}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/crm.stagehistory.list
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"entityTypeId":130,"order":{"ID":"ASC"},"filter":{"OWNER_ID":29},"select":["ID","STAGE_ID","CREATED_TIME"]}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/crm.stagehistory.list
+---
+
+{
+    "result": {
+        "items": [
+        {
+            "ID": 35,
+            "TYPE_ID": 1,
+            "OWNER_ID": 21,
+            "CREATED_TIME": "2024-04-25T14:59:11+00:00",
+            "CATEGORY_ID": 0,
+            "STAGE_SEMANTIC_ID": "P",
+            "STAGE_ID": "NEW"
+        }
+        ]
+    },
+    "total": 1,
+    "time": {
+        "start": 1724106224.858572,
+        "finish": 1724106225.344968,
+        "duration": 0.48639607429504395,
+        "processing": 0.11864185333251953,
+        "date_start": "2024-08-15T22:15:44+00:00",
+        "date_finish": "2024-08-15T22:15:45+00:00",
+        "operating": 0.11855506896972656
+    }
+}
+---
+
+{
+    "error": 0,
+    "error_description": "SHIPMENT_DOCUMENT entity is not supported"
+}
+---
+
+allowed_only_intranet_user
+---
+
+ENTITY_TYPE_NOT_SUPPORTED
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+entityTypeId
+integer | Идентификатор типа объекта. Может принимать значения:
+1 — лид,
+2 — сделка,
+5 — счет (старый),
+31 - счет (новый),
+числовой идентификатор пользовательского типа, например 130
+order
+object | Список для сортировки, где ключ — поле, а значение — ASC или DESC
+filter
+object | Список для фильтрации. Фильтр поддерживает использование точных значений, массивов значений, а также модификаторы:
+>= — больше либо равно
+> — больше
+<= — меньше либо равно
+< — меньше
+@ — IN, в качестве значения передается массив
+!@ — NOT IN, в качестве значения передается массив
+% — LIKE, поиск по подстроке. Символ % в значении фильтра передавать не нужно. Поиск ищет подстроку в любой позиции строки
+=% — LIKE, поиск по подстроке. Символ % нужно передавать в значении. Примеры:
+"мол%" — ищет значения, начинающиеся с «мол»
+"%мол" — ищет значения, заканчивающиеся на «мол»
+"%мол%" — ищет значения, где «мол» может быть в любой позиции
+%= — LIKE (аналогично =%)
+!% — NOT LIKE, поиск по подстроке. Символ % в значении фильтра передавать не нужно. Поиск идет с обеих сторон
+!=% — NOT LIKE, поиск по подстроке. Символ % нужно передавать в значении. Примеры:
+"мол%" — ищет значения, не начинающиеся с «мол»
+"%мол" — ищет значения, не заканчивающиеся на «мол»
+"%мол%" — ищет значения, где подстроки «мол» нет в любой позиции
+!%= — NOT LIKE (аналогично !=%)
+= — равно, точное совпадение (используется по умолчанию)
+!= — не равно
+! — не равно
+select
+object | Список получаемых полей
+start
+integer | Сдвиг для постраничной навигации. Логика работы с постраничной навигацией стандартная для списочных методов
+
+Таблица 1:
+result
+array | Корневой элемент ответа, содержит массив записей items. Каждый объект — массив с ключами
+time
+time | Информация о времени выполнения запроса
+
+Таблица 2:
+ID
+int | Идентификатор записи
+TYPE_ID
+int | Тип записи. Может принимать значения:
+1 — создание элемента,
+2 — перевод на промежуточную стадию,
+3 — перевод на финальную стадию,
+5 — смена воронки
+OWNER_ID
+int | Идентификатор объекта, в котором изменилась стадия
+CREATED_TIME
+datetime | Идентификатор созданного элемента, равен времени перевода элемента на стадию
+
+Таблица 3:
+STATUS_SEMANTIC_ID
+int | Cемантика стадии:
+P — промежуточная стадия,
+S — успешная стадия,
+F — провальная стадия
+STATUS_ID
+int | Идентификатор стадии
+
+Таблица 4:
+ | 
+ | 
+ | 
+
+Таблица 5:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 6:
+403 | allowed_only_intranet_user | Действие разрешено только интранет-пользователям | Пользователь не является интранет-пользователем
+400 | ENTITY_TYPE_NOT_SUPPORTED | Entity type TYPE is not supported | Возникает при передаче невалидного entityTypeId
+400 | INVALID_ARG_VALUE | Invalid filter: field 'field' is not allowed in filter | Переданное в filter поле field недоступно для фильтрации
+400 | INVALID_ARG_VALUE | Invalid filter: field 'field' has invalid value | Переданное значение для поля field в filter некорректно
+400 | INVALID_ARG_VALUE | Invalid order: field 'field' is not allowed in order | Переданное в order поле field недоступно для сортировки
+400 | INVALID_ARG_VALUE | Invalid order: allowed sort directions are ASC, DESC. But got 'orderValue' for field 'field' | Переданное значение orderValue для поля field в параметр order некорректно
+
+Таблица 7:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

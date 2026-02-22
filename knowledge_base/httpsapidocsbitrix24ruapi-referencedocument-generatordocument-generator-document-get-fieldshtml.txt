@@ -1,0 +1,13 @@
+# https://apidocs.bitrix24.ru/api-reference/document-generator/document-generator-document-get-fields.html
+URL: https://apidocs.bitrix24.ru/api-reference/document-generator/document-generator-document-get-fields.html
+
+## ОПИСАНИЕ
+Scope: documentgenerator Кто может выполнять метод: любой пользователь Метод documentgenerator.document.getfields возвращает список полей документа с их описанием. Возвращаемые значения абсолютно идентичны методу documentgenerator.template.getfields().
+
+## ПРИМЕРЫ КОДА
+
+documentgenerator.document.getfields
+---
+
+## ТАБЛИЦЫ
+Нет таблиц

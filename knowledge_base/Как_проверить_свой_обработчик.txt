@@ -1,0 +1,46 @@
+# Как проверить свой обработчик
+URL: https://apidocs.bitrix24.ru/api-reference/events/test-handler.html
+
+## ОПИСАНИЕ
+После регистрирации обработчика ONAPPTEST вручную вызывается метод event.test. Это вызывает срабатывание указанного события и позволяет убедиться, что обработчик действительно в состоянии принимать данные о событиях. Создайте файл handler.php на своём сервере. Убедитесь что он доступен из интернета. Рядом с файлом создайте папку \log. Код файла handler.php. Как использовать примеры в документации Зарегистрируйте событие, указав в поле handler путь до файла, созданного в шаге 1. Заставьте событие сработать вызовом метода с произвольными данными. При успешном вызове в папке \log создается файл со стандартными данными для событий.
+
+## ПРИМЕРЫ КОДА
+
+<?
+file_put_contents(
+    __DIR__ . '/log/' . time() . '.txt',
+    var_export($_REQUEST, true)
+);
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"event":"ONAPPTEST","handler":"https://example.com/handler.php","auth":"**put_access_token_here**"}' \
+https://**put_your_bitrix24_address**/rest/event.bind
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"any":"data","auth":"**put_access_token_here**"}' \
+https://**put_your_bitrix24_address**/rest/event.test
+---
+
+array (
+    'event' => 'ONAPPTEST',
+    'data' => 
+    array (
+        'QUERY' => 
+        array (
+        ' any' => 'data',
+        ),
+        'LANGUAGE_ID' => 'en',
+    ),
+    'ts' => '1573120286',
+    'auth' => array (...)
+)
+---
+
+## ТАБЛИЦЫ
+Нет таблиц

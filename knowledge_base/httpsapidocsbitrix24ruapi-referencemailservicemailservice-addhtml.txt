@@ -1,0 +1,56 @@
+# https://apidocs.bitrix24.ru/api-reference/mailservice/mailservice-add.html
+URL: https://apidocs.bitrix24.ru/api-reference/mailservice/mailservice-add.html
+
+## ОПИСАНИЕ
+Scope: mailservice Кто может выполнять метод: любой пользователь Метод mailservice.add добавляет новый почтовый сервис. Параметр / Тип Описание С версии ACTIVE
+unknown Активность сервиса (Y / N) NAME
+unknown Имя добавляемого почтового сервиса SERVER
+unknown Адрес добавляемого сервера PORT
+unknown Номер порта ENCRYPTION
+unknown Необходимость шифрования (Y / N) LINK
+unknown Ссылка на почтовый сервис SORT
+unknown Индекс сортировки Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  "mailservice.add",
+  {
+   'ACTIVE': 'Y',
+   'NAME': 'Мой почтовый сервис',
+   'SERVER': 'imap.my-mail.ru',
+   'PORT': '993',
+   'ENCRYPTION': 'Y',
+   'LINK': 'https://mail.my-mail.ru/',
+   'SORT': '500'
+  }
+ );
+ 
+ const result = response.getData().result;
+ console.info(result);
+}
+catch( error )
+{
+ console.error(error);
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+ACTIVE
+unknown | Активность сервиса (Y / N) | 
+NAME
+unknown | Имя добавляемого почтового сервиса | 
+SERVER
+unknown | Адрес добавляемого сервера | 
+PORT
+unknown | Номер порта | 
+ENCRYPTION
+unknown | Необходимость шифрования (Y / N) | 
+LINK
+unknown | Ссылка на почтовый сервис | 
+SORT
+unknown | Индекс сортировки | 

@@ -1,0 +1,20 @@
+# https://apidocs.bitrix24.ru/api-reference/telephony/telephony-external-call-hide.html
+URL: https://apidocs.bitrix24.ru/api-reference/telephony/telephony-external-call-hide.html
+
+## ОПИСАНИЕ
+Scope: telephony Кто может выполнять метод: любой пользователь Метод telephony.externalcall.hide скрывает карточку звонка у пользователя. Параметр / Тип Описание CALL_ID*
+string Идентификатор звонка из метода telephony.externalcall.register. USER_ID*
+int Идентификатор, либо массив идентификаторов пользователей, у которых надо скрыть звонок, если карточка показывается не у одного пользователя. Обязательные параметры отмечены *
+
+## ПРИМЕРЫ КОДА
+
+telephony.externalcall.hide
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+CALL_ID*
+string | Идентификатор звонка из метода telephony.externalcall.register.
+USER_ID*
+int | Идентификатор, либо массив идентификаторов пользователей, у которых надо скрыть звонок, если карточка показывается не у одного пользователя.

@@ -1,0 +1,32 @@
+# Удалить сервис
+URL: https://apidocs.bitrix24.ru/api-reference/ai/ai-engine-unregister.html
+
+## ОПИСАНИЕ
+Scope: ai_admin Кто может выполнять метод: администратор Метод для удаления engine. Параметры Описание code
+unknown Код engine Как использовать примеры в документации В случае успеха возвращает true.
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  'ai.engine.unregister',
+  {
+   code: 'ivanov_gpt',
+  }
+ );
+ 
+ const result = response.getData().result;
+ console.info(result);
+}
+catch( error )
+{
+ console.error(error);
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+code
+unknown | Код engine

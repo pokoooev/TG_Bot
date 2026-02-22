@@ -1,0 +1,23 @@
+# https://apidocs.bitrix24.ru/api-reference/telephony/telephony-external-call-show.html
+URL: https://apidocs.bitrix24.ru/api-reference/telephony/telephony-external-call-show.html
+
+## ОПИСАНИЕ
+Scope: telephony Кто может выполнять метод: любой пользователь Метод telephony.externalcall.show показывает карточку звонка пользователю. Параметр / Тип Описание CALL_ID*
+string Идентификатор звонка из метода telephony.externalcall.register. USER_ID
+int Идентификатор, либо массив идентификаторов пользователей в стандартном для PHP формате: USER_ID[0]=11&USER_ID[1]=24&USER_ID[2]=31. Обязательные параметры отмечены *
+
+## ПРИМЕРЫ КОДА
+
+telephony.externalcall.show
+---
+
+USER_ID[0]=11&USER_ID[1]=24&USER_ID[2]=31
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+CALL_ID*
+string | Идентификатор звонка из метода telephony.externalcall.register.
+USER_ID
+int | Идентификатор, либо массив идентификаторов пользователей в стандартном для PHP формате: USER_ID[0]=11&USER_ID[1]=24&USER_ID[2]=31.

@@ -1,0 +1,13 @@
+# Получить список линий/номеров
+URL: https://apidocs.bitrix24.ru/api-reference/telephony/telephony-external-line-get.html
+
+## ОПИСАНИЕ
+Scope: telephony Кто может выполнять метод: администратор Метод telephony.externalLine.get позволяет получить список внешних линий приложения. Без параметров.
+
+## ПРИМЕРЫ КОДА
+
+telephony.externalLine.get
+---
+
+## ТАБЛИЦЫ
+Нет таблиц

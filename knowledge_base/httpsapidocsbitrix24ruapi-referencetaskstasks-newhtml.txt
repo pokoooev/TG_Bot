@@ -1,0 +1,62 @@
+# https://apidocs.bitrix24.ru/api-reference/tasks/tasks-new.html
+URL: https://apidocs.bitrix24.ru/api-reference/tasks/tasks-new.html
+
+## ОПИСАНИЕ
+Новая карточка задач перевела комментарии в чат. Старые методы задач продолжают работать, кроме операций с комментариями. Изменения доступны с версии модуля tasks 25.700.0. Пример ответа: Запросите у задачи поля chat.id, chat.entityId, chat.entityType: Пример ответа: С версии модуля tasks 25.700.0 доступен вызов некоторых методов в новом формате. Вызов нового api отличается добавлением параметра /api/ в запрос. Старая версия: https://{адрес_установки}/rest/{id_пользователя}/{пароль_rest-приложения}/tasks.task.get Новая версия: https://{адрес_установки}/rest/api/{id_пользователя}/{пароль_rest-приложения}/tasks.task.get Для новой версии вызова метода доступна документация в формате OpenApi. Для получения OpenApi вызовите метод documentation: https://{адрес_установки}/rest/api/{id_пользователя}/{пароль_rest-приложения}/documentation Событие OnTaskCommentAdd работает. При работе с новой карточкой задачи в обработчик будут приходить параметры: События OnTaskCommentUpdate и OnTaskCommentDelete не работают в новой карточке. Метод tasks.task.result.list работает. При работе с новой карточкой задачи все результаты задачи будут возвращаться с параметром commentId: 0. Методы tasks.task.result.addFromComment и tasks.task.result.deleteFromComment не работают в новой карточке. Расположение мест встроек TASK_VIEW_SIDEBAR, TASK_VIEW_TOP_PANEL, TASK_VIEW_TAB не актуально в новой карточке задач. В новой карточке все встройки выводятся в едином блоке «Приложения». Все ранее зарегистрированные встройки продолжают работать. Можно регистрировать новые встройки, они также будут показаны в блоке «Приложения».
+
+## ПРИМЕРЫ КОДА
+
+POST https://{адрес_установки}/rest/{id_пользователя}/{пароль_rest-приложения}/tasks.task.get
+{
+    "taskId": 51,
+    "select": ["CHAT_ID"]
+}
+---
+
+{
+    "result": {
+        "task": {
+            "id": "3835",
+            "chatId": 2537,
+            "favorite": "N",
+            "group": [],
+            "action": {
+                ...
+            }
+        }
+    }
+}
+---
+
+POST https://{адрес_установки}/rest/api/{id_пользователя}/{пароль_rest-приложения}/tasks.task.get
+{
+    "id": 51,
+    "select": ["id", "chat.id", "chat.entityId", "chat.entityType"]
+}
+---
+
+{
+    "result": {
+        "item": {
+            "id": 51,
+            "chat": {
+                "id": 58,
+                "entityId": 51,
+                "entityType": "TASKS_TASK"
+            }
+        }
+    }
+}
+---
+
+https://{адрес_установки}/rest/{id_пользователя}/{пароль_rest-приложения}/tasks.task.get
+---
+
+https://{адрес_установки}/rest/api/{id_пользователя}/{пароль_rest-приложения}/tasks.task.get
+---
+
+https://{адрес_установки}/rest/api/{id_пользователя}/{пароль_rest-приложения}/documentation
+---
+
+## ТАБЛИЦЫ
+Нет таблиц

@@ -1,0 +1,204 @@
+# https://apidocs.bitrix24.ru/api-reference/pay-system/sale-pay-system-handler-list.html
+URL: https://apidocs.bitrix24.ru/api-reference/pay-system/sale-pay-system-handler-list.html
+
+## ОПИСАНИЕ
+Scope: pay_system Кто может выполнять метод: администратор CRM (право «Разрешить изменять настройки») Метод возвращает список REST-обработчиков платежной системы. Без параметров. Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+sale_paysystem_handler[] Список зарегистрированных REST-обработчиков платежных систем time
+time Информация о времени выполнения запроса HTTP-статус: 403 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Описание Статус ACCESS_DENIED Доступ запрещен. Приложение пытается изменить обработчик, добавленный другим приложением, либо недостаточно прав для обновления обработчика 403 HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/sale.paysystem.handler.list
+---
+
+{
+    "result": [
+        {
+            "ID": "1",
+            "NAME": "Обработчик Rest",
+            "CODE": "resthandlercodedoc",
+            "SORT": "100",
+            "SETTINGS": {
+                "CURRENCY": [
+                    "RUB"
+                ],
+                "FORM_DATA": {
+                    "ACTION_URI": "http://example.com/payment_form.php",
+                    "METHOD": "POST",
+                    "FIELDS": {
+                        "phone": {
+                            "VISIBLE": "Y",
+                            "CODE": {
+                                "NAME": "Номер телефона",
+                                "TYPE": "STRING"
+                            }
+                        },
+                        "paymentId": {
+                            "CODE": "PAYMENT_ID",
+                            "VISIBLE": "Y"
+                        },
+                        "serviceid": {
+                            "CODE": "REST_SERVICE_ID"
+                        }
+                    }
+                },
+                "CODES": {
+                    "REST_SERVICE_ID": {
+                        "NAME": "Номер магазина",
+                        "DESCRIPTION": "Номер магазина",
+                        "SORT": "100"
+                    },
+                    "REST_SERVICE_KEY": {
+                        "NAME": "Секретный ключ",
+                        "DESCRIPTION": "Секретный ключ",
+                        "SORT": "300"
+                    },
+                    "PAYMENT_ID": {
+                        "NAME": "Номер оплаты",
+                        "SORT": "400",
+                        "GROUP": "PAYMENT",
+                        "DEFAULT": {
+                            "PROVIDER_KEY": "PAYMENT",
+                            "PROVIDER_VALUE": "ACCOUNT_NUMBER"
+                        }
+                    },
+                    "PS_CHANGE_STATUS_PAY": {
+                        "NAME": "Автоматическая смена статуса оплаты",
+                        "SORT": "700",
+                        "INPUT": {
+                            "TYPE": "Y/N"
+                        }
+                    },
+                    "PAYMENT_BUYER_ID": {
+                        "NAME": "Код покупателя",
+                        "SORT": "1000",
+                        "GROUP": "PAYMENT",
+                        "DEFAULT": {
+                            "PROVIDER_KEY": "ORDER",
+                            "PROVIDER_VALUE": "USER_ID"
+                        }
+                    },
+                    "PS_WORK_MODE": {
+                        "NAME": "Режим работы платёжной системы",
+                        "SORT": "1100",
+                        "INPUT": {
+                            "TYPE": "ENUM",
+                            "OPTIONS": {
+                                "TEST": "Тестовый",
+                                "REGULAR": "Рабочий"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "time": {
+        "start": 1712135335.026931,
+        "finish": 1712135335.407762,
+        "duration": 0.3808310031890869,
+        "processing": 0.0336611270904541,
+        "date_start": "2024-04-03T11:08:55+02:00",
+        "date_finish": "2024-04-03T11:08:55+02:00",
+        "operating_reset_at": 1705765533,
+        "operating": 3.3076241016387939
+    }
+}
+---
+
+sale_paysystem_handler[]
+---
+
+{
+    "error": "ACCESS_DENIED",
+    "error_description": "Access denied!"
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+result
+sale_paysystem_handler[] | Список зарегистрированных REST-обработчиков платежных систем
+time
+time | Информация о времени выполнения запроса
+
+Таблица 1:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 2:
+ACCESS_DENIED | Доступ запрещен. Приложение пытается изменить обработчик, добавленный другим приложением, либо недостаточно прав для обновления обработчика | 403
+
+Таблица 3:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

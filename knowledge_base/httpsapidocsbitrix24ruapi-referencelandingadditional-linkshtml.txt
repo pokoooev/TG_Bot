@@ -1,0 +1,11 @@
+# https://apidocs.bitrix24.ru/api-reference/landing/additional-links.html
+URL: https://apidocs.bitrix24.ru/api-reference/landing/additional-links.html
+
+## ОПИСАНИЕ
+Несколько ссылок, которые могут быть полезны разработчикам при работе с функционалом Сайты:
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+Нет таблиц

@@ -1,0 +1,36 @@
+# Просмотреть пользователей, прочитавших важное сообщение
+URL: https://apidocs.bitrix24.ru/api-reference/log/log-blogpost-getusers-important.html
+
+## ОПИСАНИЕ
+Scope: log Кто может выполнять метод: любой пользователь Отдает массив идентификаторов пользователей, прочитавших указанное важное сообщение. Параметр Описание POST_ID ID сообщения ленты новостей, являющегося важным сообщением. Обязательные параметры отмечены * Как использовать примеры в документации 200 OK
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  'log.blogpost.getusers.important',
+  {
+   POST_ID: 345
+  }
+ );
+ 
+ const result = response.getData().result;
+ console.log(result);
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+https://my.bitrix24.ru/rest/log.blogpost.getusers.important.json?POST_ID=345&auth=xxxxxxx
+---
+
+{"result":["1","2","3"]}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+POST_ID | ID сообщения ленты новостей, являющегося важным сообщением.

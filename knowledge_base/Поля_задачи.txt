@@ -1,0 +1,546 @@
+# Поля задачи
+URL: https://apidocs.bitrix24.ru/api-reference/tasks/fields.html
+
+## ОПИСАНИЕ
+Запись и изменение полей производится согласно бизнес-логике и с учетом прав пользователя. То есть зависит от роли пользователя, настроек прав на группу, иерархии, статуса задачи и некоторых флагов в задаче, например, allowChangeDeadline. Название
+тип Описание id
+string Идентификатор задачи parentId
+string Идентификатор родительской задачи. Имеет значение null, если родительской задачи нет title
+string Название задачи description
+string Описание задачи chatId
+integer Идентификатор чата для новой карточки задачи mark
+string Оценка задачи. Возможные значения:
+N — отрицательная
+P — положительная
+null — без оценки priority
+string Приоритет задачи. Возможные значения: multitask
+string Признак «базовая задача с подзадачами». Возможные значения: notViewed
+string Признак «не просмотрено». Возможные значения: replicate
+string Признак «повторять задачу». Возможные значения: stageId
+string Идентификатор стадии sprintId
+string Идентификатор спринта backlogId
+string Идентификатор бэклога createdBy
+string Идентификатор постановщика createdDate
+string Дата создания в формате ISO 8601 responsibleId
+string Идентификатор ответственного changedBy
+string Идентификатор пользователя, изменившего задачу changedDate
+string Дата изменения в формате ISO 8601 statusChangedBy
+string Идентификатор пользователя, изменившего статус задачи closedBy
+string Идентификатор пользователя, завершившего задачу. Имеет значение 0, если задача не завершена closedDate
+string Дата завершения в формате ISO 8601. Имеет значение null, если задача не завершена activityDate
+string Дата последней активности в формате ISO 8601 dateStart
+string Дата начала deadline
+string Крайний срок startDatePlan
+string Плановая дата начала endDatePlan
+string Плановая дата окончания guid
+string Идентификатор GUID задачи xmlId
+string Внешний идентификатор commentsCount
+string Количество комментариев serviceCommentsCount
+string Количество системных комментариев allowChangeDeadline
+string Разрешено менять крайний срок. Возможные значения: allowTimeTracking
+string Разрешено учитывать время. Возможные значения: taskControl
+string Контроль задачи включен. Возможные значения: addInReport
+string Добавлять в отчет. Возможные значения: forkedByTemplateId
+string Идентификатор шаблона, если задача создана из шаблона timeEstimate
+string Оценка времени в секундах timeSpentInLogs
+string Фактически затраченное время matchWorkTime
+string Учитывать рабочее время. Возможные значения: forumTopicId
+string Идентификатор темы комментариев forumId
+string Идентификатор форума siteId
+string Идентификатор сайта subordinate
+string Признак того, что задача я вляется подзадачей. Возможные значения: exchangeModified
+string Дата изменения синхронизацией в формате ISO 8601 exchangeId
+string Идентификатор синхронизации outlookVersion
+string Версия viewedDate
+string Дата просмотра задачи в формате ISO 8601 sorting
+string Значение сортировки durationFact
+string Фактическая длительность isMuted
+string Признак «без звука». Возможные значения: isPinned
+string Признак «закреплено». Возможные значения: isPinnedInGroup
+string Признак «закреплена в группе». Возможные значения: flowId
+string Идентификатор потока descriptionInBbcode
+string Описание в формате BBCode. Возможные значения: status
+string Статус задачи. Возможные значения: statusChangedDate
+string Дата изменения статуса в формате ISO 8601 durationPlan
+string Плановая длительность durationType
+string Единица плановой длительности. Возможные значения: secs, mins, hours, days, weeks, monts, years favorite
+string Признак «в избранном». Возможные значения: groupId
+string Идентификатор группы, к которой привязана задача auditors
+array Список идентификаторов пользователей — наблюдателей за задачей accomplices
+array Список идентификаторов пользователей — соисполнителей checklist
+object Объект с пунктами чек-листа. Ключ — идентификатор пункта, значение — объект с описанием пункта group
+object Объект с описанием группы creator
+object Объект с описанием пользователя — постановщика задачи responsible
+object Объект с описанием пользователя — ответственного за задачу accomplicesData
+array Объект с описанием пользователей — соисполнителей. Ключ объекта — идентификатор пользователя, а значение — объект с описанием пользователя auditorsData
+object Объект с описанием пользователей — наблюдателей за задачей. Ключ объекта — идентификатор пользователя, а значение — объект с описанием пользователя newCommentsCount
+integer Количество новых комментариев action
+object Объект с описанием доступных действий над задачей checkListTree
+object Объект с описанием дерева чек-листа checkListCanAdd
+boolean Можно ли добавлять пункты чек-листа UF_CRM_TASK
+array Список привязок к элементам CRM в формате: UF_TASK_WEBDAV_FILES
+array Список файлов с Диска UF_MAIL_MESSAGE
+string Письмо email UF_*
+any Пользовательские поля. Подробнее в статье Пользовательские поля в задачах: обзор методов Чтобы получить пользовательские поля задачи, используйте методы выборки tasks.task.get и tasks.task.list. Укажите нужные поля в параметре SELECT. Таким же образом можно получить системные пользовательские поля: UF_CRM_TASK, UF_TASK_WEBDAV_FILES, UF_MAIL_MESSAGE. Название
+тип Описание id
+string Идентификатор пункта taskId
+string Идентификатор задачи createdBy
+string Идентификатор автора пункта parentId
+string Родительский пункт. Значение 0 означает корневой пункт title
+string Заголовок пункта sortIndex
+string Индекс сортировки isComplete
+string Признак завершенности. Возможные значения: isImportant
+string Признак важности. Возможные значения: toggledBy
+string Идентификатор пользователя, изменившего статус пункта toggledDate
+string Дата изменения статуса пункта в формате ISO 8601 ufChecklistFiles
+boolean Признак наличия файлов в пункте members
+array Список участников пункта attachments
+array Список вложений пункта entityId
+string Идентификатор задачи action
+object Объект с описанием доступных действий над пунктом Название
+тип Описание modify
+boolean Доступно изменение пункта remove
+boolean Доступно удаление пункта toggle
+boolean Доступно переключение статуса пункта add
+boolean Доступно добавление подпункта addAccomplice
+boolean Доступно добавление соисполнителя в пункт Название
+тип Описание id
+string Идентификатор группы name
+string Название группы opened
+boolean Признак открытой группы membersCount
+integer Количество участников группы image
+string URL изображения группы additionalData
+array Дополнительные данные группы Название
+тип Описание id
+string Идентификатор пользователя name
+string Имя и фамилия пользователя link
+string Ссылка на профиль пользователя icon
+string URL аватара пользователя workPosition
+string Должность пользователя Название
+тип Описание accept
+boolean Доступно принять задачу. Устаревшее поле, больше не используется decline
+boolean Доступно отказаться от задачи. Устаревшее поле, больше не используется complete
+boolean Доступно завершить задачу approve
+boolean Доступно принять работу исполнителя по задаче при включенном контроле taskControl disapprove
+boolean Доступно выбрать, что исполнителю нужно доделать работу по задаче при включенном контроле taskControl start
+boolean Доступно начать выполнение pause
+boolean Доступно приостановить выполнение delegate
+boolean Доступно делегирование remove
+boolean Доступно удаление задачи edit
+boolean Доступно редактирование defer
+boolean Доступно отложить задачу renew
+boolean Доступно возобновление create
+boolean Доступно создание связанных задач changeDeadline
+boolean Доступно изменение крайнего срока checklistAddItems
+boolean Доступно добавление пунктов чек-листа addFavorite
+boolean Доступно добавление в избранное deleteFavorite
+boolean Доступно удаление из избранного rate
+boolean Доступно выставление оценки take
+boolean Доступно взять задачу в работу edit.originator
+boolean Доступно редактирование постановщика checklist.reorder
+boolean Доступна смена порядка пунктов чек-листа elapsedtime.add
+boolean Доступно добавление трудозатрат dayplan.timer.toggle
+boolean Доступно управление таймером в плане на день edit.plan
+boolean Доступно редактирование плановых параметров checklist.add
+boolean Доступно добавление чек-листа favorite.add
+boolean Доступно добавление в избранное favorite.delete
+boolean Доступно удаление из избранного Название
+тип Описание nodeId
+integer Идентификатор корневого узла дерева чек-листа fields
+object Объект с описанием полей узла action
+array Массив доступных действий для узла descendants
+array Массив дочерних узлов Название
+тип Описание id
+string Идентификатор пункта для корня copiedId
+string Идентификатор источника при копировании entityId
+string Идентификатор задачи userId
+integer Идентификатор пользователя, формирующего дерево createdBy
+string Идентификатор автора пункта parentId
+string Идентификатор родителя title
+string Заголовок пункта sortIndex
+string Индекс сортировки displaySortIndex
+string Отображаемый индекс сортировки isComplete
+boolean Признак завершенности пункта isImportant
+boolean Признак важности пункта completedCount
+integer Количество завершенных подпунктов members
+array Массив участников пункта attachments
+array Массив вложений пункта nodeId
+string Идентификатор узла
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+id
+string | Идентификатор задачи | 
+parentId
+string | Идентификатор родительской задачи.
+Имеет значение null, если родительской задачи нет | 
+title
+string | Название задачи | 
+description
+string | Описание задачи | 
+chatId
+integer | Идентификатор чата для новой карточки задачи | 
+mark
+string | Оценка задачи. Возможные значения:
+N — отрицательная
+P — положительная
+null — без оценки | 
+priority
+string | Приоритет задачи. Возможные значения:
+2 — высокий
+1 — средний
+0 — низкий | 
+multitask
+string | Признак «базовая задача с подзадачами». Возможные значения:
+Y — да
+N — нет | 
+notViewed
+string | Признак «не просмотрено». Возможные значения:
+Y — не просмотрено
+N — просмотрено | 
+replicate
+string | Признак «повторять задачу». Возможные значения:
+Y — да, сделать задачу регулярной
+N — не повторять | 
+stageId
+string | Идентификатор стадии | 
+sprintId
+string | Идентификатор спринта | 
+backlogId
+string | Идентификатор бэклога | 
+createdBy
+string | Идентификатор постановщика | 
+createdDate
+string | Дата создания в формате ISO 8601 | 
+responsibleId
+string | Идентификатор ответственного | 
+changedBy
+string | Идентификатор пользователя, изменившего задачу | 
+changedDate
+string | Дата изменения в формате ISO 8601 | 
+statusChangedBy
+string | Идентификатор пользователя, изменившего статус задачи | 
+closedBy
+string | Идентификатор пользователя, завершившего задачу. Имеет значение 0, если задача не завершена | 
+closedDate
+string | Дата завершения в формате ISO 8601. Имеет значение null, если задача не завершена | 
+activityDate
+string | Дата последней активности в формате ISO 8601 | 
+dateStart
+string | Дата начала | 
+deadline
+string | Крайний срок | 
+startDatePlan
+string | Плановая дата начала | 
+endDatePlan
+string | Плановая дата окончания | 
+guid
+string | Идентификатор GUID задачи | 
+xmlId
+string | Внешний идентификатор | 
+commentsCount
+string | Количество комментариев | 
+serviceCommentsCount
+string | Количество системных комментариев | 
+allowChangeDeadline
+string | Разрешено менять крайний срок. Возможные значения:
+Y — разрешено
+N — не разрешено | 
+allowTimeTracking
+string | Разрешено учитывать время. Возможные значения:
+Y — разрешено
+N — не разрешено | 
+taskControl
+string | Контроль задачи включен. Возможные значения:
+Y — включен
+N — отключен | 
+addInReport
+string | Добавлять в отчет. Возможные значения:
+Y — добавлять
+N — не добавлять | 
+forkedByTemplateId
+string | Идентификатор шаблона, если задача создана из шаблона | 
+timeEstimate
+string | Оценка времени в секундах | 
+timeSpentInLogs
+string | Фактически затраченное время | 
+matchWorkTime
+string | Учитывать рабочее время. Возможные значения:
+Y — да
+N — нет | 
+forumTopicId
+string | Идентификатор темы комментариев | 
+forumId
+string | Идентификатор форума | 
+siteId
+string | Идентификатор сайта | 
+subordinate
+string | Признак того, что задача я вляется подзадачей. Возможные значения:
+Y — да
+N — нет | 
+exchangeModified
+string | Дата изменения синхронизацией в формате ISO 8601 | 
+exchangeId
+string | Идентификатор синхронизации | 
+outlookVersion
+string | Версия | 
+viewedDate
+string | Дата просмотра задачи в формате ISO 8601 | 
+sorting
+string | Значение сортировки | 
+durationFact
+string | Фактическая длительность | 
+isMuted
+string | Признак «без звука». Возможные значения:
+Y — включен
+N — выключен | 
+isPinned
+string | Признак «закреплено». Возможные значения:
+Y — включен
+N — выключен | 
+isPinnedInGroup
+string | Признак «закреплена в группе». Возможные значения:
+Y — закреплена
+N — не закреплена | 
+flowId
+string | Идентификатор потока | 
+descriptionInBbcode
+string | Описание в формате BBCode. Возможные значения:
+Y — включено
+N — выключено | 
+status
+string | Статус задачи. Возможные значения:
+2 — ждет выполнения
+3 — выполняется
+4 — ожидает контроля
+5 — завершена
+6 — отложена | 
+statusChangedDate
+string | Дата изменения статуса в формате ISO 8601 | 
+durationPlan
+string | Плановая длительность | 
+durationType
+string | Единица плановой длительности. Возможные значения: secs, mins, hours, days, weeks, monts, years | 
+favorite
+string | Признак «в избранном». Возможные значения:
+Y — добавлено в избранное
+N — не добавлено в избранное | 
+groupId
+string | Идентификатор группы, к которой привязана задача | 
+auditors
+array | Список идентификаторов пользователей — наблюдателей за задачей | 
+accomplices
+array | Список идентификаторов пользователей — соисполнителей | 
+checklist
+object | Объект с пунктами чек-листа. Ключ — идентификатор пункта, значение — объект с описанием пункта | 
+group
+object | Объект с описанием группы | 
+creator
+object | Объект с описанием пользователя — постановщика задачи | 
+responsible
+object | Объект с описанием пользователя — ответственного за задачу | 
+accomplicesData
+array | Объект с описанием пользователей — соисполнителей.
+Ключ объекта — идентификатор пользователя, а значение — объект с описанием пользователя | 
+auditorsData
+object | Объект с описанием пользователей — наблюдателей за задачей.
+Ключ объекта — идентификатор пользователя, а значение — объект с описанием пользователя | 
+newCommentsCount
+integer | Количество новых комментариев | 
+action
+object | Объект с описанием доступных действий над задачей | 
+checkListTree
+object | Объект с описанием дерева чек-листа | 
+checkListCanAdd
+boolean | Можно ли добавлять пункты чек-листа | 
+UF_CRM_TASK
+array | Список привязок к элементам CRM в формате:
+L_XX — лид,
+D_XX — сделка
+C_XX — контакт
+CO_XX — компания
+SI_XX — счет
+TXX_XX — смарт-процесс | 
+UF_TASK_WEBDAV_FILES
+array | Список файлов с Диска | 
+UF_MAIL_MESSAGE
+string | Письмо email | 
+UF_*
+any | Пользовательские поля.
+Подробнее в статье Пользовательские поля в задачах: обзор методов | 
+
+Таблица 1:
+id
+string | Идентификатор пункта
+taskId
+string | Идентификатор задачи
+createdBy
+string | Идентификатор автора пункта
+parentId
+string | Родительский пункт. Значение 0 означает корневой пункт
+title
+string | Заголовок пункта
+sortIndex
+string | Индекс сортировки
+isComplete
+string | Признак завершенности. Возможные значения:
+Y — пункт выполнен
+N — пункт не выполнен
+isImportant
+string | Признак важности. Возможные значения:
+Y — важный
+N — не важный
+toggledBy
+string | Идентификатор пользователя, изменившего статус пункта
+toggledDate
+string | Дата изменения статуса пункта в формате ISO 8601
+ufChecklistFiles
+boolean | Признак наличия файлов в пункте
+members
+array | Список участников пункта
+attachments
+array | Список вложений пункта
+entityId
+string | Идентификатор задачи
+action
+object | Объект с описанием доступных действий над пунктом
+
+Таблица 2:
+modify
+boolean | Доступно изменение пункта
+remove
+boolean | Доступно удаление пункта
+toggle
+boolean | Доступно переключение статуса пункта
+add
+boolean | Доступно добавление подпункта
+addAccomplice
+boolean | Доступно добавление соисполнителя в пункт
+
+Таблица 3:
+id
+string | Идентификатор группы
+name
+string | Название группы
+opened
+boolean | Признак открытой группы
+membersCount
+integer | Количество участников группы
+image
+string | URL изображения группы
+additionalData
+array | Дополнительные данные группы
+
+Таблица 4:
+id
+string | Идентификатор пользователя
+name
+string | Имя и фамилия пользователя
+link
+string | Ссылка на профиль пользователя
+icon
+string | URL аватара пользователя
+workPosition
+string | Должность пользователя
+
+Таблица 5:
+accept
+boolean | Доступно принять задачу. Устаревшее поле, больше не используется
+decline
+boolean | Доступно отказаться от задачи. Устаревшее поле, больше не используется
+complete
+boolean | Доступно завершить задачу
+approve
+boolean | Доступно принять работу исполнителя по задаче при включенном контроле taskControl
+disapprove
+boolean | Доступно выбрать, что исполнителю нужно доделать работу по задаче при включенном контроле taskControl
+start
+boolean | Доступно начать выполнение
+pause
+boolean | Доступно приостановить выполнение
+delegate
+boolean | Доступно делегирование
+remove
+boolean | Доступно удаление задачи
+edit
+boolean | Доступно редактирование
+defer
+boolean | Доступно отложить задачу
+renew
+boolean | Доступно возобновление
+create
+boolean | Доступно создание связанных задач
+changeDeadline
+boolean | Доступно изменение крайнего срока
+checklistAddItems
+boolean | Доступно добавление пунктов чек-листа
+addFavorite
+boolean | Доступно добавление в избранное
+deleteFavorite
+boolean | Доступно удаление из избранного
+rate
+boolean | Доступно выставление оценки
+take
+boolean | Доступно взять задачу в работу
+edit.originator
+boolean | Доступно редактирование постановщика
+checklist.reorder
+boolean | Доступна смена порядка пунктов чек-листа
+elapsedtime.add
+boolean | Доступно добавление трудозатрат
+dayplan.timer.toggle
+boolean | Доступно управление таймером в плане на день
+edit.plan
+boolean | Доступно редактирование плановых параметров
+checklist.add
+boolean | Доступно добавление чек-листа
+favorite.add
+boolean | Доступно добавление в избранное
+favorite.delete
+boolean | Доступно удаление из избранного
+
+Таблица 6:
+nodeId
+integer | Идентификатор корневого узла дерева чек-листа
+fields
+object | Объект с описанием полей узла
+action
+array | Массив доступных действий для узла
+descendants
+array | Массив дочерних узлов
+
+Таблица 7:
+id
+string | Идентификатор пункта для корня
+copiedId
+string | Идентификатор источника при копировании
+entityId
+string | Идентификатор задачи
+userId
+integer | Идентификатор пользователя, формирующего дерево
+createdBy
+string | Идентификатор автора пункта
+parentId
+string | Идентификатор родителя
+title
+string | Заголовок пункта
+sortIndex
+string | Индекс сортировки
+displaySortIndex
+string | Отображаемый индекс сортировки
+isComplete
+boolean | Признак завершенности пункта
+isImportant
+boolean | Признак важности пункта
+completedCount
+integer | Количество завершенных подпунктов
+members
+array | Массив участников пункта
+attachments
+array | Массив вложений пункта
+nodeId
+string | Идентификатор узла

@@ -1,0 +1,69 @@
+# https://apidocs.bitrix24.ru/api-reference/document-generator/index.html
+URL: https://apidocs.bitrix24.ru/api-reference/document-generator/index.html
+
+## ОПИСАНИЕ
+Быстрый переход: все методы На данный момент есть два scope для работы с генератором документов: Из методов одного scope нельзя получить доступ к данным другого: Поддерживаются следующие типы полей и их модификаторы: Типы полей Деньги и Адрес реализованы внутри модуля crm, поэтому использовать их в REST этого модуля не получится. Если надо вывести такие данные - придётся передавать их в уже сформированном виде. Есть возможность использовать массивы для вставки в таблицы и повторяющиеся блоки. “Изнутри” методы идентичны. По факту методы crm.documentgenerator.* после пред-обработки параметров вызывают методы documentgenerator.*. Но есть ряд отличий: Все создаваемые этим api шаблоны и документы привязаны к модулю REST. Через scope documentgenerator нельзя обращаться к шаблонам и документам других модулей. Поэтому moduleId в данных о шаблоне всегда будет rest. Даже если в add или update указать другой модуль, он не будет изменён. Для работы REST доступны только два провайдера: Привязка шаблона к пользователю самими REST-методами никак не учитывается. Но её можно использовать на стороне приложения. Для работы с нумераторами есть методы documentgenerator.numerator.*, описанные тут. Следует учесть, что через данный скоуп есть возможность получить доступ ко всем нумераторам для документов. В том числе к тем, которые работают в CRM. Но через REST обновить / удалить можно только тот нумератор, который был создан через REST. Каждый шаблон привязан к определенной стране. Список стран фиксирован и на данный момент состоит из: Начиная с версии documentgenerator 18.6.1 появилась возможность добавлять свои регионы. Для управления ими появился отдельный раздел. Что сделать можно? Что сделать нельзя? Метод Описание documentgenerator.document.add Создает новый документ на основании шаблона documentgenerator.document.delete Удаляет документ documentgenerator.document.enablepublicurl Включает/выключает публичную ссылку на документ documentgenerator.document.getfields Получает список полей документов documentgenerator.document.get Получает документ по идентификатору documentgenerator.document.list Получает список документов documentgenerator.document.update Изменяет существующий документ Метод Описание documentgenerator.numerator.add Добавляет нумератор documentgenerator.numerator.delete Удаляет нумератор documentgenerator.numerator.get Получает нумератор по идентификатору documentgenerator.numerator.list Получает список нумераторов documentgenerator.numerator.update Изменяет нумератор Метод Описание documentgenerator.region.get Возвращает информацию о регионе по его идентификатору documentgenerator.region.list Возвращает список регионов, как установленных по умолчанию, так и пользовательских documentgenerator.region.delete Удаляет регион documentgenerator.region.add Добавляет новый регион documentgenerator.region.update Обновляет существующую страну Метод Описание documentgenerator.role.get Отдает информацию о роли и её правах доступа documentgenerator.role.list Возвращает список ролей без их прав доступа documentgenerator.role.delete Удаляет роль documentgenerator.role.add Добавляет новую роль documentgenerator.role.update Обновляет роли documentgenerator.role.fillaccesses Устанавливает набор ролей и их привязок Метод Описание documentgenerator.template.add Загружает новый шаблон документа documentgenerator.template.update Обновляет существующий шаблон документа documentgenerator.template.get Возвращает шаблон документа по идентификатору documentgenerator.template.list Возвращает список шаблонов документов по фильтру documentgenerator.template.delete Удаляет шаблон документа documentgenerator.template.getfields Возвращает перечень полей шаблонов документов
+
+## ПРИМЕРЫ КОДА
+
+crm.documentgenerator.*
+---
+
+crm.documentgenerator.*
+---
+
+crm.documentgenerator.*
+---
+
+crm.documentgenerator.*
+---
+
+Bitrix\DocumentGenerator\DataProvider\Rest
+---
+
+Bitrix\DocumentGenerator\DataProvider\HashDataProvider
+---
+
+documentgenerator.numerator.*
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+documentgenerator.document.add | Создает новый документ на основании шаблона
+documentgenerator.document.delete | Удаляет документ
+documentgenerator.document.enablepublicurl | Включает/выключает публичную ссылку на документ
+documentgenerator.document.getfields | Получает список полей документов
+documentgenerator.document.get | Получает документ по идентификатору
+documentgenerator.document.list | Получает список документов
+documentgenerator.document.update | Изменяет существующий документ
+
+Таблица 1:
+documentgenerator.numerator.add | Добавляет нумератор
+documentgenerator.numerator.delete | Удаляет нумератор
+documentgenerator.numerator.get | Получает нумератор по идентификатору
+documentgenerator.numerator.list | Получает список нумераторов
+documentgenerator.numerator.update | Изменяет нумератор
+
+Таблица 2:
+documentgenerator.region.get | Возвращает информацию о регионе по его идентификатору
+documentgenerator.region.list | Возвращает список регионов, как установленных по умолчанию, так и пользовательских
+documentgenerator.region.delete | Удаляет регион
+documentgenerator.region.add | Добавляет новый регион
+documentgenerator.region.update | Обновляет существующую страну
+
+Таблица 3:
+documentgenerator.role.get | Отдает информацию о роли и её правах доступа
+documentgenerator.role.list | Возвращает список ролей без их прав доступа
+documentgenerator.role.delete | Удаляет роль
+documentgenerator.role.add | Добавляет новую роль
+documentgenerator.role.update | Обновляет роли
+documentgenerator.role.fillaccesses | Устанавливает набор ролей и их привязок
+
+Таблица 4:
+documentgenerator.template.add | Загружает новый шаблон документа
+documentgenerator.template.update | Обновляет существующий шаблон документа
+documentgenerator.template.get | Возвращает шаблон документа по идентификатору
+documentgenerator.template.list | Возвращает список шаблонов документов по фильтру
+documentgenerator.template.delete | Удаляет шаблон документа
+documentgenerator.template.getfields | Возвращает перечень полей шаблонов документов

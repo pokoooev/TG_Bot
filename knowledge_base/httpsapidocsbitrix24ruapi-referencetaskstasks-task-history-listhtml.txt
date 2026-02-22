@@ -1,0 +1,392 @@
+# https://apidocs.bitrix24.ru/api-reference/tasks/tasks-task-history-list.html
+URL: https://apidocs.bitrix24.ru/api-reference/tasks/tasks-task-history-list.html
+
+## ОПИСАНИЕ
+Scope: task Кто может выполнять метод: любой пользователь с доступом к задаче на чтение Метод tasks.task.history.list получает историю изменений задачи. Обязательные параметры отмечены * Название
+тип Описание taskId*
+integer Идентификатор задачи, для которой нужно получить историю. Идентификатор задачи можно получить при создании новой задачи или методом получения списка задач filter
+object Фильтр по типу события в формате {FIELD: 'EVENT'}. Список возможных значений для FIELD описан ниже order
+object Объект для сортировки результата вида {"поле": "значение сортировки", ... }. Направление сортировки может принимать значения: По умолчанию записи сортируются по убыванию по времени создания, то есть от новых к старым Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+object Корневой элемент ответа. Содержит массив list, который содержит объекты с описанием событий в задаче. Возвращает пустой массив "list":[], если задача не существует time
+time Информация о времени выполнения запроса Название
+тип Описание id
+integer Идентификатор события истории createdDate
+string Дата и время создания события в формате ISO 8601 field
+string Тип события истории. Возможные значения field: value
+object Объект описывает, какое изменение произошло: Тип значения зависит от события: для нового комментария — ID комментария, для изменения пункта чек-листа — текст пункта, для добавления наблюдателя — идентификатор пользователя, и так далее user
+object Объект с описанием пользователя, который выполнил действие Название
+тип Описание id
+integer Идентификатор пользователя name
+string Имя lastName
+string Фамилия secondName
+string Отчество login
+string Логин HTTP-статус: 400 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Описание Значение 100 CTaskItem All parameters in the constructor must have real class type (internal error) Не указан обязательный параметр taskId 0 wrong task id (internal error) В параметре taskId указано значение неверного типа 0 Access denied. (internal error) У пользователя нет доступа к задаче HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+tasks.task.history.list
+---
+
+{"поле": "значение сортировки", ... }
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"taskId":8137,"filter":{"FIELD":"COMMENT"},"order":{"createdDate":"ASC"}}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/tasks.task.history.list
+---
+
+{
+    "result": {
+        "list": [
+            {
+                "id": 16359,
+                "createdDate": "2025-09-25T14:09:45+03:00",
+                "field": "NEW",
+                "value": {
+                    "from": null,
+                    "to": null
+                },
+                "user": {
+                    "id": 503,
+                    "name": "Мария",
+                    "lastName": "Иванова",
+                    "secondName": "",
+                    "login": "maria@mysite.ru"
+                }
+            },
+            {
+                "id": 16361,
+                "createdDate": "2025-09-25T14:09:45+03:00",
+                "field": "COMMENT",
+                "value": {
+                    "from": null,
+                    "to": "3409"
+                },
+                "user": {
+                    "id": 503,
+                    "name": "Мария",
+                    "lastName": "Иванова",
+                    "secondName": "",
+                    "login": "maria@mysite.ru"
+                }
+            },
+            {
+                "id": 16363,
+                "createdDate": "2025-09-25T14:09:45+03:00",
+                "field": "CHECKLIST_ITEM_CREATE",
+                "value": {
+                    "from": "",
+                    "to": "Что сделать"
+                },
+                "user": {
+                    "id": 503,
+                    "name": "Мария",
+                    "lastName": "Иванова",
+                    "secondName": "",
+                    "login": "maria@mysite.ru"
+                }
+            },
+            {
+                "id": 16365,
+                "createdDate": "2025-09-25T14:09:45+03:00",
+                "field": "CHECKLIST_ITEM_CREATE",
+                "value": {
+                    "from": "",
+                    "to": "Связаться с клиентом"
+                },
+                "user": {
+                    "id": 503,
+                    "name": "Мария",
+                    "lastName": "Иванова",
+                    "secondName": "",
+                    "login": "maria@mysite.ru"
+                }
+            },
+            {
+                "id": 16367,
+                "createdDate": "2025-09-25T14:09:45+03:00",
+                "field": "CHECKLIST_ITEM_CREATE",
+                "value": {
+                    "from": "",
+                    "to": "Подготовить договор"
+                },
+                "user": {
+                    "id": 503,
+                    "name": "Мария",
+                    "lastName": "Иванова",
+                    "secondName": "",
+                    "login": "maria@mysite.ru"
+                }
+            },
+            {
+                "id": 16369,
+                "createdDate": "2025-09-25T14:09:45+03:00",
+                "field": "CHECKLIST_ITEM_CREATE",
+                "value": {
+                    "from": "",
+                    "to": "Подписать договор"
+                },
+                "user": {
+                    "id": 503,
+                    "name": "Мария",
+                    "lastName": "Иванова",
+                    "secondName": "",
+                    "login": "maria@mysite.ru"
+                }
+            },
+            {
+                "id": 16371,
+                "createdDate": "2025-09-25T14:09:57+03:00",
+                "field": "AUDITORS",
+                "value": {
+                    "from": "",
+                    "to": "547"
+                },
+                "user": {
+                    "id": 503,
+                    "name": "Мария",
+                    "lastName": "Иванова",
+                    "secondName": "",
+                    "login": "maria@mysite.ru"
+                }
+            },
+            {
+                "id": 16375,
+                "createdDate": "2025-09-25T14:09:57+03:00",
+                "field": "COMMENT",
+                "value": {
+                    "from": null,
+                    "to": "3411"
+                },
+                "user": {
+                    "id": 503,
+                    "name": "Мария",
+                    "lastName": "Иванова",
+                    "secondName": "",
+                    "login": "maria@mysite.ru"
+                }
+            },
+            {
+                "id": 16373,
+                "createdDate": "2025-09-25T14:09:58+03:00",
+                "field": "COMMENT",
+                "value": {
+                    "from": null,
+                    "to": "3413"
+                },
+                "user": {
+                    "id": 503,
+                    "name": "Мария",
+                    "lastName": "Иванова",
+                    "secondName": "",
+                    "login": "maria@mysite.ru"
+                }
+            }
+        ],
+    },
+    "time": {
+        "start": 1758798620,
+        "finish": 1758798620.969019,
+        "duration": 0.9690189361572266,
+        "processing": 0,
+        "date_start": "2025-09-25T14:10:20+03:00",
+        "date_finish": "2025-09-25T14:10:20+03:00",
+        "operating_reset_at": 1758799220,
+        "operating": 0
+    }
+}
+---
+
+DURATION_PLAN_SECONDS
+---
+
+CHECKLIST_ITEM_CREATE
+---
+
+CHECKLIST_ITEM_RENAME
+---
+
+CHECKLIST_ITEM_REMOVE
+---
+
+CHECKLIST_ITEM_UNCHECK
+---
+
+ALLOW_CHANGE_DEADLINE
+---
+
+{
+    "error": "0",
+    "error_description": "Access denied. (internal error)"
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+taskId*
+integer | Идентификатор задачи, для которой нужно получить историю.
+Идентификатор задачи можно получить при создании новой задачи или методом получения списка задач
+filter
+object | Фильтр по типу события в формате {FIELD: 'EVENT'}. Список возможных значений для FIELD описан ниже
+order
+object | Объект для сортировки результата вида {"поле": "значение сортировки", ... }.
+Направление сортировки может принимать значения:
+asc — по возрастанию
+desc — по убыванию
+По умолчанию записи сортируются по убыванию по времени создания, то есть от новых к старым
+
+Таблица 1:
+result
+object | Корневой элемент ответа. Содержит массив list, который содержит объекты с описанием событий в задаче.
+Возвращает пустой массив "list":[], если задача не существует
+time
+time | Информация о времени выполнения запроса
+
+Таблица 2:
+id
+integer | Идентификатор события истории
+createdDate
+string | Дата и время создания события в формате ISO 8601
+field
+string | Тип события истории. Возможные значения field:
+TITLE — изменение названия задачи
+DESCRIPTION — изменение описания задачи
+REAL_STATUS — изменение фактического статуса
+STATUS — изменение статуса задачи
+PRIORITY — изменение приоритета
+MARK — изменение оценки задачи
+COMMENT — добавление комментария
+DELETE — удаление задачи
+NEW — создание новой задачи
+RENEW — восстановление задачи
+MOVE_TO_BACKLOG — перемещение задачи в бэклог
+MOVE_TO_SPRINT — перемещение задачи в спринт
+PARENT_ID — изменение родительской задачи
+GROUP_ID — изменение рабочей группы/проекта
+STAGE_ID — изменение стадии
+CREATED_BY — изменение автора задачи
+RESPONSIBLE_ID — изменение исполнителя
+ACCOMPLICES — изменение соисполнителей
+AUDITORS — изменение наблюдателей
+DEADLINE — изменение крайнего срока
+START_DATE_PLAN — изменение плановой даты начала
+END_DATE_PLAN — изменение плановой даты окончания
+DURATION_PLAN — изменение плановой длительности
+DURATION_PLAN_SECONDS — изменение плановой длительности в секундах
+DURATION_FACT — изменение фактической длительности
+TIME_ESTIMATE — изменение оценки времени
+TIME_SPENT_IN_LOGS — изменение фактически затраченного времени по логу
+TAGS — изменение тегов задачи
+DEPENDS_ON — изменение зависимостей задачи
+FILES — изменение списка файлов
+UF_TASK_WEBDAV_FILES — изменение пользовательского поля с файлами
+CHECKLIST_ITEM_CREATE — создание пункта чек-листа
+CHECKLIST_ITEM_RENAME — переименование пункта чек-листа
+CHECKLIST_ITEM_REMOVE — удаление пункта чек-листа
+CHECKLIST_ITEM_CHECK — отметка пункта чек-листа как выполненного
+CHECKLIST_ITEM_UNCHECK — снятие отметки выполнения пункта чек-листа
+ADD_IN_REPORT — изменение признака «добавлять в отчет»
+TASK_CONTROL — изменение контроля результата
+ALLOW_TIME_TRACKING — включение или выключение учета времени
+ALLOW_CHANGE_DEADLINE — разрешение или запрет изменения дедлайна
+FLOW_ID — изменение потока
+value
+object | Объект описывает, какое изменение произошло:
+from — значение до изменения
+to — значение после изменения
+Тип значения зависит от события: для нового комментария — ID комментария, для изменения пункта чек-листа — текст пункта, для добавления наблюдателя — идентификатор пользователя, и так далее
+user
+object | Объект с описанием пользователя, который выполнил действие
+
+Таблица 3:
+id
+integer | Идентификатор пользователя
+name
+string | Имя
+lastName
+string | Фамилия
+secondName
+string | Отчество
+login
+string | Логин
+
+Таблица 4:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 5:
+100 | CTaskItem All parameters in the constructor must have real class type (internal error) | Не указан обязательный параметр taskId
+0 | wrong task id (internal error) | В параметре taskId указано значение неверного типа
+0 | Access denied. (internal error) | У пользователя нет доступа к задаче
+
+Таблица 6:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

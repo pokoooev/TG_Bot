@@ -1,0 +1,71 @@
+# Виртуальное окружение
+venv/
+env/
+ENV/
+.venv/
+
+# Файлы с данными (JSON)
+*.json
+!categories.json
+!requirements.json
+!example.json
+
+# Логи
+logs/
+*.log
+
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Файлы с секретами
+.env
+.env.local
+.env.*.local
+*.env
+
+# Базы данных
+*.db
+*.sqlite
+*.sqlite3
+
+# Результаты парсинга (большие файлы)
+all_parsed_*.json
+all_links.json
+all_links_detailed.json
+output.json
+data/
+
+# Настройки IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Временные файлы
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Selenium и браузеры
+geckodriver.log
+chromedriver.log
+selenium.log
+webdriver-manager-cache/
+
+# Документация и заметки
+notes/
+*.md
+!README.mdgoogle-chrome-stable_current_amd64.deb
+*.deb

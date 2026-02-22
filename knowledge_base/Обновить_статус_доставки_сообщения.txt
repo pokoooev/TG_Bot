@@ -1,0 +1,37 @@
+# Обновить статус доставки сообщения
+URL: https://apidocs.bitrix24.ru/api-reference/messageservice/messageservice-message-status-update.html
+
+## ОПИСАНИЕ
+Scope: messageservice Кто может выполнять метод: администратор Метод позволяет задать статус доставки указанного сообщения, отправленного с помощью провайдера сообщений. Параметр Описание CODE* Код провайдера. MESSAGE_ID* Идентификатор сообщения. STATUS Статус сообщения. Обязательный. Допустимые статусы: Обязательные параметры отмечены * Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  'messageservice.message.status.update',
+  {
+   CODE: 'provider1',
+   message_id: 1,
+   status: 'delivered'
+  }
+ );
+ 
+ const result = response.getData().result;
+ alert("Успешно: " + result);
+}
+catch( error )
+{
+ alert("Ошибка: " + error);
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+CODE* | Код провайдера.
+MESSAGE_ID* | Идентификатор сообщения.
+STATUS | Статус сообщения. Обязательный. Допустимые статусы:
+delivered - доставлено
+undelivered - не доставлено
+failed - ошибка доставки

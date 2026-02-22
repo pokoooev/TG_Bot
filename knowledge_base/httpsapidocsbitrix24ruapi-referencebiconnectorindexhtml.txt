@@ -1,0 +1,35 @@
+# https://apidocs.bitrix24.ru/api-reference/biconnector/index.html
+URL: https://apidocs.bitrix24.ru/api-reference/biconnector/index.html
+
+## ОПИСАНИЕ
+Методы работают только в контексте приложения Scope: biconnector Кто может выполнять методы: пользователь с доступом к разделу «Рабочее место аналитика» Метод Описание biconnector.connector.add Добавляет новый коннектор biconnector.connector.update Обновляет существующий коннектор biconnector.connector.get Возвращает информацию о коннекторе biconnector.connector.list Возвращает список доступных коннекторов biconnector.connector.delete Удаляет коннектор biconnector.connector.fields Возвращает описание полей коннектора Метод Описание biconnector.source.add Добавляет новый источник biconnector.source.update Обновляет существующий источник biconnector.source.get Возвращает информацию об источнике biconnector.source.list Возвращает список доступных источников biconnector.source.delete Удаляет источник biconnector.source.fields Возвращает описание полей источника Метод Описание biconnector.dataset.add Добавляет новый датасет biconnector.dataset.update Обновляет существующий датасет biconnector.dataset.fields.update Обновляет поля датасета biconnector.dataset.get Возвращает информацию о датасете biconnector.dataset.list Возвращает список доступных датасетов biconnector.dataset.delete Удаляет датасет biconnector.dataset.fields Возвращает описание полей датасета
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+biconnector.connector.add | Добавляет новый коннектор
+biconnector.connector.update | Обновляет существующий коннектор
+biconnector.connector.get | Возвращает информацию о коннекторе
+biconnector.connector.list | Возвращает список доступных коннекторов
+biconnector.connector.delete | Удаляет коннектор
+biconnector.connector.fields | Возвращает описание полей коннектора
+
+Таблица 1:
+biconnector.source.add | Добавляет новый источник
+biconnector.source.update | Обновляет существующий источник
+biconnector.source.get | Возвращает информацию об источнике
+biconnector.source.list | Возвращает список доступных источников
+biconnector.source.delete | Удаляет источник
+biconnector.source.fields | Возвращает описание полей источника
+
+Таблица 2:
+biconnector.dataset.add | Добавляет новый датасет
+biconnector.dataset.update | Обновляет существующий датасет
+biconnector.dataset.fields.update | Обновляет поля датасета
+biconnector.dataset.get | Возвращает информацию о датасете
+biconnector.dataset.list | Возвращает список доступных датасетов
+biconnector.dataset.delete | Удаляет датасет
+biconnector.dataset.fields | Возвращает описание полей датасета

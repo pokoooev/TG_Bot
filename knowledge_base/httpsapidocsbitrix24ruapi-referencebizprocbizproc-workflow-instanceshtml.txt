@@ -1,0 +1,211 @@
+# https://apidocs.bitrix24.ru/api-reference/bizproc/bizproc-workflow-instances.html
+URL: https://apidocs.bitrix24.ru/api-reference/bizproc/bizproc-workflow-instances.html
+
+## ОПИСАНИЕ
+Scope: bizproc Кто может выполнять метод: администратор Метод получает список запущенных бизнес-процессов. bizproc.workflow.instance.list Существует старый метод bizproc.workflow.instance.list — алиас метода bizproc.workflow.instances. Он принимает те же параметры и возвращает такие же результаты. Поддержка bizproc.workflow.instance.list не гарантирована в будущем, поэтому рекомендуем использовать bizproc.workflow.instances. Название
+тип Описание SELECT
+array Массив содержит список полей, которые необходимо выбрать. Можно указать только те поля, которые необходимы. Доступные поля: Значение по умолчанию: ['ID', 'MODIFIED', 'OWNED_UNTIL'] FILTER
+object Объект для фильтрации списка запущенных бизнес-процессов в формате {"field_1": "value_1", ... "field_N": "value_N"}. Список фильтруемых полей такой же, как для параметра SELECT. Перед названием фильтруемого поля можно указать тип фильтрации: ORDER
+object Объект для сортировки списка запущенных бизнес-процессов в формате {"field_1": "value_1", ... "field_N": "value_N"}. Список полей для сортировки такой же, как для параметра SELECT. Направление сортировки может принимать значения: Значение по умолчанию: {'MODIFIED': 'desc'} start
+integer Параметр используется для управления постраничной навигацией. Размер страницы результатов всегда статичный — 50 записей. Чтобы выбрать вторую страницу результатов, необходимо передавать значение 50. Чтобы выбрать третью страницу результатов — значение 100 и так далее. Формула расчета значения параметра start: start = (N - 1) * 50, где N — номер нужной страницы Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+object Корневой элемент ответа. Cодержит массив объектов с информацией о запущенных бизнес-процессах total
+inreger Общее количество найденных записей time
+time Информация о времени выполнения запроса HTTP-статус: 403 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Статус Код Описание Значение 403 ACCESS_DENIED Access denied! Метод запустил не администратор HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+bizproc.workflow.instance.list
+---
+
+bizproc.workflow.instances
+---
+
+bizproc.workflow.instance.list
+---
+
+bizproc.workflow.instances
+---
+
+['ID', 'MODIFIED', 'OWNED_UNTIL']
+---
+
+{"field_1": "value_1", ... "field_N": "value_N"}
+---
+
+{"field_1": "value_1", ... "field_N": "value_N"}
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"select":["ID","MODIFIED","OWNED_UNTIL","MODULE_ID","ENTITY","DOCUMENT_ID","STARTED","STARTED_BY","TEMPLATE_ID"],"order":{"STARTED":"DESC"},"filter":{">STARTED_BY":0}}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/bizproc.workflow.instances
+---
+
+{
+    "result":[
+        {
+            "DOCUMENT_ID": "LEAD_1",
+            "ENTITY": "CCrmDocumentLead",
+            "ID": "66e412fdc9bd44.36306599",
+            "STARTED": "2024-09-13T10:25:01+00:00",
+            "MODULE_ID": "crm",
+            "OWNED_UNTIL": null,
+            "TEMPLATE_ID": "1",
+            "STARTED_BY": "0",
+        },
+        {
+            "DOCUMENT_ID":"DEAL_1633",
+            "ENTITY":"CCrmDocumentDeal",
+            "ID":"658c4d3d6a2906.51542462",
+            "STARTED":"2023-12-27T19:13:49+03:00",
+            "MODULE_ID":"crm",
+            "OWNED_UNTIL":null,
+            "TEMPLATE_ID":"212",
+            "STARTED_BY":"57",
+        }
+    ],
+    "total": 2,
+    "time": {
+        "start": 1726476060.581428,
+        "finish": 1726476060.813776,
+        "duration": 0.23234796524047852,
+        "processing": 0.002630949020385742,
+        "date_start": "2024-09-16T08:41:00+00:00",
+        "date_finish": "2024-09-16T08:41:00+00:00",
+        "operating_reset_at": 1726476660,
+        "operating": 0,
+    },
+}
+---
+
+{
+    "error": "ACCESS_DENIED",
+    "error_description": "Access denied!",
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+SELECT
+array | Массив содержит список полей, которые необходимо выбрать.
+Можно указать только те поля, которые необходимы.
+Доступные поля:
+ID — идентификатор бизнес-процесса
+MODIFIED — дата последнего изменения
+OWNED_UNTIL — время блокировки бизнес-процесса. Процесс считается зависшим, если разница времени блокировки с текущим временем более 5 минут
+MODULE_ID — идентификатор модуля по документу
+ENTITY — идентификатор сущности по документу
+DOCUMENT_ID — идентификатор документа
+STARTED — дата запуска бизнес-процесса
+STARTED_BY — кем запущен бизнес-процесс
+TEMPLATE_ID — идентификатор шаблона бизнес-процесса
+Значение по умолчанию: ['ID', 'MODIFIED', 'OWNED_UNTIL'] | 
+FILTER
+object | Объект для фильтрации списка запущенных бизнес-процессов в формате {"field_1": "value_1", ... "field_N": "value_N"}.
+Список фильтруемых полей такой же, как для параметра SELECT.
+Перед названием фильтруемого поля можно указать тип фильтрации:
+! — не равно
+< — меньше
+<= — меньше либо равно
+> — больше
+>= — больше либо равно | 
+ORDER
+object | Объект для сортировки списка запущенных бизнес-процессов в формате {"field_1": "value_1", ... "field_N": "value_N"}.
+Список полей для сортировки такой же, как для параметра SELECT.
+Направление сортировки может принимать значения:
+asc — по возрастанию
+desc — по убыванию
+Значение по умолчанию: {'MODIFIED': 'desc'} | 
+start
+integer | Параметр используется для управления постраничной навигацией.
+Размер страницы результатов всегда статичный — 50 записей.
+Чтобы выбрать вторую страницу результатов, необходимо передавать значение 50. Чтобы выбрать третью страницу результатов — значение 100 и так далее.
+Формула расчета значения параметра start:
+start = (N - 1) * 50, где N — номер нужной страницы | 
+
+Таблица 1:
+result
+object | Корневой элемент ответа.
+Cодержит массив объектов с информацией о запущенных бизнес-процессах
+total
+inreger | Общее количество найденных записей
+time
+time | Информация о времени выполнения запроса
+
+Таблица 2:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 3:
+403 | ACCESS_DENIED | Access denied! | Метод запустил не администратор
+
+Таблица 4:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

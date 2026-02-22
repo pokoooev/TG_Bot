@@ -1,0 +1,199 @@
+# Получить основные настройки календаря
+URL: https://apidocs.bitrix24.ru/api-reference/calendar/calendar-settings-get.html
+
+## ОПИСАНИЕ
+Scope: calendar Кто может выполнять метод: любой пользователь Метод получает основные настройки календаря. Изменить основные настройки может только администратор портала. Без параметров. Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+object Корневой элемент ответа work_time_start
+string Время начала рабочего дня work_time_end
+string Время окончания рабочего дня year_holidays
+string Список праздничных дней week_holidays
+array Массив выходных дней week_start
+string День начала недели user_name_template
+string Шаблон имени пользователя sync_by_push
+boolean Флаг автоматической синхронизации календарей по подписке. Push-события от Google/Office365 user_show_login
+boolean Флаг отображения логина пользователя path_to_user
+string Шаблон ссылки на профиль пользователя path_to_user_calendar
+string Шаблон ссылки на просмотр календаря пользователя path_to_group
+string Шаблон ссылки на просмотр рабочей группы path_to_group_calendar
+string Шаблон ссылки на просмотр календаря группы path_to_vr
+string Шаблон ссылки к видеопереговорной path_to_rm
+string Шаблон ссылки к переговорной rm_iblock_type
+string Тип инфоблока бронирования переговорных и видеопереговорных rm_iblock_id
+string Идентификатор инфоблока бронирования переговорных dep_manager_sub
+boolean Флаг разрешения начальникам просматривать календари подчиненных denied_superpose_types
+array Список типов календарей, которые не могут быть добавлены в избранные pathes_for_sites
+boolean Устанавливает шаблоны ссылок общие для всех сайтов forum_id
+string Идентификатор форума для комментариев rm_for_sites
+boolean Устанавливает параметры переговорных общие для всех сайтов path_to_type_company_calendar
+string Шаблон ссылки на просмотр календарей компании path_to_type_location
+string Шаблон ссылки на просмотр бронирования переговорных path_to_type_open_event
+string Шаблон ссылки на просмотр календаря открытых событий HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/calendar.settings.get
+---
+
+{
+    "result": {
+        "work_time_start": "9",
+        "work_time_end": "19",
+        "year_holidays": "1.01,2.01,7.01,23.02,8.03,1.05,9.05,12.06,4.11",
+        "year_workdays": "31.12",
+        "week_holidays": [
+            "SA",
+            "SU"
+        ],
+        "week_start": "MO",
+        "user_name_template": "#NAME# #LAST_NAME#",
+        "sync_by_push": false,
+        "user_show_login": true,
+        "path_to_user": "/company/personal/user/#user_id#/",
+        "path_to_user_calendar": "/company/personal/user/#user_id#/calendar/",
+        "path_to_group": "/workgroups/group/#group_id#/",
+        "path_to_group_calendar": "/workgroups/group/#group_id#/calendar/",
+        "path_to_vr": "",
+        "path_to_rm": "",
+        "rm_iblock_type": "",
+        "rm_iblock_id": "",
+        "dep_manager_sub": true,
+        "denied_superpose_types": [],
+        "pathes_for_sites": "",
+        "forum_id": "8",
+        "rm_for_sites": true,
+        "path_to_type_company_calendar": "",
+        "path_to_type_location": "",
+        "path_to_type_open_event": ""
+    },
+    "time": {
+        "start": 1733924639.802569,
+        "finish": 1733924640.184363,
+        "duration": 0.3817939758300781,
+        "processing": 0.012382984161376953,
+        "date_start": "2024-12-11T13:43:59+00:00",
+        "date_finish": "2024-12-11T13:44:00+00:00"
+    }
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+result
+object | Корневой элемент ответа
+work_time_start
+string | Время начала рабочего дня
+work_time_end
+string | Время окончания рабочего дня
+year_holidays
+string | Список праздничных дней
+week_holidays
+array | Массив выходных дней
+week_start
+string | День начала недели
+user_name_template
+string | Шаблон имени пользователя
+sync_by_push
+boolean | Флаг автоматической синхронизации календарей по подписке. Push-события от Google/Office365
+user_show_login
+boolean | Флаг отображения логина пользователя
+path_to_user
+string | Шаблон ссылки на профиль пользователя
+path_to_user_calendar
+string | Шаблон ссылки на просмотр календаря пользователя
+path_to_group
+string | Шаблон ссылки на просмотр рабочей группы
+path_to_group_calendar
+string | Шаблон ссылки на просмотр календаря группы
+path_to_vr
+string | Шаблон ссылки к видеопереговорной
+path_to_rm
+string | Шаблон ссылки к переговорной
+rm_iblock_type
+string | Тип инфоблока бронирования переговорных и видеопереговорных
+rm_iblock_id
+string | Идентификатор инфоблока бронирования переговорных
+dep_manager_sub
+boolean | Флаг разрешения начальникам просматривать календари подчиненных
+denied_superpose_types
+array | Список типов календарей, которые не могут быть добавлены в избранные
+pathes_for_sites
+boolean | Устанавливает шаблоны ссылок общие для всех сайтов
+forum_id
+string | Идентификатор форума для комментариев
+rm_for_sites
+boolean | Устанавливает параметры переговорных общие для всех сайтов
+path_to_type_company_calendar
+string | Шаблон ссылки на просмотр календарей компании
+path_to_type_location
+string | Шаблон ссылки на просмотр бронирования переговорных
+path_to_type_open_event
+string | Шаблон ссылки на просмотр календаря открытых событий
+
+Таблица 1:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

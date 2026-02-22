@@ -1,0 +1,11 @@
+# https://apidocs.bitrix24.ru/api-reference/imopenlines/data-types.html
+URL: https://apidocs.bitrix24.ru/api-reference/imopenlines/data-types.html
+
+## ОПИСАНИЕ
+Базовые типы данных перечислены в отдельной статье. В этой статье рассмотрим типы данных и структуру объектов, характерные именно для Открытых линий.
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+Нет таблиц

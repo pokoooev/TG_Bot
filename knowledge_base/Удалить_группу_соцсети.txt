@@ -1,0 +1,32 @@
+# Удалить группу соцсети
+URL: https://apidocs.bitrix24.ru/api-reference/sonet-group/sonet-group-delete.html
+
+## ОПИСАНИЕ
+Scope: sonet Кто может выполнять метод: любой пользователь Удаляет группу соцсети. Для осуществления операции текущий пользователь должен быть либо владельцем группы, либо иметь права администратора соцсети. Параметр Описание GROUP_ID ID группы, которую необходимо удалить. Обязательные параметры отмечены * В случае успешного изменения группы возвращает true, иначе - текст ошибки. Как использовать примеры в документации 200 OK
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  'sonet_group.delete',
+  {
+   'GROUP_ID': 11
+  }
+ );
+ 
+ const result = response.getData().result;
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+https://mydomain.bitrix24.ru/rest/sonet_group.delete.json?auth=803f65e30340ff39703f8061c8b63a10&GROUP_ID=11
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+GROUP_ID | ID группы, которую необходимо удалить.

@@ -1,0 +1,30 @@
+# Удалить провайдер
+URL: https://apidocs.bitrix24.ru/api-reference/messageservice/messageservice-sender-delete.html
+
+## ОПИСАНИЕ
+Scope: messageservice Кто может выполнять метод: администратор Метод удаляет зарегистрированный ранее провайдера сообщений. Нельзя удалить провайдер зарегистрированный другим приложением или другим вебхуком. Параметр Описание CODE Идентификатор провайдера. Обязательные параметры отмечены * Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  'messageservice.sender.delete',
+  {
+   'CODE': provider
+  }
+ );
+ 
+ const result = response.getData().result;
+ alert("Успешно: " + result);
+}
+catch( error )
+{
+ alert('Error: ' + error);
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+CODE | Идентификатор провайдера.

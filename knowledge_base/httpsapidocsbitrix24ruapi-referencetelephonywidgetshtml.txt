@@ -1,0 +1,11 @@
+# https://apidocs.bitrix24.ru/api-reference/telephony/widgets.html
+URL: https://apidocs.bitrix24.ru/api-reference/telephony/widgets.html
+
+## ОПИСАНИЕ
+Примеры добавления виджетов в карточку звонка и интеграции с WebRTC представлены в статьях:
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+Нет таблиц

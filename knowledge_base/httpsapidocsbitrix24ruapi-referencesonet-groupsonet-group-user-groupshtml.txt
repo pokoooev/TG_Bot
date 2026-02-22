@@ -1,0 +1,42 @@
+# https://apidocs.bitrix24.ru/api-reference/sonet-group/sonet-group-user-groups.html
+URL: https://apidocs.bitrix24.ru/api-reference/sonet-group/sonet-group-user-groups.html
+
+## ОПИСАНИЕ
+Scope: sonet Кто может выполнять метод: любой пользователь Метод возвращает массив групп соцсети текущего пользователя, осуществляя вызов CSocNetUserToGroup::GetList(). Как использовать примеры в документации 200 OK
+
+## ПРИМЕРЫ КОДА
+
+CSocNetUserToGroup::GetList()
+---
+
+try
+{
+ const response = await $b24.callMethod('sonet_group.user.groups', {});
+ 
+ const result = response.getData().result;
+ console.log('Result:', result);
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+https://mydomain.bitrix24.ru/rest/sonet_group.user.groups.json?auth=52423d4a5f19f5f964f9b4e96a925cfa
+---
+
+{
+"result": [
+    {"GROUP_ID":"1","GROUP_NAME":"Маркетинг и реклама","ROLE":"A"},
+    {"GROUP_ID":"3","GROUP_NAME":"Продажи","ROLE":"A"},
+    {"GROUP_ID":"5","GROUP_NAME":"Отдых","ROLE":"A"},
+    {"GROUP_ID":"7","GROUP_NAME":"Технологии","ROLE":"A"},
+    {"GROUP_ID":"9","GROUP_NAME":"Фриланс","ROLE":"A"},
+    {"GROUP_ID":"13","GROUP_NAME":"Test sonet group","ROLE":"A"},
+    {"GROUP_ID":"15","GROUP_NAME":"Test sonet group","ROLE":"A"}
+]
+}
+---
+
+## ТАБЛИЦЫ
+Нет таблиц

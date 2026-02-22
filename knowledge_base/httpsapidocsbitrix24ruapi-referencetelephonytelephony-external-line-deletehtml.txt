@@ -1,0 +1,17 @@
+# https://apidocs.bitrix24.ru/api-reference/telephony/telephony-external-line-delete.html
+URL: https://apidocs.bitrix24.ru/api-reference/telephony/telephony-external-line-delete.html
+
+## ОПИСАНИЕ
+Scope: telephony Кто может выполнять метод: администратор Метод telephony.externalLine.delete удаляет внешнюю линию. Параметр / Тип Описание NUMBER
+string Номер внешней линии.
+
+## ПРИМЕРЫ КОДА
+
+telephony.externalLine.delete
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+NUMBER
+string | Номер внешней линии.

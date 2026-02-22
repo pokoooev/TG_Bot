@@ -1,0 +1,35 @@
+# Получить информацию о резвизиях API
+URL: https://apidocs.bitrix24.ru/api-reference/chat-bots/im-revision-get.html
+
+## ОПИСАНИЕ
+Scope: im Кто может выполнять метод: любой пользователь Метод im.revision.get получает информацию о ревизиях API. Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  'im.revision.get',
+  {}
+ );
+ 
+ const result = response.getData().result;
+ console.log(result);
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+{    
+    "result": {
+        "rest": 18,
+        "web": 117,
+        "mobile": 9,
+    }
+}
+---
+
+## ТАБЛИЦЫ
+Нет таблиц

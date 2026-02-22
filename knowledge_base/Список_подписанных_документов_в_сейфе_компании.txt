@@ -1,0 +1,182 @@
+# Список подписанных документов в сейфе компании
+URL: https://apidocs.bitrix24.ru/api-reference/sign/sign-b2e-mysafe-tail.html
+
+## ОПИСАНИЕ
+Scope: sign.b2e Кто может выполнять метод: пользователь с доступом к разделу «Сейф компании». Доступные документы зависят от уровня права «Доступ к документам сейфа» Метод sign.b2e.mysafe.tail возвращает список подписанных документов в сейфе компании. Метод работает только в контексте авторизации приложения. Обязательные параметры отмечены * Название
+тип Описание limit
+integer Количество записей на странице. Параметр принимает значение от 1 до 50. По умолчанию выводится 20 записей на странице offset
+integer Параметр используется для управления постраничной навигацией. Аналогичен стандартному параметру start. Размер страницы результатов зависит от параметра limit Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+object Корневой элемент ответа. Содержит информацию о подписанных документах в сейфе компании time
+time Информация о времени выполнения запроса Название
+тип Описание id
+integer Идентификатор подписанного документа title
+string Название документа create_date
+string Дата создания документа signed_date
+string Дата подписания документа creator_id
+integer Идентификатор пользователя, создавшего документ member_id
+integer Идентификатор пользователя, с которым подписан документ role
+string Роль сотрудника в документе: file_url
+string Ссылка для скачивания подписанного документа HTTP-статус: 401 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"limit":2,"offset":0,"auth":"**put_access_token_here**"}' \
+https://**put_your_bitrix24_address**/rest/sign.b2e.mysafe.tail
+---
+
+{
+    "result": [
+        {
+            "id": 59,
+            "title": "test-pdf е",
+            "create_date": "2024-06-28T19:07:03+03:00",
+            "signed_date": "2024-06-28T19:34:58+03:00",
+            "creator_id": 1,
+            "member_id": 1,
+            "role": "signer",
+            "file_url": "https://your-domain.bitrix24.ru/rest/download.json?auth=7e34b4670000071b0075444600000037f0f1072e5aa442013dece15a3df95d26ed4873&token=sign.b2e%7CaWQ9NTkmXz1IVEVndlJnZUttZUFkeERtaVBRbkhwZkhhTEJFZklpYQ%3D%3D%7CImRvd25sb2FkfHNpZ24uYjJlfGFXUTlOVGttWHoxSVZFVm5kbEpuWlV0dFpVRmtlRVJ0YVZCUmJraHdaa2hoVEVKRlprbHBZUT09fDdlMzRiNDY3MDAwMDA3MWIwMDc1NDQ0NjAwMDAwMDM3ZjBmMTA3MmU1YWE0NDIwMTNkZWNlMTVhM2RmOTVkMjZlZDQ4NzMi.8C%2B3HpNFR5C0YkzTeVL%2FdhE6QJYN66CGoDzZG4VeR4Q%3D"
+        },
+        {
+            "id": 55,
+            "title": "test-pdf 778484",
+            "create_date": "2024-06-28T18:37:37+03:00",
+            "signed_date": "2024-06-28T18:39:47+03:00",
+            "creator_id": 19,
+            "member_id": 1,
+            "role": "signer",
+            "file_url": "https://your-domain.bitrix24.ru/rest/download.json?auth=7e34b4670000071b0075444600000037f0f1072e5aa442013dece15a3df95d26ed4873&token=sign.b2e%7CaWQ9NTUmXz12czNjZDhyM3g2SUZYdzByRVZBbVJIYzZTY3dxZUFxbw%3D%3D%7CImRvd25sb2FkfHNpZ24uYjJlfGFXUTlOVFVtWHoxMmN6TmpaRGh5TTNnMlNVWllkekJ5UlZaQmJWSklZelpUWTNkeFpVRnhidz09fDdlMzRiNDY3MDAwMDA3MWIwMDc1NDQ0NjAwMDAwMDM3ZjBmMTA3MmU1YWE0NDIwMTNkZWNlMTVhM2RmOTVkMjZlZDQ4NzMi.r6Khc2bwTlEANXvuAptaut0Z%2F6y1nGx%2FZhRKqEGkjk0%3D"
+        }
+    ],
+    "time": {
+        "start": 1739859574.5550749,
+        "finish": 1739859574.595099,
+        "duration": 0.0400240421295166,
+        "processing": 0.0148630142211914,
+        "date_start": "2025-02-18T09:19:34+03:00",
+        "date_finish": "2025-02-18T09:19:34+03:00",
+        "operating_reset_at": 1739860174,
+        "operating": 0
+    }
+}
+---
+
+{
+    "error": "WRONG_AUTH_TYPE",
+    "error_description": "Current authorization type is denied for this method Application context required"
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+limit
+integer | Количество записей на странице.
+Параметр принимает значение от 1 до 50.
+По умолчанию выводится 20 записей на странице
+offset
+integer | Параметр используется для управления постраничной навигацией. Аналогичен стандартному параметру start.
+Размер страницы результатов зависит от параметра limit
+
+Таблица 1:
+result
+object | Корневой элемент ответа. Содержит информацию о подписанных документах в сейфе компании
+time
+time | Информация о времени выполнения запроса
+
+Таблица 2:
+id
+integer | Идентификатор подписанного документа
+title
+string | Название документа
+create_date
+string | Дата создания документа
+signed_date
+string | Дата подписания документа
+creator_id
+integer | Идентификатор пользователя, создавшего документ
+member_id
+integer | Идентификатор пользователя, с которым подписан документ
+role
+string | Роль сотрудника в документе:
+editor — заполняющий
+reviewer — согласующий
+assignee — представитель компании
+signer - сотрудник
+file_url
+string | Ссылка для скачивания подписанного документа
+
+Таблица 3:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 4:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

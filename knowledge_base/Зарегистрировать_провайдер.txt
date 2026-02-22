@@ -1,0 +1,106 @@
+# Зарегистрировать провайдер
+URL: https://apidocs.bitrix24.ru/api-reference/messageservice/messageservice-sender-add.html
+
+## ОПИСАНИЕ
+Scope: messageservice Кто может выполнять метод: администратор Метод регистрирует новый провайдер сообщений Параметр Описание CODE Внутренний идентификатор провайдера. Допустимые символы a-z, A-Z, 0-9, точка, дефис и нижнее подчеркивание. TYPE Тип провайдера. HANDLER URL приложения, на который будут отправлены данные. NAME Название провайдера. Может быть строкой или ассоциативным массивом локализированных строк. DESCRIPTION Описание провайдера. Может быть строкой или ассоциативным массивом локализированных строк. Обязательные параметры отмечены * На HANDLER приходят данные: Отправление из карточки CRM Отправление из Бизнес-процесса или робота. Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  'messageservice.sender.add',
+  {
+   CODE: 'provider1',
+   TYPE: 'SMS',
+   HANDLER: 'http:///',
+   NAME: 'Провайдер ***.ru',
+   DESCRIPTION: 'Провайдер ***.ru'
+  }
+ );
+ 
+ const result = response.getData().result;
+ if(result.error())
+  alert("Error: " + result.error());
+ else
+  alert("Успешно: " + result);
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+Array
+(
+    [module_id] => crm
+    [bindings] => Array
+        (
+            [0] => Array
+                (
+                    [OWNER_TYPE_ID] => 1
+                    [OWNER_ID] => 98
+                )
+
+        )
+
+    [properties] => Array
+        (
+            [phone_number] => +7*********
+            [message_text] => test message
+    )
+
+    [type] => SMS
+    [code] => example
+    [message_id] => 72dd742c8270db0ddbbab92f98877537
+    [message_to] => +7**********
+    [message_body] => test message
+    [ts] => 1506687055
+    [auth] => /*auth*/
+
+)
+---
+
+Array
+(
+    [module_id] => bizproc
+    [workflow_id] => 59ce38567ff2a5.26351167
+    [document_id] => Array
+        (
+            [0] => crm
+            [1] => CCrmDocumentLead
+            [2] => LEAD_98
+        )
+
+    [document_type] => Array
+        (
+            [0] => crm
+            [1] => CCrmDocumentLead
+            [2] => LEAD
+        )
+
+    [properties] => Array
+        (
+            [phone_number] => +7*********
+            [message_text] => test message
+        )
+
+    [type] => SMS
+    [code] => example
+    [message_id] => 8b3fc6cd0cb4a7b91f6632889cdf46e0
+    [message_to] => +7*********
+    [message_body] => test message
+    [ts] => 1506687103
+    [auth] => /*auth*/
+
+)
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+CODE | Внутренний идентификатор провайдера. Допустимые символы a-z, A-Z, 0-9, точка, дефис и нижнее подчеркивание.
+TYPE | Тип провайдера.
+HANDLER | URL приложения, на который будут отправлены данные.
+NAME | Название провайдера. Может быть строкой или ассоциативным массивом локализированных строк.
+DESCRIPTION | Описание провайдера. Может быть строкой или ассоциативным массивом локализированных строк.

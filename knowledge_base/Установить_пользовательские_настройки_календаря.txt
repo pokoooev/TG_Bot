@@ -1,0 +1,206 @@
+# Установить пользовательские настройки календаря
+URL: https://apidocs.bitrix24.ru/api-reference/calendar/calendar-user-settings-set.html
+
+## ОПИСАНИЕ
+Scope: calendar Кто может выполнять метод: любой пользователь Метод устанавливает пользовательские настройки календаря для текущего пользователя. Обязательные параметры отмечены * Название
+тип Описание settings*
+object Объект со значениями пользовательских настроек календаря view
+string Стандартное представление для календаря. Возможные значения: meetSection
+string Календарь для приглашений crmSection
+string Календарь для CRM showDeclined
+boolean Показывать события, в которых пользователь отказался принять участие denyBusyInvitation
+boolean Запрещать приглашать в событие, если время занято collapseOffHours
+string Скрывать нерабочее время в календаре в недельном и дневном представлении. Возможные значения: showWeekNumbers
+string Показывать номер недель. Возможные значения: showTasks
+string Отображать задачи в календаре. Возможные значения: syncTasks
+string Синхронизировать календарь задач. Возможные значения: showCompletedTasks
+string Отображать завершенные задачи. Возможные значения: lastUsedSection
+string Идентификатор календаря, который используется при создании событий, если в параметрах не передан идентификатор календаря. Значение по умолчанию — false sendFromEmail
+string E-mail для отправки почтовых приглашений defaultSections
+object Настройки предустановленных календарей. Ключем объекта настроек может быть: Значением объекта является идентификатор календаря syncPeriodPast
+string Количество месяцев для синхронизации в прошлом периоде syncPeriodFuture
+string Количество месяцев для синхронизации в будущем периоде defaultReminders
+object Объект со стандартными настройками напоминаний о событии Название
+тип Описание fullDay
+array Массив стандартных настроек напоминаний для целодневных событий withTime
+array Массив стандартных настроек напоминаний для событий с указанием времени Название
+тип Описание type
+string Временной тип напоминания. Возможные значения: count
+integer Числовое значение временного промежутка Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+boolean Возвращает true в случае успешного выполнения HTTP-статус: 400 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Сообщение об ошибке Описание Пустая строка Не задан обязательный параметр "settings" для метода "calendar.user.settings.set" Не передан обязательный параметр settings HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"settings":{"view":"month","meetSection":"4","crmSection":"4","showDeclined":true,"denyBusyInvitation":false,"collapseOffHours":"N","showWeekNumbers":"N","showTasks":"Y","syncTasks":"N","showCompletedTasks":"N","lastUsedSection":"false","sendFromEmail":"","defaultSections":{"user1":"4","group6":"49"},"syncPeriodPast":"3","syncPeriodFuture":"12","defaultReminders":{"fullDay":[{"type":"min","count":15}],"withTime":[{"type":"min","count":50}]}}}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/calendar.user.settings.set
+---
+
+{
+    "result": true,
+    "time": {
+        "start": 1733318565.183275,
+        "finish": 1733318565.695058,
+        "duration": 0.5117831230163574,
+        "processing": 0.29406094551086426,
+        "date_start": "2024-12-04T13:22:45+00:00",
+        "date_finish": "2024-12-04T13:22:45+00:00"
+    }
+}
+---
+
+{
+    "error": "",
+    "error_description": "Не задан обязательный параметр "settings" для метода "calendar.user.settings.set""
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+settings*
+object | Объект со значениями пользовательских настроек календаря
+
+Таблица 1:
+meetSection
+string | Календарь для приглашений
+crmSection
+string | Календарь для CRM
+showDeclined
+boolean | Показывать события, в которых пользователь отказался принять участие
+denyBusyInvitation
+boolean | Запрещать приглашать в событие, если время занято
+collapseOffHours
+string | Скрывать нерабочее время в календаре в недельном и дневном представлении. Возможные значения:
+Y — скрывать
+N — не скрывать
+showWeekNumbers
+string | Показывать номер недель. Возможные значения:
+Y — показывать
+N — не показывать
+showTasks
+string | Отображать задачи в календаре. Возможные значения:
+Y — отображать
+N — не отображать
+syncTasks
+string | Синхронизировать календарь задач. Возможные значения:
+Y — да
+N — нет
+showCompletedTasks
+string | Отображать завершенные задачи. Возможные значения:
+Y — отображать
+N — не отображать
+lastUsedSection
+string | Идентификатор календаря, который используется при создании событий, если в параметрах не передан идентификатор календаря.
+Значение по умолчанию — false
+sendFromEmail
+string | E-mail для отправки почтовых приглашений
+defaultSections
+object | Настройки предустановленных календарей.
+Ключем объекта настроек может быть:
+user[id] — тип Календарь пользователя c идентификатором пользователя. Например, user12 соответствует календарю пользователя с идентификатором 12
+group[id] — тип Календарь группы с идентификатором группы. Например, group36 соответствует календарю группы с идентификатором 36
+Значением объекта является идентификатор календаря
+syncPeriodPast
+string | Количество месяцев для синхронизации в прошлом периоде
+syncPeriodFuture
+string | Количество месяцев для синхронизации в будущем периоде
+defaultReminders
+object | Объект со стандартными настройками напоминаний о событии
+
+Таблица 2:
+fullDay
+array | Массив стандартных настроек напоминаний для целодневных событий
+withTime
+array | Массив стандартных настроек напоминаний для событий с указанием времени
+
+Таблица 3:
+type
+string | Временной тип напоминания. Возможные значения:
+min — минуты
+hour — часы
+day — дни
+count
+integer | Числовое значение временного промежутка
+
+Таблица 4:
+result
+boolean | Возвращает true в случае успешного выполнения
+
+Таблица 5:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 6:
+Пустая строка | Не задан обязательный параметр "settings" для метода "calendar.user.settings.set" | Не передан обязательный параметр settings
+
+Таблица 7:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

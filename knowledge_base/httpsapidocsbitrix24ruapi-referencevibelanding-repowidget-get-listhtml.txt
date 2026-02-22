@@ -1,0 +1,315 @@
+# https://apidocs.bitrix24.ru/api-reference/vibe/landing-repowidget-get-list.html
+URL: https://apidocs.bitrix24.ru/api-reference/vibe/landing-repowidget-get-list.html
+
+## ОПИСАНИЕ
+Scope: landing Кто может выполнять метод: любой пользователь Метод landing.repowidget.getlist возвращает список виджетов текущего приложения, отобранных по фильтру. Обязательные параметры отмечены * Название
+тип Описание params*
+object Массив полей для получения списка виджетов Обязательные параметры отмечены * Название
+тип Описание select
+array Массив со списком полей, которые необходимо выбрать. Если не передан или передан пустой массив, то будут выбраны все доступные доступные виджеты filter
+object Объект для фильтрации выбранных записей в формате {"field_1": "value_1", ... "field_N": "value_N"}. Возможные значения для field смотрите в таблице ниже. Ключу может быть задан дополнительный префикс, уточняющий поведение фильтра. Возможные значения префикса: >= — больше либо равно > — больше <= — меньше либо равно < — меньше @ — IN (в качестве значения передаётся массив) !@— NOT IN (в качестве значения передаётся массив) % — LIKE, поиск по подстроке. Символ % в значении фильтра передавать не нужно. Поиск ищет подстроку в любой позиции строки =% — LIKE, поиск по подстроке. Символ % нужно передавать в значении. Примеры: %= — LIKE (см. описание выше) !% — NOT LIKE, поиск по подстроке. Символ % в значении фильтра передавать не нужно. Поиск идет с обоих сторон. !=% — NOT LIKE, поиск по подстроке. Символ % нужно передавать в значении. Примеры: !%= — NOT LIKE (см. описание выше) = — равно, точное совпадение (используется по умолчанию) != - не равно ! — не равно group
+array Массив для группировки виджетов. Группировать можно по полям виджета order
+object Объект для сортировки выбранных записей в формате {"field_1": "order_1", ... "field_N": "order_N"}. Возможные значения для field смотрите в таблице ниже. Возможные значения для order: Поля объекта виджета. Присутствуют в запросе и ответе. Название
+тип Описание ID
+integer Идентификатор виджета XML_ID
+string Уникальный код записи APP_CODE
+string Код текущего приложения ACTIVE
+char Активность виджета. Принимает значения: NAME
+string Название виджета DESCRIPTION
+string Описание виджета SECTIONS
+string Код раздела, в который будет добавлен виджет PREVIEW
+string URL картинки-обложки виджета для слайдера выбора виджетов WIDGET_PARAMS
+object Параметры для vue-шаблонизатора CONTENT
+string Верстка виджета с использованием конструкций Vue MANIFEST
+object Манифест виджета CREATED_BY_ID
+integer Идентификатор пользователя, создавшего запись MODIFIED_BY_ID
+integer Идентификатор пользователя, изменившего запись DATE_CREATE
+date Дата создания DATE_MODIFY
+date Дата изменения SITE_TEMPLATE_ID
+string Привязка виджета к определенному шаблону сайта. Только для коробочного Битрикс24! Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+object Массив виджетов. Каждый элемент массива — объект, допустимые поля описаны выше. time
+time Информация о времени выполнения запроса HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+landing.repowidget.getlist
+---
+
+{"field_1": "value_1", ... "field_N": "value_N"}
+---
+
+{"field_1": "order_1", ... "field_N": "order_N"}
+---
+
+// callListMethod: Получает все данные сразу. Используйте только для небольших выборок (< 1000 элементов) из-за высокой нагрузки на память.
+
+try {
+  const response = await $b24.callListMethod(
+    'landing.repowidget.getlist',
+    {
+      params: {
+        select: [
+          'ID', 'NAME'
+        ],
+        filter: {
+          '>ID': '1'
+        }
+      }
+    },
+    (progress) => { console.log('Progress:', progress) }
+  )
+  const items = response.getData() || []
+  for (const entity of items) { console.log('Entity:', entity) }
+} catch (error) {
+  console.error('Request failed', error)
+}
+
+// fetchListMethod: Выбирает данные по частям с помощью итератора. Используйте для больших объемов данных для эффективного потребления памяти.
+
+try {
+  const generator = $b24.fetchListMethod('landing.repowidget.getlist', {
+    params: {
+      select: [
+        'ID', 'NAME'
+      ],
+      filter: {
+        '>ID': '1'
+      }
+    }
+  }, 'ID')
+  for await (const page of generator) {
+    for (const entity of page) { console.log('Entity:', entity) }
+  }
+} catch (error) {
+  console.error('Request failed', error)
+}
+
+// callMethod: Ручное управление постраничной навигацией через параметр start. Используйте для точного контроля над пакетами запросов. Для больших данных менее эффективен, чем fetchListMethod.
+
+try {
+  const response = await $b24.callMethod('landing.repowidget.getlist', {
+    params: {
+      select: [
+        'ID', 'NAME'
+      ],
+      filter: {
+        '>ID': '1'
+      }
+    }
+  }, 0)
+  const result = response.getData().result || []
+  for (const entity of result) { console.log('Entity:', entity) }
+} catch (error) {
+  console.error('Request failed', error)
+}
+---
+
+{
+    "result": [
+        {
+            "ID": "4",
+            "XML_ID": "my_widget",
+            "APP_CODE": "app.code",
+            "ACTIVE": "Y",
+            "NAME": "My widget",
+            "DESCRIPTION": null,
+            "SECTIONS": "widgets_company_life",
+            "SITE_TEMPLATE_ID": null,
+            "PREVIEW": "https://my-app.com/vibe_preview.jpg",
+            "MANIFEST": {
+                "block": {
+                    "type": [
+                        "mainpage"
+                    ],
+                    "subtype": [
+                        "widgetvue"
+                    ],
+                    "subtype_params": {
+                        "rootNode": ".w-container",
+                        "demoData": {
+                            "desc": "JustSome widget data",
+                            "count": "420",
+                        },
+                        "handler": "https://my-app.com/vibe.php",
+                        "style": "https://my-app.com/vibe.css",
+                        "lang": {
+                            "ru": {
+                                "W_TITLE": "Люди и их возраст",
+                                "W_EMPTY": "Нет людей"
+                            },
+                            "en": {
+                                "W_TITLE": "Widget title",
+                                "W_EMPTY": "Empty!"
+                            }
+                        }
+                    }
+                }
+            },
+            "CONTENT": "<div class=\"w-container\">{{desc}}</div>",
+            "CREATED_BY_ID": "1",
+            "MODIFIED_BY_ID": "1",
+            "DATE_CREATE": "10.10.2024 15:55:30",
+            "DATE_MODIFY": "16.10.2024 16:12:57"
+        }
+    ],
+    "time": {
+        "start": 1729162340.81773,
+        "finish": 1729162344.800994,
+        "duration": 3.9832639694213867,
+        "processing": 3.8990869522094727,
+        "date_start": "2024-10-17T15:52:20+05:00",
+        "date_finish": "2024-10-17T15:52:24+05:00",
+        "operating": 3.899045944213867
+    }
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+params*
+object | Массив полей для получения списка виджетов
+
+Таблица 1:
+select
+array | Массив со списком полей, которые необходимо выбрать.
+Если не передан или передан пустой массив, то будут выбраны все доступные доступные виджеты
+filter
+object | Объект для фильтрации выбранных записей в формате {"field_1": "value_1", ... "field_N": "value_N"}.
+Возможные значения для field смотрите в таблице ниже.
+Ключу может быть задан дополнительный префикс, уточняющий поведение фильтра. Возможные значения префикса:
+>= — больше либо равно
+> — больше
+<= — меньше либо равно
+< — меньше
+@ — IN (в качестве значения передаётся массив)
+!@— NOT IN (в качестве значения передаётся массив)
+% — LIKE, поиск по подстроке. Символ % в значении фильтра передавать не нужно. Поиск ищет подстроку в любой позиции строки
+=% — LIKE, поиск по подстроке. Символ % нужно передавать в значении. Примеры:
+"мол%" — ищем значения, начинающиеся с «мол»
+"%мол" — ищем значения, заканчивающиеся на «мол»
+"%мол%" — ищем значения, где «мол» может быть в любой позиции
+%= — LIKE (см. описание выше)
+!% — NOT LIKE, поиск по подстроке. Символ % в значении фильтра передавать не нужно. Поиск идет с обоих сторон.
+!=% — NOT LIKE, поиск по подстроке. Символ % нужно передавать в значении. Примеры:
+"мол%" — ищем значения, не начинающиеся с «мол»
+"%мол" — ищем значения, не заканчивающиеся на «мол»
+"%мол%" — ищем значения, где подстроки «мол» нет в любой позиции
+!%= — NOT LIKE (см. описание выше)
+= — равно, точное совпадение (используется по умолчанию)
+!= - не равно
+! — не равно
+group
+array | Массив для группировки виджетов. Группировать можно по полям виджета
+order
+object | Объект для сортировки выбранных записей в формате {"field_1": "order_1", ... "field_N": "order_N"}.
+Возможные значения для field смотрите в таблице ниже.
+Возможные значения для order:
+asc — в порядке возрастания
+desc — в порядке убывания
+
+Таблица 2:
+ID
+integer | Идентификатор виджета
+XML_ID
+string | Уникальный код записи
+APP_CODE
+string | Код текущего приложения
+ACTIVE
+char | Активность виджета. Принимает значения:
+Y - виджет активен и доступен
+N - виджет неактивен и недоступен
+NAME
+string | Название виджета
+DESCRIPTION
+string | Описание виджета
+SECTIONS
+string | Код раздела, в который будет добавлен виджет
+PREVIEW
+string | URL картинки-обложки виджета для слайдера выбора виджетов
+WIDGET_PARAMS
+object | Параметры для vue-шаблонизатора
+CONTENT
+string | Верстка виджета с использованием конструкций Vue
+MANIFEST
+object | Манифест виджета
+CREATED_BY_ID
+integer | Идентификатор пользователя, создавшего запись
+MODIFIED_BY_ID
+integer | Идентификатор пользователя, изменившего запись
+DATE_CREATE
+date | Дата создания
+DATE_MODIFY
+date | Дата изменения
+SITE_TEMPLATE_ID
+string | Привязка виджета к определенному шаблону сайта. Только для коробочного Битрикс24!
+
+Таблица 3:
+result
+object | Массив виджетов. Каждый элемент массива — объект, допустимые поля описаны выше.
+time
+time | Информация о времени выполнения запроса
+
+Таблица 4:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

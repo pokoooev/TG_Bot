@@ -1,0 +1,53 @@
+# https://apidocs.bitrix24.ru/api-reference/chats/im-dialog-get.html
+URL: https://apidocs.bitrix24.ru/api-reference/chats/im-dialog-get.html
+
+## ОПИСАНИЕ
+Scope: im Кто может выполнять метод: любой пользователь Метод im.dialog.get получает информацию о диалоге. Обязательные параметры отмечены * Параметр Пример Описание Ревизия DIALOG_ID*
+string chat29
+или
+256 Идентификатор диалога. Формат: 24 Как использовать примеры в документации Код Описание DIALOG_ID_EMPTY Не передан идентификатор диалога ACCESS_ERROR Текущий пользователь не имеет прав доступа к диалогу
+
+## ПРИМЕРЫ КОДА
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"DIALOG_ID":"chat1"}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/im.dialog.get
+---
+
+{
+    "result":
+    {
+        "id": "21191",
+        "title": "Мятный чат №3",
+        "owner": "2",
+        "extranet": false,
+        "avatar": "",
+        "color": "#4ba984",
+        "type": "chat",
+        "entity_type": "",
+        "entity_data_1": "",
+        "entity_data_2": "",
+        "entity_data_3": "",
+        "date_create": "2017-10-14T12:15:32+02:00",
+        "message_type": "C"
+    }
+}
+---
+
+{
+    "error": "DIALOG_ID_EMPTY",
+    "error_description": "Dialog ID can't be empty"
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+DIALOG_ID*
+string | chat29
+или
+256 | Идентификатор диалога. Формат:
+chatXXX – чат получателя, если сообщение для чата
+XXX – идентификатор получателя, если сообщение для приватного диалога | 24
+
+Таблица 1:
+DIALOG_ID_EMPTY | Не передан идентификатор диалога
+ACCESS_ERROR | Текущий пользователь не имеет прав доступа к диалогу

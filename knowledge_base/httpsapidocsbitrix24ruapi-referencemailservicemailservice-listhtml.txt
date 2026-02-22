@@ -1,0 +1,45 @@
+# https://apidocs.bitrix24.ru/api-reference/mailservice/mailservice-list.html
+URL: https://apidocs.bitrix24.ru/api-reference/mailservice/mailservice-list.html
+
+## ОПИСАНИЕ
+Scope: mailservice Кто может выполнять метод: любой пользователь Метод mailservice.list возвращает список всех почтовых сервисов. Без параметров. Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+// callListMethod: Получает все данные сразу. Используйте только для небольших выборок (< 1000 элементов) из-за высокой нагрузки на память.
+
+try {
+  const response = await $b24.callListMethod(
+    'mailservice.list',
+    {}
+  );
+  const items = response.getData() || [];
+  for (const entity of items) { console.log('Entity:', entity); }
+} catch (error) {
+  console.error('Request failed', error);
+}
+
+// fetchListMethod: Выбирает данные по частям с помощью итератора. Используйте для больших объемов данных для эффективного потребления памяти.
+
+try {
+  const generator = $b24.fetchListMethod('mailservice.list', {});
+  for await (const page of generator) {
+    for (const entity of page) { console.log('Entity:', entity); }
+  }
+} catch (error) {
+  console.error('Request failed', error);
+}
+
+// callMethod: Ручное управление постраничной навигацией через параметр start. Используйте для точного контроля над пакетами запросов. Для больших данных менее эффективен, чем fetchListMethod.
+
+try {
+  const response = await $b24.callMethod('mailservice.list', {}, 0);
+  const result = response.getData().result || [];
+  for (const entity of result) { console.log('Entity:', entity); }
+} catch (error) {
+  console.error('Request failed', error);
+}
+---
+
+## ТАБЛИЦЫ
+Нет таблиц

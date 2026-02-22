@@ -1,0 +1,132 @@
+# https://apidocs.bitrix24.ru/api-reference/landing/index.html
+URL: https://apidocs.bitrix24.ru/api-reference/landing/index.html
+
+## ОПИСАНИЕ
+Быстрый переход: все методы Чтобы создать полноценный сайт через REST или внести изменения в существующий, вы должны понимать, что REST копирует логику работы пользователя. То есть, например, чтобы начать менять блок, нужно его сначала добавить, если его нет на странице, а чтобы изменения увидели свет, нужно опубликовать страницу. Но давайте коротко по пунктам. Итак, "чтобы создать сайт" нужно всего ничего: Это – необходимый вам костяк для работы с блоками. Методов конечно существует намного больше и они достаточно точечны, чтобы охватить максимум ваших кейсов. Успехов! Метод Описание С версии landing.repo.getList Метод для получения списка блоков текущего приложения. landing.repo.register Метод добавления блока в репозиторий. landing.repo.unregister Метод удаления блока. landing.repo.checkContent Метод проверяет контент на опасные подстроки. Метод Описание landing.template.getLandingRef Получает список включаемых областей для страницы landing.template.getlist Получает список шаблонов landing.template.getSiteRef Получает список включаемых областей для сайта landing.template.setLandingRef Устанавливает включаемые области для страницы landing.template.setSiteRef Устанавливает включаемые области для сайта Метод Описание landing.demos.register Метод регистрирует шаблон в мастере создания сайта и страницы. landing.demos.unregister Метод удаляет зарегистрированный пользовательский шаблон. landing.demos.getList Метод для получения списка доступных пользовательских шаблонов текущего приложения. landing.demos.getSiteList Метод для получения списка доступных шаблонов для создания сайтов. landing.demos.getPageList Метод для получения списка доступных шаблонов для создания страниц. Метод Описание С версии landing.site.add Добавляет сайт landing.site.addFolder Добавляет папку в сайт 21.800.0 landing.site.delete Удаляет сайт landing.site.fullExport Экспортирует сайт и всего его страницы в специальный массив landing.site.getFolders Получает папки сайта 21.800.0 landing.site.getList Получает список сайтов landing.site.getPreview Возвращает URL изображения-превью сайта 21.800.0 landing.site.getPublicUrl Возвращает полный URL сайтов 18.7.500 landing.site.getadditionalfields Получает дополнительные поля сайта landing.site.markDelete Помечает сайт как удаленный landing.site.markFolderDelete Помечает папку как удаленную 21.800.0 landing.site.markFolderUnDelete Восстанавливает папку из корзины 21.800.0 landing.site.markUnDelete Восстанавливает сайт из корзины landing.site.publication Публикует сайт и все его страницы landing.site.publicationFolder Публикует папку сайта 21.800.0 landing.site.unPublicFolder Снимает с публикации папку сайта 21.800.0 landing.site.unpublic Снимает с публикации сайт и все его страницы landing.site.update Обновляет параметры сайта landing.site.updateFolder Обновляет параметры папки 21.800.0 Метод Описание landing.role.enable Переключает модели landing.role.isEnabled Определяет модели прав Метод Описание landing.site.getRights Метод вернет права текущего пользователя. landing.site.setRights Устанавливает права доступа для сайта. Метод Описание landing.role.getList Метод позволяет получить список ролей. landing.role.getRights Метод позволяет получить список сайтов, права на которые установлены в рамках роли. landing.role.setAccessCodes Метод устанавливает для роли коды доступа, для которых будет действовать данная роль. landing.role.setRights Метод устанавливает необходимые права в рамках роли для списков сайта. Метод Описание С версии landing.landing.add Метод для добавления страницы. landing.landing.addByTemplate Метод для добавления Страницы по шаблону. landing.landing.copy Метод копирует указанную страницу. landing.landing.delete Метод для удаления страницы. landing.landing.getadditionalfields Метод для получения дополнительных полей страницы landing.landing.getlist Метод для получения списка страниц. landing.landing.getpreview Метод возвращает путь до превью страницы. landing.landing.getpublicurl Метод возвращает веб-адрес страницы. landing.landing.markDelete Метод помечает страницу как удаленную. landing.landing.markUnDelete Метод помечает страницу как не удаленную. landing.landing.move Метод перемещает страницу в другой сайт и/или папку. 21.800.0 landing.landing.publication Метод для публикации страницы. landing.landing.removeEntities Метод удаляет связанные сущности лендинга. landing.landing.resolveIdByPublicUrl Метод по переданному относительному URL страницы возвращает идентификатор страницы. 21.800.0 landing.landing.unpublic Метод для снятия с публикации страницы. landing.landing.update Метод для изменения страницы. Метод Описание С версии landing.landing.addblock Метод для добавление нового блока на страницу. landing.landing.copyblock Метод для копирования блока со страницы на страницу. landing.landing.deleteblock Метод для удаление блока со страницы. landing.landing.downblock Метод для опускания блока на одну позицию вниз на странице. landing.landing.favoriteBlock Метод сохраняет имеющийся на странице блок в «Мои блоки». 21.800.0 landing.landing.hideblock Метод скрывает блок со страницы. landing.landing.markdeletedblock Метод помечает блок как удаленный, но не удаляет его физически. landing.landing.markundeletedblock Метод восстанавливает блок из помеченных как удаленный landing.landing.moveblock Метод для переноса блока со страницы на страницу. landing.landing.showblock Метод для показа блока со странице. landing.landing.unFavoriteBlock Метод удаляет блок, который был сохранен в «Мои блоки». 21.800.0 landing.landing.upblock Метод для поднятия блока на одну позицию вверх на странице. Метод Описание landing.syspage.deleteForLanding Удаляет все упоминания страницы как специальной landing.syspage.deleteForSite Удаляет все специальные страницы landing.syspage.getSpecialPage Получает адрес специальной страницы сайта landing.syspage.get Получает список специальных страниц landing.syspage.set Устанавливает специальную страницу для сайта Метод Описание С версии landing.block.clonecard Метод для клонирования карточки блока. landing.block.removecard Метод для удаления блока landing.block.updatenodes Метод для изменения контента блока. landing.block.changeNodeName Метод изменяет название тега. landing.block.updateattrs Метод для изменения атрибутов ноды блока. landing.block.updateStyles Метод для изменения стилей блока. landing.block.getcontent Метод для получения контента блока. landing.block.getlist Метод для получение списка блоков страницы. landing.block.getbyid Метод для получения блока по его идентификатору. landing.block.getmanifest Метод для получения манифеста конкретного блока, уже размещенного на странице. landing.block.getmanifestfile Метод для получения манифеста блока из репозитория. landing.block.getrepository Метод возвращает список блоков из репозитория. landing.block.uploadfile Метод загружает картинку и привязывает ее к указанному блоку. landing.block.updatecontent Метод обновляет содержимое уже размещенного на странице блока на любой произвольный. landing.block.addcard Метод полностью повторяет работу landing.block.clonecard но дает возможность вставить карточку сразу с измененным контентом. landing.block.updateCards Метод для массового изменения карточек блока. landing.block.changeAnchor Метод изменяет символьный код якоря. landing.block.getContentFromRepository Метод получает контент блока из репозитория «как есть» до добавления блока на какую-либо страницу. 18.7.500 Метод Описание landing.site.bindingToGroup Привязывает к группе Социальной сети landing.site.bindingToMenu Встраивает в меню landing.site.getGroupBindings Получает привязки к группам landing.site.getMenuBindings Получает список привязок в меню landing.site.unbindingFromGroup Удаляет привязку к группе Социальной сети landing.site.unbindingFromMenu Удаляет из меню
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+landing.repo.getList | Метод для получения списка блоков текущего приложения. | 
+landing.repo.register | Метод добавления блока в репозиторий. | 
+landing.repo.unregister | Метод удаления блока. | 
+landing.repo.checkContent | Метод проверяет контент на опасные подстроки. | 
+
+Таблица 1:
+landing.template.getLandingRef | Получает список включаемых областей для страницы
+landing.template.getlist | Получает список шаблонов
+landing.template.getSiteRef | Получает список включаемых областей для сайта
+landing.template.setLandingRef | Устанавливает включаемые области для страницы
+landing.template.setSiteRef | Устанавливает включаемые области для сайта
+
+Таблица 2:
+landing.demos.register | Метод регистрирует шаблон в мастере создания сайта и страницы.
+landing.demos.unregister | Метод удаляет зарегистрированный пользовательский шаблон.
+landing.demos.getList | Метод для получения списка доступных пользовательских шаблонов текущего приложения.
+landing.demos.getSiteList | Метод для получения списка доступных шаблонов для создания сайтов.
+landing.demos.getPageList | Метод для получения списка доступных шаблонов для создания страниц.
+
+Таблица 3:
+landing.site.add | Добавляет сайт | 
+landing.site.addFolder | Добавляет папку в сайт | 21.800.0
+landing.site.delete | Удаляет сайт | 
+landing.site.fullExport | Экспортирует сайт и всего его страницы в специальный массив | 
+landing.site.getFolders | Получает папки сайта | 21.800.0
+landing.site.getList | Получает список сайтов | 
+landing.site.getPreview | Возвращает URL изображения-превью сайта | 21.800.0
+landing.site.getPublicUrl | Возвращает полный URL сайтов | 18.7.500
+landing.site.getadditionalfields | Получает дополнительные поля сайта | 
+landing.site.markDelete | Помечает сайт как удаленный | 
+landing.site.markFolderDelete | Помечает папку как удаленную | 21.800.0
+landing.site.markFolderUnDelete | Восстанавливает папку из корзины | 21.800.0
+landing.site.markUnDelete | Восстанавливает сайт из корзины | 
+landing.site.publication | Публикует сайт и все его страницы | 
+landing.site.publicationFolder | Публикует папку сайта | 21.800.0
+landing.site.unPublicFolder | Снимает с публикации папку сайта | 21.800.0
+landing.site.unpublic | Снимает с публикации сайт и все его страницы | 
+landing.site.update | Обновляет параметры сайта | 
+landing.site.updateFolder | Обновляет параметры папки | 21.800.0
+
+Таблица 4:
+landing.role.enable | Переключает модели
+landing.role.isEnabled | Определяет модели прав
+
+Таблица 5:
+landing.site.getRights | Метод вернет права текущего пользователя.
+landing.site.setRights | Устанавливает права доступа для сайта.
+
+Таблица 6:
+landing.role.getList | Метод позволяет получить список ролей.
+landing.role.getRights | Метод позволяет получить список сайтов, права на которые установлены в рамках роли.
+landing.role.setAccessCodes | Метод устанавливает для роли коды доступа, для которых будет действовать данная роль.
+landing.role.setRights | Метод устанавливает необходимые права в рамках роли для списков сайта.
+
+Таблица 7:
+landing.landing.add | Метод для добавления страницы. | 
+landing.landing.addByTemplate | Метод для добавления Страницы по шаблону. | 
+landing.landing.copy | Метод копирует указанную страницу. | 
+landing.landing.delete | Метод для удаления страницы. | 
+landing.landing.getadditionalfields | Метод для получения дополнительных полей страницы | 
+landing.landing.getlist | Метод для получения списка страниц. | 
+landing.landing.getpreview | Метод возвращает путь до превью страницы. | 
+landing.landing.getpublicurl | Метод возвращает веб-адрес страницы. | 
+landing.landing.markDelete | Метод помечает страницу как удаленную. | 
+landing.landing.markUnDelete | Метод помечает страницу как не удаленную. | 
+landing.landing.move | Метод перемещает страницу в другой сайт и/или папку. | 21.800.0
+landing.landing.publication | Метод для публикации страницы. | 
+landing.landing.removeEntities | Метод удаляет связанные сущности лендинга. | 
+landing.landing.resolveIdByPublicUrl | Метод по переданному относительному URL страницы возвращает идентификатор страницы. | 21.800.0
+landing.landing.unpublic | Метод для снятия с публикации страницы. | 
+landing.landing.update | Метод для изменения страницы. | 
+
+Таблица 8:
+landing.landing.addblock | Метод для добавление нового блока на страницу. | 
+landing.landing.copyblock | Метод для копирования блока со страницы на страницу. | 
+landing.landing.deleteblock | Метод для удаление блока со страницы. | 
+landing.landing.downblock | Метод для опускания блока на одну позицию вниз на странице. | 
+landing.landing.favoriteBlock | Метод сохраняет имеющийся на странице блок в «Мои блоки». | 21.800.0
+landing.landing.hideblock | Метод скрывает блок со страницы. | 
+landing.landing.markdeletedblock | Метод помечает блок как удаленный, но не удаляет его физически. | 
+landing.landing.markundeletedblock | Метод восстанавливает блок из помеченных как удаленный | 
+landing.landing.moveblock | Метод для переноса блока со страницы на страницу. | 
+landing.landing.showblock | Метод для показа блока со странице. | 
+landing.landing.unFavoriteBlock | Метод удаляет блок, который был сохранен в «Мои блоки». | 21.800.0
+landing.landing.upblock | Метод для поднятия блока на одну позицию вверх на странице. | 
+
+Таблица 9:
+landing.syspage.deleteForLanding | Удаляет все упоминания страницы как специальной
+landing.syspage.deleteForSite | Удаляет все специальные страницы
+landing.syspage.getSpecialPage | Получает адрес специальной страницы сайта
+landing.syspage.get | Получает список специальных страниц
+landing.syspage.set | Устанавливает специальную страницу для сайта
+
+Таблица 10:
+landing.block.clonecard | Метод для клонирования карточки блока. | 
+landing.block.removecard | Метод для удаления блока | 
+landing.block.updatenodes | Метод для изменения контента блока. | 
+landing.block.changeNodeName | Метод изменяет название тега. | 
+landing.block.updateattrs | Метод для изменения атрибутов ноды блока. | 
+landing.block.updateStyles | Метод для изменения стилей блока. | 
+landing.block.getcontent | Метод для получения контента блока. | 
+landing.block.getlist | Метод для получение списка блоков страницы. | 
+landing.block.getbyid | Метод для получения блока по его идентификатору. | 
+landing.block.getmanifest | Метод для получения манифеста конкретного блока, уже размещенного на странице. | 
+landing.block.getmanifestfile | Метод для получения манифеста блока из репозитория. | 
+landing.block.getrepository | Метод возвращает список блоков из репозитория. | 
+landing.block.uploadfile | Метод загружает картинку и привязывает ее к указанному блоку. | 
+landing.block.updatecontent | Метод обновляет содержимое уже размещенного на странице блока на любой произвольный. | 
+landing.block.addcard | Метод полностью повторяет работу landing.block.clonecard но дает возможность вставить карточку сразу с измененным контентом. | 
+landing.block.updateCards | Метод для массового изменения карточек блока. | 
+landing.block.changeAnchor | Метод изменяет символьный код якоря. | 
+landing.block.getContentFromRepository | Метод получает контент блока из репозитория «как есть» до добавления блока на какую-либо страницу. | 18.7.500
+
+Таблица 11:
+landing.site.bindingToGroup | Привязывает к группе Социальной сети
+landing.site.bindingToMenu | Встраивает в меню
+landing.site.getGroupBindings | Получает привязки к группам
+landing.site.getMenuBindings | Получает список привязок в меню
+landing.site.unbindingFromGroup | Удаляет привязку к группе Социальной сети
+landing.site.unbindingFromMenu | Удаляет из меню

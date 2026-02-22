@@ -1,0 +1,126 @@
+# Отменить обработчик
+URL: https://apidocs.bitrix24.ru/api-reference/events/event-unbind.html
+
+## ОПИСАНИЕ
+Кто может выполнять метод: администратор Метод event.unbind выполняет отмену зарегистрированного обработчика события. Метод работает только в контексте авторизации приложения и только при авторизации под пользователем с правами администрирования портала. Обязательные параметры отмечены * Название
+тип Описание event*
+string Имя события handler*
+string Ссылка на обработчик события auth_type
+integer Идентификатор пользователя, под которым авторизуется обработчик события. Примечание Если требуется удалить обработчики события, установленные с пустым auth_type (с авторизацией от имени пользователя, вызвавшего событие), но оставить остальные обработчики, указывайте auth_type=0 или пустое значение параметра. event_type
+string Значения: online\|offline. По умолчанию event_type=online, и поведение метода не меняется. Если вызывается event_type=offline, то метод работает с офлайн-событиями Если какие-либо параметры не указаны, то будут удалены все обработчики события, удовлетворяющие остальным требованиям. Как использовать примеры в документации HTTP-статус: 200 Метод возвращает количество удаленных при вызове обработчиков событий. Название
+тип Описание result
+object Корневой элемент ответа time
+time Информация о времени выполнения запроса HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{
+    "event": "ONCRMLEADADD",
+    "handler": "https://www.my-domain.ru/handler/",
+    "auth": "**put_access_token_here**"
+}' \
+https://**put_your_bitrix24_address**/rest/event.unbind
+    ```
+---
+
+{
+    "result": {
+        "count": 1
+    },
+    "time": {
+        "start": 1721298360.468008,
+        "finish": 1721298360.553977,
+        "duration": 0.0859689712524414,
+        "processing": 0.0023431777954101562,
+        "date_start": "2024-07-18T12:26:00+02:00",
+        "date_finish": "2024-07-18T12:26:00+02:00",
+        "operating": 0
+    }
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+event*
+string | Имя события
+handler*
+string | Ссылка на обработчик события
+auth_type
+integer | Идентификатор пользователя, под которым авторизуется обработчик события.
+Примечание
+Если требуется удалить обработчики события, установленные с пустым auth_type (с авторизацией от имени пользователя, вызвавшего событие), но оставить остальные обработчики, указывайте auth_type=0 или пустое значение параметра.
+event_type
+string | Значения: online\|offline. По умолчанию event_type=online, и поведение метода не меняется. Если вызывается event_type=offline, то метод работает с офлайн-событиями
+
+Таблица 1:
+result
+object | Корневой элемент ответа
+time
+time | Информация о времени выполнения запроса
+
+Таблица 2:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

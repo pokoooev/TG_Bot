@@ -1,0 +1,17 @@
+# Telegram бот
+python-telegram-bot==21.0
+
+# База данных
+sqlalchemy==2.0.23
+asyncpg==0.29.0
+psycopg2-binary==2.9.9
+alembic==1.12.1
+
+# Переменные окружения
+python-dotenv==1.0.0
+
+# Yandex Cloud SDK
+yandex-ai-studio-sdk==0.19.2
+
+# Автоматический запуск
+schedule==1.2.0

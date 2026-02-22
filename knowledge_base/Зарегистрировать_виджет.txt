@@ -1,0 +1,199 @@
+# Зарегистрировать виджет
+URL: https://apidocs.bitrix24.ru/api-reference/widgets/placement-bind.html
+
+## ОПИСАНИЕ
+Scope: placement, в зависимости от места встройки Кто может выполнять метод: администратор Метод добавляет обработчик встройки виджета. Он может быть вызван в любой момент во время работы приложения, однако чаще всего, удобнее регистрировать свои виджеты во время установки приложения. Важно учитывать, что пока установка приложения не завершена, зарегистрированные вами виджеты не будут доступны обычным пользователям в интерфейсе Битрикс24 - их смогут видеть только пользователи с административными правами.
+Проверьте установку приложения. Обязательные параметры отмечены * Название
+тип Описание PLACEMENT*
+string Идентификатор требуемого места встройки виджета HANDLER*
+string URL обработчика места встройки виджета TITLE
+string Название виджета в интерфейсе. В зависимости от конкретного места встройки это может быть название вкладки в форме, название пункта меню и т.д. DESCRIPTION
+string Описание виджета в интерфейсе. На практике не используется GROUP_NAME
+string Позволяет объединять элементы пользовательского интерфейса для нескольких обработчиков одного и того же типа виджета в группу. Например, несколько пунктов выпадающего меню в верхней кнопке карточки CRM. Поддерживается только некоторыми типами виджетов LANG_ALL
+object Массив параметров TITLE, DESCRIPTION и GROUP_NAME для указанных языков. Пользователи, у которых в интерфейсе Битрикс24 выбран один из таких языков, будут видеть локализованные версии TITLE, DESCRIPTION и GROUP_NAME: OPTIONS
+object Дополнительные параметры отображения виджета. Конкретные значения зависит от места встройки виджета. На текущий момент используется в виджетах для мессенджера, в виджете PAGE_BACKGROUND_WORKER и в виджете CRM_XXX_DETAIL_ACTIVITY USER_ID
+integer Идентификатор пользователя Битрикс24, для которого будет доступен зарегистрированный виджет. Возможные значение можно получить с помощью метода user.get На текущий момент этот параметр поддерживается только виджетом PAGE_BACKGROUND_WORKER. При попытке регистрации места встраивания в прочих виджетах, вы получите ошибку ERROR_PLACEMENT_USER_MODE: User mode is not available. Как использовать примеры в документации Частые кейсы и сценарии HTTP-статус: 200 Название
+тип Описание result
+boolean Возвращает результат добавления обработчика виджета. Возможные значения: time
+time Информация о времени выполнения запроса HTTP-статус: 400, 403, 200 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Описание Статус ERROR_PLACEMENT_MAX_COUNT Произошла попытка повторной регистрации обработчика виджета PAGE_BACKGROUND_WORKER 200 ERROR_ARGUMENT Не указано значение обязательного поля. Код обязательного поля возвращается в argument 200 HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта Итак, успешный вызов метода placement.bind позволил вам зарегистрировать обработчик виджета. Важно, чтобы указанный вами параметр HANDLER_URL указывал на реальный и доступный URL. Важно Требуется, чтобы URL обработчика был обязательно доступен из внешней сети. Ссылки на localhost, локальные домены и аналогичные способы обращения к локальному вебсерверу не годятся. Проверяйте доступность указанного вами URL с помощь специальных сервисов, контролирующих доступность сайтов! Обращаясь к вашему обработчику, Битрикс24 передаст в него POST-message, содержащий информацию о контексте виджета, например, идентификатор сделки, если виджет встраивается в карточку сделки в CRM и т.д. Примеры таких данных вы найдете в описаниях конкретных мест встройки виджетов.
+
+## ПРИМЕРЫ КОДА
+
+в зависимости от места встройки
+---
+
+"LANG_ALL": {
+        "en": {
+            "TITLE": "title",
+            "DESCRIPTION": "description",
+            "GROUP_NAME": "group"
+        },
+        "ru": {
+            "TITLE": "заголовок",
+            "DESCRIPTION": "описание",
+            "GROUP_NAME": "группа"
+        }
+    }
+---
+
+PAGE_BACKGROUND_WORKER
+---
+
+PAGE_BACKGROUND_WORKER
+---
+
+ERROR_PLACEMENT_USER_MODE: User mode is not available
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"PLACEMENT":"PLACEMENT_CODE","HANDLER":"http://myapp.com/handler/?type=1","OPTIONS":{"errorHandlerUrl":"http://myapp.com/error/"},"TITLE":"title","DESCRIPTION":"description","GROUP_NAME":"group","LANG_ALL":{"en":{"TITLE":"title","DESCRIPTION":"description","GROUP_NAME":"group"},"ru":{"TITLE":"заголовок","DESCRIPTION":"описание","GROUP_NAME":"группа"}}}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/placement.bind
+---
+
+{
+    "result": true,
+    "time": {
+        "start": 1712132792.910734,
+        "finish": 1712132793.530359,
+        "duration": 0.6196250915527344,
+        "processing": 0.032338857650756836,
+        "date_start": "2024-04-03T10:26:32+02:00",
+        "date_finish": "2024-04-03T10:26:33+02:00",
+        "operating_reset_at": 1705765533,
+        "operating": 3.3076241016387939
+    }
+}
+---
+
+{
+    "error": "ERROR_ARGUMENT",
+    "error_description": "Argument 'PLACEMENT' is null or empty",
+    "argument": "PLACEMENT"
+}
+---
+
+ERROR_PLACEMENT_MAX_COUNT
+---
+
+PAGE_BACKGROUND_WORKER
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+PLACEMENT*
+string | Идентификатор требуемого места встройки виджета
+HANDLER*
+string | URL обработчика места встройки виджета
+TITLE
+string | Название виджета в интерфейсе. В зависимости от конкретного места встройки это может быть название вкладки в форме, название пункта меню и т.д.
+DESCRIPTION
+string | Описание виджета в интерфейсе. На практике не используется
+GROUP_NAME
+string | Позволяет объединять элементы пользовательского интерфейса для нескольких обработчиков одного и того же типа виджета в группу. Например, несколько пунктов выпадающего меню в верхней кнопке карточки CRM. Поддерживается только некоторыми типами виджетов
+LANG_ALL
+object | Массив параметров TITLE, DESCRIPTION и GROUP_NAME для указанных языков. Пользователи, у которых в интерфейсе Битрикс24 выбран один из таких языков, будут видеть локализованные версии TITLE, DESCRIPTION и GROUP_NAME:
+    "LANG_ALL": {
+        "en": {
+            "TITLE": "title",
+            "DESCRIPTION": "description",
+            "GROUP_NAME": "group"
+        },
+        "ru": {
+            "TITLE": "заголовок",
+            "DESCRIPTION": "описание",
+            "GROUP_NAME": "группа"
+        }
+    }
+OPTIONS
+object | Дополнительные параметры отображения виджета. Конкретные значения зависит от места встройки виджета. На текущий момент используется в виджетах для мессенджера, в виджете PAGE_BACKGROUND_WORKER и в виджете CRM_XXX_DETAIL_ACTIVITY
+USER_ID
+integer | Идентификатор пользователя Битрикс24, для которого будет доступен зарегистрированный виджет. Возможные значение можно получить с помощью метода user.get
+На текущий момент этот параметр поддерживается только виджетом PAGE_BACKGROUND_WORKER.
+При попытке регистрации места встраивания в прочих виджетах, вы получите ошибку ERROR_PLACEMENT_USER_MODE: User mode is not available.
+
+Таблица 1:
+result
+boolean | Возвращает результат добавления обработчика виджета. Возможные значения:
+True, обработчик успешно зарегистрирован;
+False, обработчик не зарегистрирован
+time
+time | Информация о времени выполнения запроса
+
+Таблица 2:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 3:
+ERROR_PLACEMENT_MAX_COUNT | Произошла попытка повторной регистрации обработчика виджета PAGE_BACKGROUND_WORKER | 200
+ERROR_ARGUMENT | Не указано значение обязательного поля. Код обязательного поля возвращается в argument | 200
+
+Таблица 4:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

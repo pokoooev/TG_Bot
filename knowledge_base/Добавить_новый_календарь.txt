@@ -1,0 +1,162 @@
+# Добавить новый календарь
+URL: https://apidocs.bitrix24.ru/api-reference/calendar/calendar-section-add.html
+
+## ОПИСАНИЕ
+Scope: calendar Кто может выполнять метод: любой пользователь Метод добавляет новый календарь. Система добавит новый календарь только для пользователя, который выполнит метод. Администратор может создавать календари для других пользователей. Обязательные параметры отмечены * Название
+тип Описание type*
+string Тип календаря. Возможные значения: ownerId*
+integer Идентификатор владельца календаря. Для type со значением user установится идентификатор текущего пользователя, если не передать значение в ownerId name*
+string Название календаря description
+string Описание календаря color
+string Цвет календаря text_color
+string Цвет текста в календаре export
+object Объект параметров экспорта календаря Название
+тип Описание ALLOW
+boolean Разрешить экспорт календаря. Возможные значения: SET
+string Период, за который производить экспорт. Возможные значения: Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+integer Идентификатор созданного календаря HTTP-статус: 400 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Сообщение об ошибке Описание Пустая строка Не задан обязательный параметр "type" для метода "calendar.section.add" Не передан обязательный параметр type Пустая строка Не задан обязательный параметр "ownerId" для метода "calendar.section.add" Не передан обязательный параметр ownerId и параметр type не равен user Пустая строка Недопустимое значение параметра "name" Передан неверный формат данных в поле name Пустая строка Недопустимое значение параметра "description" Передан неверный формат данных в поле description Пустая строка Доступ запрещен Нет прав для создания календаря с переданным type Пустая строка При создании секции произошла ошибка Другая ошибка HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"type":"user","ownerId":2,"name":"New Section","description":"Description for section","color":"#9cbeee","text_color":"#283000","export":{"ALLOW":false,"SET":"3_9"}}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/calendar.section.add
+---
+
+{
+    "result": 190,
+    "time": {
+        "start": 1733812564.64201,
+        "finish": 1733812565.71673,
+        "duration": 1.0747201442718506,
+        "processing": 0.05963897705078125,
+        "date_start": "2024-12-08T06:36:04+00:00",
+        "date_finish": "2024-12-08T06:36:05+00:00"
+    }
+}
+---
+
+{
+    "error": "",
+    "error_description": "Не задан обязательный параметр "type" для метода "calendar.section.add""
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+type*
+string | Тип календаря. Возможные значения:
+user — календарь пользователя
+group — календарь группы
+ownerId*
+integer | Идентификатор владельца календаря.
+Для type со значением user установится идентификатор текущего пользователя, если не передать значение в ownerId
+name*
+string | Название календаря
+description
+string | Описание календаря
+color
+string | Цвет календаря
+text_color
+string | Цвет текста в календаре
+export
+object | Объект параметров экспорта календаря
+
+Таблица 1:
+ALLOW
+boolean | Разрешить экспорт календаря. Возможные значения:
+true — разрешить
+false — запретить
+SET
+string | Период, за который производить экспорт. Возможные значения:
+all — за весь период
+3_9 — 3 месяца до и 9 после
+6_12 — 6 месяцев до и 12 после
+
+Таблица 2:
+result
+integer | Идентификатор созданного календаря
+
+Таблица 3:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 4:
+Пустая строка | Не задан обязательный параметр "type" для метода "calendar.section.add" | Не передан обязательный параметр type
+Пустая строка | Не задан обязательный параметр "ownerId" для метода "calendar.section.add" | Не передан обязательный параметр ownerId и параметр type не равен user
+Пустая строка | Недопустимое значение параметра "name" | Передан неверный формат данных в поле name
+Пустая строка | Недопустимое значение параметра "description" | Передан неверный формат данных в поле description
+Пустая строка | Доступ запрещен | Нет прав для создания календаря с переданным type
+Пустая строка | При создании секции произошла ошибка | Другая ошибка
+
+Таблица 5:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

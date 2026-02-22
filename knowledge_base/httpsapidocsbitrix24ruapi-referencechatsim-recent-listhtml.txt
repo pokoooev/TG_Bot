@@ -1,0 +1,99 @@
+# https://apidocs.bitrix24.ru/api-reference/chats/im-recent-list.html
+URL: https://apidocs.bitrix24.ru/api-reference/chats/im-recent-list.html
+
+## ОПИСАНИЕ
+Scope: im Кто может выполнять метод: любой пользователь Метод im.recent.list получает список последних диалогов пользователя (с поддержкой пагинации). Параметр Пример Описание Ревизия SKIP_OPENLINES
+unknown 'Y' Пропускать чаты открытых линий 30 SKIP_DIALOG
+unknown 'N' Пропускать диалоги "один на один" 30 SKIP_CHAT
+unknown 'Y' Пропускать чаты 30 LAST_MESSAGE_DATE
+unknown '2021-10-30' Дата из последнего элемента предыдущей выборки 30 Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+B24.callMethod(
+   'im.recent.list',
+   {
+      LAST_MESSAGE_DATE: '2021-10-30'
+   },
+   res => {
+      if (res.error())
+      {
+            console.error(result.error().ex);
+      }
+      else
+      {
+            console.log(res.data())
+      }
+   }
+)
+---
+
+{
+"items": [
+    {
+     "id": "chat71",
+     "chat_id": 71,
+     "type": "chat",
+     "avatar": {
+        "url": "",
+        "color": "#8474c8"
+     },
+     "title": "Фиолетовый гость №3 - Открытая линия 2",
+     "message": {
+        "id": 267,
+        "text": "Отправлена форма \"Форма контактных данных для открытых линий\" [Вложение]",
+        "file": false,
+        "author_id": 0,
+        "attach": true,
+        "date": "2021-10-27T18:20:45+02:00",
+        "status": "received"
+     },
+     "counter": 3,
+     "pinned": false,
+     "unread": false,
+     "date_update": "2021-10-27T18:20:45+02:00",
+     "chat": {
+        "id": 71,
+        "name": "Фиолетовый гость №3 - Открытая линия 2",
+        "owner": 0,
+        "extranet": false,
+        "avatar": "",
+        "color": "#8474c8",
+        "type": "lines",
+        "entity_type": "LINES",
+        "entity_id": "livechat|2|70|2016",
+        "entity_data_1": "N|NONE|0|N|N|7|1635351612|0|0|0",
+        "entity_data_2": "",
+        "entity_data_3": "",
+        "mute_list": [],
+        "manager_list": [],
+        "date_create": "2021-10-27T18:20:12+02:00",
+        "message_type": "L"
+     },
+     "lines": {
+        "id": 7,
+        "status": 5,
+        "date_create": "2021-10-27T18:20:12+02:00"
+     },
+     "user": {
+        "id": 0
+     },
+     "options": []
+    },
+    ...
+],
+"hasMore": false
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+SKIP_OPENLINES
+unknown | 'Y' | Пропускать чаты открытых линий | 30
+SKIP_DIALOG
+unknown | 'N' | Пропускать диалоги "один на один" | 30
+SKIP_CHAT
+unknown | 'Y' | Пропускать чаты | 30
+LAST_MESSAGE_DATE
+unknown | '2021-10-30' | Дата из последнего элемента предыдущей выборки | 30

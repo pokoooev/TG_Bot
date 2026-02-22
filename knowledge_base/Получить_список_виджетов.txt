@@ -1,0 +1,38 @@
+# Получить список виджетов
+URL: https://apidocs.bitrix24.ru/api-reference/widgets/placement-list.html
+
+## ОПИСАНИЕ
+Scope: в зависимости от места встройки Кто может выполнять метод: любой пользователь Метод для получения списка доступных приложению мест встраивания. Параметр Описание С версии SCOPE Ограничение списка одним из прав доступа приложения Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+в зависимости от места встройки
+---
+
+GET https://sometestportal.bitrix24.com/rest/placement.list?auth=7e623a5a0000cd710000cd5b00000001000000a8b1dbe022e2de93198634e9526b00f7 HTTP/1.1
+HTTP/1.1 200 OK
+{
+    "result": [
+        "CRM_LEAD_LIST_MENU",
+        "CRM_DEAL_LIST_MENU",
+        "CRM_INVOICE_LIST_MENU",
+        "CRM_QUOTE_LIST_MENU",
+        "CRM_CONTACT_LIST_MENU",
+        "CRM_COMPANY_LIST_MENU",
+        "CRM_ACTIVITY_LIST_MENU",
+        "CRM_LEAD_DETAIL_TAB",
+        "CRM_DEAL_DETAIL_TAB",
+        "CRM_CONTACT_DETAIL_TAB",
+        "CRM_COMPANY_DETAIL_TAB",
+        "CRM_LEAD_DETAIL_ACTIVITY",
+        "CRM_DEAL_DETAIL_ACTIVITY",
+        "CRM_CONTACT_DETAIL_ACTIVITY",
+        "CRM_COMPANY_DETAIL_ACTIVITY"
+    ]
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+SCOPE | Ограничение списка одним из прав доступа приложения | 

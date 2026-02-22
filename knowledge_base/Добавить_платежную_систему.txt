@@ -1,0 +1,256 @@
+# Добавить платежную систему
+URL: https://apidocs.bitrix24.ru/api-reference/pay-system/sale-pay-system-add.html
+
+## ОПИСАНИЕ
+Scope: pay_system Кто может выполнять метод: администратор CRM (право «Разрешить изменять настройки») Метод добавляет платежную систему. Обязательные параметры отмечены * Название
+тип Описание NAME*
+string Название платежной системы DESCRIPTION
+string Описание платежной системы PERSON_TYPE_ID*
+sale_person_type.id Идентификатор типа плательщика BX_REST_HANDLER*
+sale_paysystem_handler.CODE Код REST-обработчика, указанный при добавлении обработчика методом sale.paysystem.handler.add ACTIVE
+string Индикатор активности платежной системы. Возможные значения: Если не передано, то по умолчанию N SETTINGS
+object Список значений настроек обработчика в формате {"field_1": "value_1", ... "field_N": "value_N"}, где field — название настройки, а value — объект, содержащий ключи TYPE и VALUE (описание смотрите ниже). Структура настроек задается при добавлении обработчика платежной системы в методе sale.paysystem.handler.add в ключе CODES параметра SETTINGS ENTITY_REGISTRY_TYPE*
+string Привязка платежной системы: LOGOTYPE
+string Логотип платежной системы (картинка в формате Base64) NEW_WINDOW
+string Флаг, отвечающий за настройку «Открывать в новом окне». Возможные значения: Если не передано, то по умолчанию N XML_ID
+string Внешний идентификатор платежной системы. Может быть использован как дополнительный параметр для фильтрации в sale.paysystem.list Название Описание ORDER Параметры PROPERTY Свойства счета PAYMENT Оплата USER Пользователь VALUE Произвольное значение типа строка Y\N Флажок Название Описание ORDER PAYMENT USER Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+integer Идентификатор добавленной платежной системы time
+time Информация о времени выполнения запроса HTTP-статус: 400, 403 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Описание Статус ACCESS_DENIED Недостаточно прав для добавления платежной системы 403 ERROR_CHECK_FAILURE Не указано значение обязательного поля либо значение одного из полей указано неверно 400 ERROR_PAY_SYSTEM_ADD Прочие ошибки. Подробную информацию об ошибке смотрите в error_description 400 ERROR_HANDLER_NOT_FOUND Обработчик, указанный в параметре BX_REST_HANDLER, не найден 400 ERROR_PERSON_TYPE_NOT_FOUND Тип плательщика, указанный в параметре PERSON_TYPE_ID, не найден 400 HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+sale_paysystem_handler.CODE
+---
+
+{"field_1": "value_1", ... "field_N": "value_N"}
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"NAME":"Оплата картой","DESCRIPTION":"Легко оплачивайте покупки картой.","XML_ID":"my_ps_id","PERSON_TYPE_ID":1,"BX_REST_HANDLER":"resthandlercode","ACTIVE":"Y","ENTITY_REGISTRY_TYPE":"ORDER","LOGOTYPE":"/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAASABUDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD73/4Oa/25vEf7CH/BK/XNW8GarrPh/wAZeONcsfCejazpk3k3GkyS+ZdTSh/vKWtbO5jDJhlaVWBBGR4V/wAFMP28vj1/wRc/4I+fs56O3jmLxh+0j4m1Wy0/V5tft11a9v4xDNc30SYJE/kTSWdn52S7o6tne+4fNv7f3/BSHwX8d/2xvjL+y/8A8FBrHxt4R+F+g/EKDxB8NtY8L6WLeTTbG3N5BDLdMqSy3FtdWkynfFFI4aSUDYQvl8r/AMFDv+Cr37P37eP/AAWX/Zz+IHw10/42fGi6+GOp2VlpnhbSrBNL03WLtLw3cF7ZtOzXJlExjWWGW1hEy20YM0aoSwB/RtRRRQBw/wAb/wBmb4b/ALTWk2On/Ej4feB/iDY6ZMbiztvEuhWurQ2khG0vGtwjhGK8EqASOKT4H/swfDX9mTTr+z+G3w78DfD201WRZr2Dw1oNrpMd46ghWkW3jQOwBIBbJAJoooA7miiigD//2Q==","NEW_WINDOW":"N","SETTINGS":{"REST_SERVICE_ID":{"TYPE":"VALUE","VALUE":"SERVICE ID VALUE"},"REST_SERVICE_KEY":{"TYPE":"VALUE","VALUE":"KEY ID VALUE"},"PAYMENT_ID":{"TYPE":"PAYMENT","VALUE":"ACCOUNT_NUMBER"}}}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/sale.paysystem.add
+---
+
+{
+    "result": 1,
+    "time": {
+        "start": 1712132792.910734,
+        "finish": 1712132793.530359,
+        "duration": 0.6196250915527344,
+        "processing": 0.032338857650756836,
+        "date_start": "2024-04-03T10:26:32+02:00",
+        "date_finish": "2024-04-03T10:26:33+02:00",
+        "operating_reset_at": 1705765533,
+        "operating": 3.3076241016387939
+    }
+}
+---
+
+{
+    "error": "ERROR_CHECK_FAILURE",
+    "error_description": "Parameter NAME is not defined"
+}
+---
+
+ERROR_HANDLER_NOT_FOUND
+---
+
+ERROR_PERSON_TYPE_NOT_FOUND
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+NAME*
+string | Название платежной системы
+DESCRIPTION
+string | Описание платежной системы
+PERSON_TYPE_ID*
+sale_person_type.id | Идентификатор типа плательщика
+BX_REST_HANDLER*
+sale_paysystem_handler.CODE | Код REST-обработчика, указанный при добавлении обработчика методом sale.paysystem.handler.add
+ACTIVE
+string | Индикатор активности платежной системы. Возможные значения:
+Y — да
+N — нет
+Если не передано, то по умолчанию N
+SETTINGS
+object | Список значений настроек обработчика в формате {"field_1": "value_1", ... "field_N": "value_N"}, где field — название настройки, а value — объект, содержащий ключи TYPE и VALUE (описание смотрите ниже).
+Структура настроек задается при добавлении обработчика платежной системы в методе sale.paysystem.handler.add в ключе CODES параметра SETTINGS
+ENTITY_REGISTRY_TYPE*
+string | Привязка платежной системы:
+ORDER — значение для заказов магазина, сделок, смарт-процессов
+CRM_INVOICE — значение для счетов CRM
+CRM_QUOTE — значение для коммерческих предложений CRM
+LOGOTYPE
+string | Логотип платежной системы (картинка в формате Base64)
+NEW_WINDOW
+string | Флаг, отвечающий за настройку «Открывать в новом окне». Возможные значения:
+Y — да
+N — нет
+Если не передано, то по умолчанию N
+XML_ID
+string | Внешний идентификатор платежной системы. Может быть использован как дополнительный параметр для фильтрации в sale.paysystem.list
+
+Таблица 1:
+ORDER | Параметры
+PROPERTY | Свойства счета
+PAYMENT | Оплата
+USER | Пользователь
+VALUE | Произвольное значение типа строка
+Y\N | Флажок
+
+Таблица 2:
+ORDER | ID — идентификатор
+ACCOUNT_NUMBER — номер заказа
+ORDER_TOPIC — тема
+DATE_INSERT — дата заказа
+DATE_INSERT_DATE — дата заказа без времени
+DATE_BILL — дата и время выставления
+DATE_BILL_DATE — дата выставления
+DATE_PAY_BEFORE — срок оплаты
+SHOULD_PAY — сумма счета
+CURRENCY — валюта
+PRICE — стоимость заказа
+PRICE_DELIVERY — стоимость доставки
+DISCOUNT_VALUE — величина скидки
+USER_ID — код покупателя
+PAY_SYSTEM_ID — код платежной системы
+DELIVERY_ID — код службы доставки
+TAX_VALUE — налог
+USER_DESCRIPTION — комментарий
+PAYMENT | ID — идентификатор
+ACCOUNT_NUMBER — номер оплаты
+DATE_BILL — дата и время выставления
+DATE_BILL_DATE — дата выставления без времени
+SUM — сумма счета
+CURRENCY — валюта
+PAID — оплачено
+DATE_PAID — дата оплаты
+PAY_SYSTEM_ID — код платежной системы
+PAY_VOUCHER_NUM — номер ваучера
+PAY_VOUCHER_DATE — дата ваучера
+DATE_PAY_BEFORE — оплатить до
+XML_ID — индентификатор XML
+PAY_SYSTEM_NAME — название платежной системы
+COMPANY_ID — код компании
+PAY_RETURN_NUM — номер возврата
+PAY_RETURN_DATE — дата возврата
+PAY_RETURN_COMMENT — коментарий возврата
+USER | ID — код покупателя,
+LOGIN — логин
+NAME — имя
+SECOND_NAME — отчество
+LAST_NAME — фамилия
+EMAIL — EMail
+PERSONAL_PROFESSION — профессия
+PERSONAL_WWW — персональный веб-сайт
+PERSONAL_ICQ — номер ICQ
+PERSONAL_GENDER — пол
+PERSONAL_FAX — номер факса
+PERSONAL_MOBILE — номер телефона
+PERSONAL_STREET — адрес
+PERSONAL_MAILBOX — почтовый ящик
+PERSONAL_CITY — город
+PERSONAL_STATE — штат
+PERSONAL_ZIP — индекс
+PERSONAL_COUNTRY — страна
+WORK_COMPANY — компания
+WORK_DEPARTMENT — отдел
+WORK_POSITION — должность
+WORK_WWW — сайт компании
+WORK_PHONE — рабочий телефон
+WORK_FAX — рабочий факс
+WORK_STREET — адрес компании
+WORK_MAILBOX — рабочий почтовый ящик
+WORK_CITY — город компании
+WORK_STATE — штат компании
+WORK_ZIP — индекс компании
+WORK_COUNTRY — страна компании
+
+Таблица 3:
+result
+integer | Идентификатор добавленной платежной системы
+time
+time | Информация о времени выполнения запроса
+
+Таблица 4:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 5:
+ACCESS_DENIED | Недостаточно прав для добавления платежной системы | 403
+ERROR_CHECK_FAILURE | Не указано значение обязательного поля либо значение одного из полей указано неверно | 400
+ERROR_PAY_SYSTEM_ADD | Прочие ошибки. Подробную информацию об ошибке смотрите в error_description | 400
+ERROR_HANDLER_NOT_FOUND | Обработчик, указанный в параметре BX_REST_HANDLER, не найден | 400
+ERROR_PERSON_TYPE_NOT_FOUND | Тип плательщика, указанный в параметре PERSON_TYPE_ID, не найден | 400
+
+Таблица 6:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

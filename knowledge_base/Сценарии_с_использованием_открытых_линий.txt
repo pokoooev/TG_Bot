@@ -1,0 +1,11 @@
+# Сценарии с использованием открытых линий
+URL: https://apidocs.bitrix24.ru/api-reference/imopenlines/tutorials.html
+
+## ОПИСАНИЕ
+
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+Нет таблиц

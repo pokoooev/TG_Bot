@@ -1,0 +1,11 @@
+# https://apidocs.bitrix24.ru/api-reference/widgets/mobile-app.html
+URL: https://apidocs.bitrix24.ru/api-reference/widgets/mobile-app.html
+
+## ОПИСАНИЕ
+Scope: mobile Кто может выполнять метод: любой пользователь
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+Нет таблиц

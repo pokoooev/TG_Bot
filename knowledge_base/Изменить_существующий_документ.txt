@@ -1,0 +1,18 @@
+# Изменить существующий документ
+URL: https://apidocs.bitrix24.ru/api-reference/document-generator/document-generator-document-update.html
+
+## ОПИСАНИЕ
+Scope: documentgenerator Кто может выполнять метод: любой пользователь Метод documentgenerator.document.update обновляет существующий документ с новыми значениями. Надо учесть, что обновление документа на удалённом шаблоне невозможно. Работает аналогично documentgenerator.document.add(). Параметр Описание id Идентификатор документа. values Массив новых значений полей документа. stampsEnabled 1 (поставить), 0 (убрать) печати и подписи. fields Настройки полей.
+
+## ПРИМЕРЫ КОДА
+
+documentgenerator.document.update
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+id | Идентификатор документа.
+values | Массив новых значений полей документа.
+stampsEnabled | 1 (поставить), 0 (убрать) печати и подписи.
+fields | Настройки полей.

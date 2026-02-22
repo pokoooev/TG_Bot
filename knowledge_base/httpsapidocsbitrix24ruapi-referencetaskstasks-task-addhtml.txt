@@ -1,0 +1,297 @@
+# https://apidocs.bitrix24.ru/api-reference/tasks/tasks-task-add.html
+URL: https://apidocs.bitrix24.ru/api-reference/tasks/tasks-task-add.html
+
+## ОПИСАНИЕ
+Scope: task Кто может выполнять метод: любой пользователь Метод tasks.task.add добавляет новую задачу. Обязательные параметры отмечены * Название
+тип Описание fields*
+object Значения полей задачи. Обязательные поля для создания задачи: Проверьте, какие обязательные пользовательские поля настроены для задач в вашем Битрикс24. Все обязательные поля нужно передать в метод. В метод можно передать параметр SE_PARAMETER — список объектов с дополнительными параметрами задачи. Возможные значения кодов CODE: Как использовать примеры в документации Добавим задачу с файлами и привязками объектов CRM. Чтобы прикрепить файл к задаче, нужно добавить символ n перед идентификатором файла. HTTP-статус: 200 Название
+тип Описание result
+object Объект с данными ответа task
+object Объект с описанием задачи после выполнения операции time
+time Информация о времени выполнения запроса HTTP-статус: 400 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Описание Значение 100 Could not find value for parameter {fields} (internal error) Не передан параметр fields или передан пустой ERROR_CORE Пользователь указанный в поле "Исполнитель" не найден В поле RESPONSIBLE_ID указан идентификатор несуществующего пользователя ERROR_CORE Не указан исполнитель Не заполнено поле RESPONSIBLE_ID ERROR_CORE Не указано название задачи Не заполнено поле TITLE ERROR_CORE Не введено значение обязательного поля Не заполнено обязательное пользовательское поле с указанным названием ERROR_CORE Некорректный статус Указано некорректное значение в поле STATUS ERROR_CORE Задача указанная в поле "Надзадача" не найдена В поле PARENT_ID указан идентификатор несуществующей задачи ERROR_CORE В планировании сроков указана дата окончания меньшая даты старта Дата и время в поле END_DATE_PLAN указано меньше, чем в START_DATE_PLAN ERROR_CORE В планировании сроков указана слишком большая длительность задачи В значении поля END_DATE_PLAN указана слишком большая дата HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+SE_PARAMETER: [
+    {
+        VALUE: 'Y',
+        CODE: 3
+    },
+    {
+        VALUE: 'Y',
+        CODE: 2
+    }
+]
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"fields":{"TITLE":"Название задачи","DEADLINE":"2025-12-31T23:59:59","CREATED_BY":456,"RESPONSIBLE_ID":123,"UF_CRM_TASK":["L_4","C_7","CO_5","D_10"],"UF_TASK_WEBDAV_FILES":["n12345","n67890"]}}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/tasks.task.add
+---
+
+{
+    "result": {
+        "task": {
+            "id": "3711",
+            "parentId": null,
+            "title": "task for test",
+            "description": "",
+            "mark": null,
+            "priority": "1",
+            "multitask": "N",
+            "notViewed": "N",
+            "replicate": "N",
+            "stageId": "0",
+            "createdBy": "1",
+            "createdDate": "2024-11-02T10:06:08+02:00",
+            "responsibleId": "1",
+            "changedBy": "1",
+            "changedDate": "2024-11-02T10:06:08+02:00",
+            "statusChangedBy": null,
+            "closedBy": null,
+            "closedDate": null,
+            "activityDate": "2024-11-02T10:06:08+02:00",
+            "dateStart": null,
+            "deadline": null,
+            "startDatePlan": null,
+            "endDatePlan": null,
+            "guid": "{c2794da9-c7fe-404d-a709-ddab4578717a}",
+            "xmlId": null,
+            "commentsCount": null,
+            "serviceCommentsCount": null,
+            "allowChangeDeadline": "N",
+            "allowTimeTracking": "N",
+            "taskControl": "N",
+            "addInReport": "N",
+            "forkedByTemplateId": null,
+            "timeEstimate": "0",
+            "timeSpentInLogs": null,
+            "matchWorkTime": "N",
+            "forumTopicId": null,
+            "forumId": null,
+            "siteId": "s1",
+            "subordinate": "Y",
+            "exchangeModified": null,
+            "exchangeId": null,
+            "outlookVersion": "1",
+            "viewedDate": null,
+            "sorting": null,
+            "durationFact": null,
+            "isMuted": "N",
+            "isPinned": "N",
+            "isPinnedInGroup": "N",
+            "flowId": null,
+            "descriptionInBbcode": "Y",
+            "status": "2",
+            "statusChangedDate": "2024-11-02T10:06:08+02:00",
+            "durationPlan": null,
+            "durationType": "days",
+            "favorite": "N",
+            "groupId": "0",
+            "auditors": [],
+            "accomplices": [],
+            "checklist": [],
+            "group": [],
+            "creator": {
+                "id": "1",
+                "name": "Viola",
+                "link": "/company/personal/user/1/",
+                "icon": "https://your-domain.bitrix24.com/b13743910/resize_cache/2267/c0120a8d7c10d63c83e32398d1ec4d9e/main/c7b/c7bd44b1babaa5448125dd97d038ce1b/d5fb56b94dc2c3cd8c006a2c595a4895.jpg",
+                "workPosition": ""
+            },
+            "responsible": {
+                "id": "1",
+                "name": "Viola",
+                "link": "/company/personal/user/1/",
+                "icon": "https://your-domain.bitrix24.com/b13743910/resize_cache/2267/c0120a8d7c10d63c83e32398d1ec4d9e/main/c7b/c7bd44b1babaa5448125dd97d038ce1b/d5fb56b94dc2c3cd8c006a2c595a4895.jpg",
+                "workPosition": ""
+            },
+            "accomplicesData": [],
+            "auditorsData": [],
+            "newCommentsCount": 0,
+            "action": {
+                "accept": false,
+                "decline": false,
+                "complete": true,
+                "approve": false,
+                "disapprove": false,
+                "start": true,
+                "pause": false,
+                "delegate": true,
+                "remove": true,
+                "edit": true,
+                "defer": true,
+                "renew": false,
+                "create": true,
+                "changeDeadline": true,
+                "checklistAddItems": true,
+                "addFavorite": true,
+                "deleteFavorite": false,
+                "rate": true,
+                "edit.originator": false,
+                "checklist.reorder": true,
+                "elapsedtime.add": true,
+                "dayplan.timer.toggle": false,
+                "edit.plan": true,
+                "checklist.add": true,
+                "favorite.add": true,
+                "favorite.delete": false
+            },
+            "checkListTree": {
+                "nodeId": 0,
+                "fields": {
+                    "id": null,
+                    "copiedId": null,
+                    "entityId": null,
+                    "userId": 1,
+                    "createdBy": null,
+                    "parentId": null,
+                    "title": "",
+                    "sortIndex": null,
+                    "displaySortIndex": "",
+                    "isComplete": false,
+                    "isImportant": false,
+                    "completedCount": 0,
+                    "members": [],
+                    "attachments": []
+                },
+                "action": [],
+                "descendants": []
+            },
+            "checkListCanAdd": true
+        }
+    },
+    "time": {
+        "start": 1758188171.142611,
+        "finish": 1758188172.101309,
+        "duration": 0.958698034286499,
+        "processing": 0.9341180324554443,
+        "date_start": "2025-09-18T12:36:11+03:00",
+        "date_finish": "2025-09-18T12:36:12+03:00",
+        "operating_reset_at": 1758188771,
+        "operating": 0.9340989589691162
+    }
+}
+---
+
+{
+    "error": "ERROR_CORE",
+    "error_description": "Не указано название задачи\u003Cbr\u003E"
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+fields*
+object | Значения полей задачи. Обязательные поля для создания задачи:
+TITLE — название задачи
+RESPONSIBLE_ID — идентификатор ответственного
+Проверьте, какие обязательные пользовательские поля настроены для задач в вашем Битрикс24. Все обязательные поля нужно передать в метод.
+В метод можно передать параметр SE_PARAMETER — список объектов с дополнительными параметрами задачи. Возможные значения кодов CODE:
+1 — сроки определяются сроками подзадач
+2 — автоматически завершать задачу при завершении подзадач (и наоборот)
+3 — не завершать задачу без результата
+SE_PARAMETER: [
+    {
+        VALUE: 'Y',
+        CODE: 3
+    },
+    {
+        VALUE: 'Y',
+        CODE: 2
+    }
+]
+
+Таблица 1:
+result
+object | Объект с данными ответа
+task
+object | Объект с описанием задачи после выполнения операции
+time
+time | Информация о времени выполнения запроса
+
+Таблица 2:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 3:
+100 | Could not find value for parameter {fields} (internal error) | Не передан параметр fields или передан пустой
+ERROR_CORE | Пользователь указанный в поле "Исполнитель" не найден | В поле RESPONSIBLE_ID указан идентификатор несуществующего пользователя
+ERROR_CORE | Не указан исполнитель | Не заполнено поле RESPONSIBLE_ID
+ERROR_CORE | Не указано название задачи | Не заполнено поле TITLE
+ERROR_CORE | Не введено значение обязательного поля | Не заполнено обязательное пользовательское поле с указанным названием
+ERROR_CORE | Некорректный статус | Указано некорректное значение в поле STATUS
+ERROR_CORE | Задача указанная в поле "Надзадача" не найдена | В поле PARENT_ID указан идентификатор несуществующей задачи
+ERROR_CORE | В планировании сроков указана дата окончания меньшая даты старта | Дата и время в поле END_DATE_PLAN указано меньше, чем в START_DATE_PLAN
+ERROR_CORE | В планировании сроков указана слишком большая длительность задачи | В значении поля END_DATE_PLAN указана слишком большая дата
+
+Таблица 4:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

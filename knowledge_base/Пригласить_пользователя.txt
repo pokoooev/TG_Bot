@@ -1,0 +1,287 @@
+# Пригласить пользователя
+URL: https://apidocs.bitrix24.ru/api-reference/user/user-add.html
+
+## ОПИСАНИЕ
+Scope: user Кто может выполнять метод: администратор Метод user.add приглашает пользователя. Возможно только от имени пользователя с правами приглашения пользователей, как правило администратора. В случае успеха пользователю будет выслано стандартное приглашение на портал. В result возвращается идентификатор нового пользователя. Если нужно добавить пользователя экстранета, то в полях необходимо передать: EXTRANET: Y и SONET_GROUP_ID: [...]. Если нужно добавить пользователя интранета, то обязательно передается: UF_DEPARTMENT: [...]. Обязательные параметры отмечены * Название
+тип Описание EMAIL*
+string E-mail пользователя NAME
+string Имя LAST_NAME
+string Фамилия SECOND_NAME
+string Отчество PERSONAL_GENDER
+string Пол PERSONAL_PROFESSION
+string Профессия PERSONAL_WWW
+string Домашняя страничка PERSONAL_BIRTHDAY
+string Дата рождения PERSONAL_PHOTO
+array Фотография, передавайте массив из имени файла и строки с Bаse64 PERSONAL_ICQ
+string ICQ PERSONAL_PHONE
+string Личный телефон PERSONAL_FAX
+string Факс PERSONAL_MOBILE
+string Личный мобильный PERSONAL_PAGER
+string Пейджер PERSONAL_STREET
+string Улица проживания PERSONAL_CITY
+string Город проживания PERSONAL_STATE
+string Область / край PERSONAL_ZIP
+string Почтовый индекс PERSONAL_COUNTRY
+string Страна PERSONAL_MAILBOX
+string Почтовый ящик PERSONAL_NOTES
+string Дополнительные заметки WORK_PHONE
+string Телефон компании WORK_COMPANY
+string Компания WORK_POSITION
+string Должность WORK_DEPARTMENT
+string Отдел WORK_WWW
+string Сайт компании WORK_FAX
+string WORK_FAX WORK_PAGER
+string WORK_PAGER WORK_STREET
+string WORK_STREET WORK_MAILBOX
+string WORK_MAILBOX WORK_CITY
+string Город работы WORK_STATE
+string WORK_STATE WORK_ZIP
+string WORK_ZIP WORK_COUNTRY
+string WORK_COUNTRY WORK_PROFILE
+string WORK_PROFILE WORK_LOGO
+array WORK_LOGO WORK_NOTES
+string WORK_NOTES UF_SKYPE_LINK
+string Ссылка на чат в Skype UF_ZOOM
+string Zoom UF_DEPARTMENT
+string Подразделения UF_INTERESTS
+string Интересы UF_SKILLS
+string Навыки UF_WEB_SITES
+string Другие сайты UF_XING
+string Xing UF_LINKEDIN
+string LinkedIn UF_FACEBOOK
+string Facebook** UF_TWITTER
+string Twitter UF_SKYPE
+string Skype UF_DISTRICT
+string Район UF_PHONE_INNER
+string Внутренний телефон **Социальная сеть признана экстремистской и запрещена на территории Российской Федерации. Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+integer Идентификатор нового пользователя time
+time Информация о времени выполнения запроса HTTP-статус: 400 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Cообщение об ошибке Описание ERROR_ARGUMENT wrong_email Не передан параметр EMAIL или передан некорректный e-mail ERROR_ARGUMENT Пользователь с таким email уже существует Попытка зарегистрировать пользователя на e-mail, который уже занят ERROR_CORE access_denied У пользователя нет прав на вызов метода ERROR_ARGUMENT user_count_exceeded Превышено количество пользователей ERROR_GROUPID Не указан код группы Не указан код группы при добавлении пользователя в экстранет ERROR_NO_GROUP Группа указана неверно Неверно указана группа при добавлении пользователя ERROR_ARGUMENT no_extranet_field При вызове метода не указано к какой группе должен принадлежать пользователь ERROR_CORE Ошибка обновления полей пользователя HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+SONET_GROUP_ID: [...]
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{
+    "EMAIL": "newuser1@example.com",
+    "UF_DEPARTMENT": [1]
+}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/user.add
+---
+
+{
+        "result":12,
+        "time":{
+            "start":1721733827.713938,
+            "finish":1721733828.286292,
+            "duration":0.5723540782928467,
+            "processing":0.5508849620819092,
+            "date_start":"2024-07-23T11:23:47+00:00",
+            "date_finish":"2024-07-23T11:23:48+00:00",
+            "operating":0.5508630275726318
+        }
+    }
+---
+
+{
+    "error": "ERROR_ARGUMENT",
+    "error_description": "wrong_email",
+    "argument": ""
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+EMAIL*
+string | E-mail пользователя
+NAME
+string | Имя
+LAST_NAME
+string | Фамилия
+SECOND_NAME
+string | Отчество
+PERSONAL_GENDER
+string | Пол
+PERSONAL_PROFESSION
+string | Профессия
+PERSONAL_WWW
+string | Домашняя страничка
+PERSONAL_BIRTHDAY
+string | Дата рождения
+PERSONAL_PHOTO
+array | Фотография, передавайте массив из имени файла и строки с Bаse64
+PERSONAL_ICQ
+string | ICQ
+PERSONAL_PHONE
+string | Личный телефон
+PERSONAL_FAX
+string | Факс
+PERSONAL_MOBILE
+string | Личный мобильный
+PERSONAL_PAGER
+string | Пейджер
+PERSONAL_STREET
+string | Улица проживания
+PERSONAL_CITY
+string | Город проживания
+PERSONAL_STATE
+string | Область / край
+PERSONAL_ZIP
+string | Почтовый индекс
+PERSONAL_COUNTRY
+string | Страна
+PERSONAL_MAILBOX
+string | Почтовый ящик
+PERSONAL_NOTES
+string | Дополнительные заметки
+WORK_PHONE
+string | Телефон компании
+WORK_COMPANY
+string | Компания
+WORK_POSITION
+string | Должность
+WORK_DEPARTMENT
+string | Отдел
+WORK_WWW
+string | Сайт компании
+WORK_FAX
+string | WORK_FAX
+WORK_PAGER
+string | WORK_PAGER
+WORK_STREET
+string | WORK_STREET
+WORK_MAILBOX
+string | WORK_MAILBOX
+WORK_CITY
+string | Город работы
+WORK_STATE
+string | WORK_STATE
+WORK_ZIP
+string | WORK_ZIP
+WORK_COUNTRY
+string | WORK_COUNTRY
+WORK_PROFILE
+string | WORK_PROFILE
+WORK_LOGO
+array | WORK_LOGO
+WORK_NOTES
+string | WORK_NOTES
+UF_SKYPE_LINK
+string | Ссылка на чат в Skype
+UF_ZOOM
+string | Zoom
+UF_DEPARTMENT
+string | Подразделения
+UF_INTERESTS
+string | Интересы
+UF_SKILLS
+string | Навыки
+UF_WEB_SITES
+string | Другие сайты
+UF_XING
+string | Xing
+UF_LINKEDIN
+string | LinkedIn
+UF_FACEBOOK
+string | Facebook**
+UF_TWITTER
+string | Twitter
+UF_SKYPE
+string | Skype
+UF_DISTRICT
+string | Район
+UF_PHONE_INNER
+string | Внутренний телефон
+
+Таблица 1:
+result
+integer | Идентификатор нового пользователя
+time
+time | Информация о времени выполнения запроса
+
+Таблица 2:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 3:
+ERROR_ARGUMENT | wrong_email | Не передан параметр EMAIL или передан некорректный e-mail
+ERROR_ARGUMENT | Пользователь с таким email уже существует | Попытка зарегистрировать пользователя на e-mail, который уже занят
+ERROR_CORE | access_denied | У пользователя нет прав на вызов метода
+ERROR_ARGUMENT | user_count_exceeded | Превышено количество пользователей
+ERROR_GROUPID | Не указан код группы | Не указан код группы при добавлении пользователя в экстранет
+ERROR_NO_GROUP | Группа указана неверно | Неверно указана группа при добавлении пользователя
+ERROR_ARGUMENT | no_extranet_field | При вызове метода не указано к какой группе должен принадлежать пользователь
+ERROR_CORE |  | Ошибка обновления полей пользователя
+
+Таблица 4:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

@@ -1,0 +1,119 @@
+# https://apidocs.bitrix24.ru/api-reference/files/how-to-update-files.html
+URL: https://apidocs.bitrix24.ru/api-reference/files/how-to-update-files.html
+
+## ОПИСАНИЕ
+В Битрикс24 есть два типа файловых полей. Файл. Поле не связано с Диском, в него файлы загружаются напрямую через строку формата Base64. После загрузки в поле хранится ID файла. Файл (диск). Поле связано с Диском, в поле хранится ID объекта диска. Поле не обрабатывает формат Base64. Для обновления файлов диска используйте методы disk.file.*. Если поле не множественное, загрузите новый файл в поле методом *.update. Используйте формат передачи данных Base64. При загрузке нового файла старый файл удалится автоматически. Чтобы очистить поле, передайте пустое значение. Если поле множественное, в поле хранится массив из ID файлов. При обновлении множественных полей типа «файл» учитывайте особенности методов. Для обновления полей в объектах CRM используйте универсальный метод crm.item.update. Не рекомендуется использовать методы crm.deal.update, crm.lead.update, crm.contact.update, crm.company.update для обновления файловых полей. Перед обновлением поля получите ID текущих файлов, чтобы сохранить их. Можно использовать метод crm.item.get, он вернет все поля элемента, или метод crm.item.list с выбором только нужного поля типа «файл» в select. В ответе получим информацию по файлам: ID и ссылки на скачивание. В зависимости от переданных параметров метод crm.item.update выполняет операции: загрузки новых файлов — передавайте контент в формате Bаse64, удаления старых файлов — не передавайте ID этих файлов в массиве, сохранения файлов — передавайте ID в массиве файлов. Файлы будут сохранены, если их ID перечислены в запросе. Файлы будут удалены, если их ID отсутствует в запросе. Чтобы удалить все файлы, передавайте пустой массив в поле. Для обновления файлов в комментариях элементов CRM используйте метод crm.timeline.comment.update. Старые файлы всегда удаляются при обновлении значения поля. Новые файлы загружайте в поле в формате Base64. Чтобы удалить все файлы, передавайте пустой массив в поле FILES. Чтобы загрузить новые файлы в поле элемента списка, передавайте файлы методом lists.element.update в формате Base64. Старые файлы останутся в поле без изменений. Для удаления файлов понадобится ID значения свойства. Чтобы получить ID для удаления файла, выполните метод lists.element.get, он вернет все поля элемента. Поле «файл» в примере — PROPERTY_1075. В поле получим информацию: первое значение "3693" — это ID значения свойства, второе значение "31219"— это ID файла. Передайте в метод lists.element.update поле с постфиксом _DEL, например PROPERTY_1075_DEL. В поле укажите список из ID значений свойств, которые будут удалены: ключ — ID значения свойства, значение — Y. Чтобы загрузить новые файлы к посту в ленте, передавайте файлы методом log.blogpost.update в формате Base64. Старые файлы останутся в посте без изменений. Для удаления файлов понадобится их ID. Чтобы получить ID для удаления файла, выполните метод log.blogpost.get, он вернет все поля поста, включая FILES. В ответе получим массив объектов: первое значение 0 — это порядковый ID файла в посте, второе значение 437— это ID файла. Передайте в метод log.blogpost.update поле FILES. В поле укажите массив ID файлов, которые будут удалены: ключ — ID файла, значение — del. Чтобы удалить все файлы из поста, передайте в метод log.blogpost.update поле UF_BLOG_POST_FILE. В значении поля укажите ["empty"]. Чтобы загрузить новые файлы в карточку товара, передавайте файлы методом catalog.product.update в формате Base64. Старые файлы останутся в поле без изменений. Для удаления файлов понадобится ID значения поля. Чтобы получить ID для удаления файла, выполните метод catalog.product.get. Метод вернет все поля товара. Поле «файл» в примере — property1077. Поле содержит массив объектов: value — это информация по файлу: ID и ссылки на скачивание, valueId — это ID значения поля. Чтобы удалить файл, передайте в метод catalog.product.update поле со значениями: value — укажите remove как ключ, Y как значение, valueId — укажитеID значения поля, файл которого будет удален.
+
+## ПРИМЕРЫ КОДА
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"ID":525,"FIELDS":{"TEMPLATE_DATA":["bp-379.bpt","base64_encoded_content_here"]}}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/bizproc.workflow.template.update
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"id":9,"entityTypeId":177,"fields":{"ufCrm_7_1739432938":[]}}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/crm.item.update
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"entityTypeId":177,"select":["ufCrm_7_1739432938"],"filter":{"id":"29"}}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/crm.item.list
+---
+
+{
+    "result": {
+        "items": [
+            {
+                "ufCrm_7_1739432938": [
+                    {
+                        "id": 30577, // id файла, используем для сохранения файла в поле
+                        "url": "https://your-domain.bitrix24.com/bitrix/services/main/ajax.php?action=crm.controller.item.getFile&SITE_ID=s1&entityTypeId=177&id=29&fieldName=UF_CRM_7_1739432938&fileId=30577",
+                        "urlMachine": "https://your-domain.bitrix24.com/rest/crm.controller.item.getFile.json?auth=c2a8ad670000071b006e2cf200000001f0f107061147e530dda74d4e556cae7642992c&token=crm%7CYWN0aW9uPWNybS5jb25ZTU1NmNhZTc2NDI5OTJjIg%3D%3D.cR012fYj2JpQSObAORU0G8ZDvVc1Osnv0foUpBpaJVY%3D"
+                    },
+                    {
+                        "id": 30581, // id файла, используем для сохранения файла в поле
+                        "url": "https:///your-domain.bitrix24.com/bitrix/services/main/ajax.php?action=crm.controller.item.getFile&SITE_ID=s1&entityTypeId=177&id=29&fieldName=UF_CRM_7_1739432938&fileId=30581",
+                        "urlMachine": "https:///your-domain.bitrix24.com/rest/crm.controller.item.getFile.json?auth=c2a8ad670000071b006e2cf200000001f0f107061147e530dda74d4e556cae7642992c&token=crm%7CYWNNmNhZTc2NDI5OTJjIg%3D%3D.l6GB1qKENuwQYtQHse4GK1r%2F3zps%2FQdh%2BlFsopOuJdU%3D"
+                    }
+                ]
+            }
+        ]
+    },
+}
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"id":9,"entityTypeId":177,"fields":{"ufCrm_7_1739432938":[{"id":30577},["myNewFile.pdf","base64_encoded_content_here"]]}}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/crm.item.update
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"id":62589,"fields":{"COMMENT":"Comment was changed","FILES":[]}}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/crm.timeline.comment.update
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"IBLOCK_TYPE_ID":"lists","IBLOCK_ID":"37","ELEMENT_ID":"6783"}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/lists.element.get
+---
+
+{
+    "result": [
+        {
+            "ID": "6783",
+            "PROPERTY_1075": {
+                "3693": "31219", // 3693 — id значения, используем для удаления
+                "3697": "31221", // 3697 — id значения, используем для удаления
+                "3699": "31223"  // 3699 — id значения, используем для удаления
+            }
+        }
+    ],
+    "total": 1,
+}
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"IBLOCK_TYPE_ID":"lists","IBLOCK_ID":37,"ELEMENT_ID":6783,"FIELDS":{"NAME":"файлы реста","PROPERTY_1075_DEL":{"3693":"Y"}}}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/lists.element.update
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"POST_ID":211}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/log.blogpost.get
+---
+
+[FILES] => Array
+    (
+        [0] => 437 
+        [1] => 439
+        [2] => 441
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"POST_ID":211,"POST_TITLE":"Новый заголовок поста","FILES":{"445":"del"}}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/log.blogpost.update
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"POST_ID":211,"POST_TITLE":"Новый заголовок поста","UF_BLOG_POST_FILE":["empty"]}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/log.blogpost.update
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"id":541}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/catalog.product.get
+---
+
+{
+    "result": {
+        "product": {
+            "iblockId": 25,
+            "id": 541,
+            "property1077": [
+                {
+                    "value": {
+                        "id": "31251",
+                        "url": "/rest/catalog.product.download?fields%5BfieldName%5D=property1077&fields%5BfileId%5D=31251&fields%5BproductId%5D=541",
+                        "urlMachine": "/rest/catalog.product.download?fields%5BfieldName%5D=property1077&fields%5BfileId%5D=31251&fields%5BproductId%5D=541"
+                    },
+                    "valueId": "3705" // id значения, используем для удаления
+                },
+                {
+                    "value": {
+                        "id": "31253",
+                        "url": "/rest/catalog.product.download?fields%5BfieldName%5D=property1077&fields%5BfileId%5D=31253&fields%5BproductId%5D=541",
+                        "urlMachine": "/rest/catalog.product.download?fields%5BfieldName%5D=property1077&fields%5BfileId%5D=31253&fields%5BproductId%5D=541"
+                    },
+                    "valueId": "3707" // id значения, используем для удаления
+                }
+            ],
+
+        }
+    },
+}
+---
+
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"id":541,"fields":{"property1077":[{"value":{"remove":"Y"},"valueId":"3705"}]}}' https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/catalog.product.update
+---
+
+## ТАБЛИЦЫ
+Нет таблиц

@@ -1,0 +1,59 @@
+# https://apidocs.bitrix24.ru/api-reference/telephony/telephony-call-attach-transcription.html
+URL: https://apidocs.bitrix24.ru/api-reference/telephony/telephony-call-attach-transcription.html
+
+## ОПИСАНИЕ
+Scope: telephony Кто может выполнять метод: любой пользователь Метод telephony.call.attachTranscription добавляет расшифровку записи к звонку. Параметр / Тип Описание CALL_ID
+string Идентификатор звонка. COST
+float Стоимость расшифровки. COST_CURRENCY
+string Валюта стоимости расшифровки. MESSAGES Расшифровка звонка. Массив объектов типа TranscriptMessage. Параметр / Тип Описание SIDE
+string Участник разговора. Варианты значения: START_TIME
+int Время начала фразы в секундах, считая от начала разговора. STOP_TIME
+int Время окончания фразы в секундах, считая от начала разговора. MESSAGE
+string Текст фразы. Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+telephony.call.attachTranscription
+---
+
+try
+{
+ const response = await $b24.callMethod(
+  "telephony.call.attachTranscription",
+  {
+   CALL_ID: callId,
+   MESSAGES: messages
+  }
+ );
+ 
+ const result = response.getData().result;
+ console.log(result);
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+CALL_ID
+string | Идентификатор звонка.
+COST
+float | Стоимость расшифровки.
+COST_CURRENCY
+string | Валюта стоимости расшифровки.
+MESSAGES | Расшифровка звонка. Массив объектов типа TranscriptMessage.
+
+Таблица 1:
+SIDE
+string | Участник разговора. Варианты значения:
+User - пользователь портала,
+Client - внешний участник.
+START_TIME
+int | Время начала фразы в секундах, считая от начала разговора.
+STOP_TIME
+int | Время окончания фразы в секундах, считая от начала разговора.
+MESSAGE
+string | Текст фразы.

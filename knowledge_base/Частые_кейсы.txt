@@ -1,0 +1,11 @@
+# Частые кейсы
+URL: https://apidocs.bitrix24.ru/api-reference/widgets/tutorials.html
+
+## ОПИСАНИЕ
+
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+Нет таблиц

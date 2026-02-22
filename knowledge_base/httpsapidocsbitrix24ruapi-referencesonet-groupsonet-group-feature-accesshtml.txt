@@ -1,0 +1,40 @@
+# https://apidocs.bitrix24.ru/api-reference/sonet-group/sonet-group-feature-access.html
+URL: https://apidocs.bitrix24.ru/api-reference/sonet-group/sonet-group-feature-access.html
+
+## ОПИСАНИЕ
+Scope: sonet Кто может выполнять метод: любой пользователь Проверяет, имеет ли текущий пользователь право на совершение операции в группе соцсети, осуществляя вызов функции CSocNetFeaturesPerms::CurrentUserCanPerformOperation(). 200 OK Параметр Описание GROUP_ID ID группы соцсети. FEATURE Символьный код функционала. OPERATION Символьный код операции. Обязательные параметры отмечены * Возвращает true, если пользователь имеет право на совершение операции, false - если не имеет и ошибку в случае некорректных параметров. Примечание Коды операций и функционала смотрите в описании метода CanPerformOperation. Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+CSocNetFeaturesPerms::CurrentUserCanPerformOperation()
+---
+
+https://mydomain.bitrix24.ru/rest/sonet_group.feature.access.json?auth=52423d4a5f19f5f964f9b4e96a925cfa&GROUP_ID=1&FEATURE=blog&OPERATION=write_post
+---
+
+try
+{
+ const response = await $b24.callMethod(
+  'sonet_group.feature.access',
+  {
+   'GROUP_ID': 1,
+   'FEATURE': 'blog',
+   'OPERATION': 'write_post'
+  }
+ );
+ 
+ const result = response.getData().result;
+ // Нужная вам логика обработки данных
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+GROUP_ID | ID группы соцсети.
+FEATURE | Символьный код функционала.
+OPERATION | Символьный код операции.

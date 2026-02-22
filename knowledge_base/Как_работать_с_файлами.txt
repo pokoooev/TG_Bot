@@ -1,0 +1,11 @@
+# Как работать с файлами
+URL: https://apidocs.bitrix24.ru/api-reference/files/index.html
+
+## ОПИСАНИЕ
+
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+Нет таблиц

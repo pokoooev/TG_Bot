@@ -1,0 +1,11 @@
+# https://apidocs.bitrix24.ru/api-reference/chat-bots/tutorials.html
+URL: https://apidocs.bitrix24.ru/api-reference/chat-bots/tutorials.html
+
+## ОПИСАНИЕ
+Эти материалы могут пригодиться при разработке чат-ботов для Битрикс24:
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+Нет таблиц

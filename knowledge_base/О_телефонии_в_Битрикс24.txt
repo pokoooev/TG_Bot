@@ -1,0 +1,28 @@
+# О телефонии в Битрикс24
+URL: https://apidocs.bitrix24.ru/api-reference/telephony/index.html
+
+## ОПИСАНИЕ
+Метод Описание telephony.externalCall.searchCrmEntities Получает объекты CRM по номеру телефона telephony.externalcall.register Регистрирует новый звонок telephony.externalcall.finish Завершает звонок telephony.externalcall.show Показывает карточку звонка пользователю telephony.externalcall.hide Скрывает карточку звонка telephony.call.attachTranscription Прикрепляет расшифровку записи к звонку telephony.externalCall.attachRecord Прикрепляет запись разговора к звонку telephony.externalLine.add Добавляет внешнюю линию telephony.externalLine.update Обновляет информацию о внешней линии telephony.externalLine.get Получает информацию о внешней линии telephony.externalLine.delete Удаляет внешнюю линию voximplant.statistic.get Возвращает список истории звонков
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+telephony.externalCall.searchCrmEntities | Получает объекты CRM по номеру телефона
+telephony.externalcall.register | Регистрирует новый звонок
+telephony.externalcall.finish | Завершает звонок
+telephony.externalcall.show | Показывает карточку звонка пользователю
+telephony.externalcall.hide | Скрывает карточку звонка
+telephony.call.attachTranscription | Прикрепляет расшифровку записи к звонку
+telephony.externalCall.attachRecord | Прикрепляет запись разговора к звонку
+telephony.externalLine.add | Добавляет внешнюю линию
+telephony.externalLine.update | Обновляет информацию о внешней линии
+telephony.externalLine.get | Получает информацию о внешней линии
+telephony.externalLine.delete | Удаляет внешнюю линию
+voximplant.statistic.get | Возвращает список истории звонков
+
+Таблица 1:
+ | 
+ | 

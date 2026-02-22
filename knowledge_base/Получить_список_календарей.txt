@@ -1,0 +1,268 @@
+# Получить список календарей
+URL: https://apidocs.bitrix24.ru/api-reference/calendar/calendar-section-get.html
+
+## ОПИСАНИЕ
+Scope: calendar Кто может выполнять метод: любой пользователь Метод получает список календарей. Обязательные параметры отмечены * Название
+тип Описание type*
+string Тип календаря: ownerId*
+integer Идентификатор владельца календаря. Для типа календаря location параметр ownerId должен иметь значение 0 Как использовать примеры в документации HTTP-статус: 200 Название
+тип Описание result
+array Массив календарей ID
+string Идентификатор календаря NAME
+string Название календаря GAPI_CALENDAR_ID
+string Идентификатор синхронизации DESCRIPTION
+string Описание календаря COLOR
+string Цвет календаря TEXT_COLOR
+string Цвет текста в календаре EXPORT
+object Объект с параметрами экспорта календаря CAL_TYPE
+string Тип календаря OWNER_ID
+string Идентификатор владельца календаря. Для типа Календарь пользователя user поле содержит идентификатор пользователя. Для Календаря группы group — идентификатор группы CREATED_BY
+string Идентификатор создателя календаря DATE_CREATE
+datetime Дата создания календаря TIMESTAMP_X
+datetime Дата изменения календаря CAL_DAV_CON
+string Идентификатор синхронизации SYNC_TOKEN
+string Идентификатор синхронизации PAGE_TOKEN
+string Идентификатор синхронизации EXTERNAL_TYPE
+string Тип провайдера для синхронизации ACCESS
+object Объект данных доступа к календарю. Ключ объекта — идентификатор прав доступа. Получить название прав доступа можно методом access.name. Определить права доступа для текущего пользователя — методом user.access. Значение обьекта содержит числовой идентификатор разрешения на право доступа. Индентификаторы разрешения на право доступа отличаются на разных порталах. На текущий момент узнать все идентификаторы может только администратор портала в коробочной версии Битрикс24 IS_COLLAB
+boolean Флаг принадлежности календаря к коллабе PERM
+object Объект прав доступа текущего пользователя к календарю Название
+тип Описание ALLOW
+boolean Экспорт календаря разрешен Название
+тип Описание view_time
+boolean Просмотр времени событий календаря view_title
+boolean Просмотр названия событий календаря view_full
+boolean Полный доступ к информации о событии календаря add
+boolean Добавление событий в календарь edit
+boolean Редактирование событий в календаре edit_section
+boolean Редактирование календаря access
+boolean Полный доступ к календарю HTTP-статус: 400 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Сообщение об ошибке Описание Пустая строка Не задан обязательный параметр "type" для метода "calendar.section.get" Не передан обязательный параметр type Пустая строка Не задан обязательный параметр "ownerId" для метода "calendar.section.get" Не передан обязательный параметр ownerId и параметр type не равен user Пустая строка Доступ запрещен Запрещен доступ к методу для внешних пользователей HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"type":"user","ownerId":1}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/calendar.section.get
+---
+
+{
+    "result": [
+        {
+            "ID": "190",
+            "NAME": "New Section",
+            "GAPI_CALENDAR_ID": null,
+            "DESCRIPTION": "Description for section",
+            "COLOR": "#9cbeee",
+            "TEXT_COLOR": "#283000",
+            "EXPORT": {
+                "ALLOW": true
+            },
+            "CAL_TYPE": "user",
+            "OWNER_ID": "1",
+            "CREATED_BY": "1",
+            "DATE_CREATE": "2024-12-10 06:36:00",
+            "TIMESTAMP_X": "2024-12-10 06:36:00",
+            "CAL_DAV_CON": null,
+            "SYNC_TOKEN": null,
+            "PAGE_TOKEN": null,
+            "EXTERNAL_TYPE": "local",
+            "ACCESS": {
+                "D114": 17,
+                "G2": 13,
+                "U2": 15,
+                "U1": 19
+            },
+            "IS_COLLAB": false,
+            "PERM": {
+                "view_time": true,
+                "view_title": true,
+                "view_full": true,
+                "add": true,
+                "edit": true,
+                "edit_section": true,
+                "access": true
+            }
+        },
+        {
+            "ID": "191",
+            ...
+        }
+        {
+            "ID": "192",
+            ...
+        }
+    ],
+    "time": {
+        "start": 1733828946.418185,
+        "finish": 1733828946.650208,
+        "duration": 0.23202300071716309,
+        "processing": 0.0054471492767333984,
+        "date_start": "2024-12-08T11:09:06+00:00",
+        "date_finish": "2024-12-08T11:09:06+00:00"
+    }
+}
+---
+
+{
+    "error": "",
+    "error_description": "Не задан обязательный параметр "type" для метода "calendar.section.get""
+}
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+type*
+string | Тип календаря:
+user — календарь пользователя
+group — календарь группы
+company_calendar — календарь компании
+location — календарь переговорной комнаты. Используется для бронирования времени в календаре переговорной комнаты через стороннее приложение
+другие типы, в том числе пользовательские
+ownerId*
+integer | Идентификатор владельца календаря.
+Для типа календаря location параметр ownerId должен иметь значение 0
+
+Таблица 1:
+result
+array | Массив календарей
+ID
+string | Идентификатор календаря
+NAME
+string | Название календаря
+GAPI_CALENDAR_ID
+string | Идентификатор синхронизации
+DESCRIPTION
+string | Описание календаря
+COLOR
+string | Цвет календаря
+TEXT_COLOR
+string | Цвет текста в календаре
+EXPORT
+object | Объект с параметрами экспорта календаря
+CAL_TYPE
+string | Тип календаря
+OWNER_ID
+string | Идентификатор владельца календаря.
+Для типа Календарь пользователя user поле содержит идентификатор пользователя. Для Календаря группы group — идентификатор группы
+CREATED_BY
+string | Идентификатор создателя календаря
+DATE_CREATE
+datetime | Дата создания календаря
+TIMESTAMP_X
+datetime | Дата изменения календаря
+CAL_DAV_CON
+string | Идентификатор синхронизации
+SYNC_TOKEN
+string | Идентификатор синхронизации
+PAGE_TOKEN
+string | Идентификатор синхронизации
+EXTERNAL_TYPE
+string | Тип провайдера для синхронизации
+ACCESS
+object | Объект данных доступа к календарю.
+Ключ объекта — идентификатор прав доступа. Получить название прав доступа можно методом access.name. Определить права доступа для текущего пользователя — методом user.access.
+Значение обьекта содержит числовой идентификатор разрешения на право доступа. Индентификаторы разрешения на право доступа отличаются на разных порталах. На текущий момент узнать все идентификаторы может только администратор портала в коробочной версии Битрикс24
+IS_COLLAB
+boolean | Флаг принадлежности календаря к коллабе
+PERM
+object | Объект прав доступа текущего пользователя к календарю
+
+Таблица 2:
+ALLOW
+boolean | Экспорт календаря разрешен
+
+Таблица 3:
+view_time
+boolean | Просмотр времени событий календаря
+view_title
+boolean | Просмотр названия событий календаря
+view_full
+boolean | Полный доступ к информации о событии календаря
+add
+boolean | Добавление событий в календарь
+edit
+boolean | Редактирование событий в календаре
+edit_section
+boolean | Редактирование календаря
+access
+boolean | Полный доступ к календарю
+
+Таблица 4:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 5:
+Пустая строка | Не задан обязательный параметр "type" для метода "calendar.section.get" | Не передан обязательный параметр type
+Пустая строка | Не задан обязательный параметр "ownerId" для метода "calendar.section.get" | Не передан обязательный параметр ownerId и параметр type не равен user
+Пустая строка | Доступ запрещен | Запрещен доступ к методу для внешних пользователей
+
+Таблица 6:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта

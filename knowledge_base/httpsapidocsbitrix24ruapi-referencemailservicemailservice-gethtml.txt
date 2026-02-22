@@ -1,0 +1,32 @@
+# https://apidocs.bitrix24.ru/api-reference/mailservice/mailservice-get.html
+URL: https://apidocs.bitrix24.ru/api-reference/mailservice/mailservice-get.html
+
+## ОПИСАНИЕ
+Scope: mailservice Кто может выполнять метод: любой пользователь Метод mailservice.get возвращает параметры указанного почтового сервиса. Параметр / Тип Описание С версии ID
+unknown Идентификатор почтового сервиса Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  "mailservice.get",
+  {
+   'ID': 10
+  }
+ );
+ 
+ const result = response.getData().result;
+ console.info(result);
+}
+catch(error)
+{
+ console.error(error);
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+ID
+unknown | Идентификатор почтового сервиса | 

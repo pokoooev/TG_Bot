@@ -1,0 +1,26 @@
+# https://apidocs.bitrix24.ru/api-reference/mailservice/mailservice-fields.html
+URL: https://apidocs.bitrix24.ru/api-reference/mailservice/mailservice-fields.html
+
+## ОПИСАНИЕ
+Scope: mailservice Кто может выполнять метод: любой пользователь Метод mailservice.fields возвращает описание полей почтового сервиса. Без параметров. Как использовать примеры в документации
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  "mailservice.fields",
+  {}
+ );
+ 
+ const result = response.getData().result;
+ console.info(result);
+}
+catch(error)
+{
+ console.error(error);
+}
+---
+
+## ТАБЛИЦЫ
+Нет таблиц

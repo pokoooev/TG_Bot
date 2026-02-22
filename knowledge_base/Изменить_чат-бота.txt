@@ -1,0 +1,110 @@
+# Изменить чат-бота
+URL: https://apidocs.bitrix24.ru/api-reference/chat-bots/imbot-update.html
+
+## ОПИСАНИЕ
+Scope: imbot Кто может выполнять метод: любой пользователь Метод imbot.update обновляет данные бота. Параметр Пример Описание BOT_ID*
+unknown 39 Идентификатор чат-бота, которого нужно изменить CLIENT_ID
+unknown '' строковый идентификатор чат-бота, используется только в режиме Вебхуков FIELDS*
+unknown Данные для обновления CODE
+unknown 'newbot' Строковой идентификатор чат-бота, уникальный в рамках вашего приложения EVENT_...*
+unknown 'http://www.hazz/chatApi/event.php' Ссылка на обработчик событий, поступивших от сервера. Обработчики событий: PROPERTIES*
+unknown Обязательное при обновлении данных бота NAME
+unknown 'UpdatedBot' Имя чат-бота LAST_NAME
+unknown '' Фамилия чат-бота COLOR
+unknown 'MINT' Цвет чат-бота для мобильного приложения RED, GREEN, MINT, LIGHT_BLUE, DARK_BLUE, PURPLE, AQUA, PINK, LIME, BROWN, AZURE, KHAKI, SAND, MARENGO, GRAY, GRAPHITE EMAIL
+unknown 'test2@test.ru' E-mail для связи PERSONAL_BIRTHDAY
+unknown '2016-03-12' День рождения в формате YYYY-mm-dd WORK_POSITION
+unknown 'Мой второй бот' Занимаемая должность, используется как описание чат-бота PERSONAL_WWW
+unknown 'http://test2.ru' Ссылка на сайт PERSONAL_GENDER
+unknown 'M' Пол бота, допустимые значения M - мужской, F - женский, пусто, если не требуется указывать PERSONAL_PHOTO
+unknown '/* base64 image */' Аватар чат-бота - base64 Обязательные параметры отмечены * Метод imbot.update больше не поддерживает изменение полей TYPE и OPENLINE (im 17.5.10). Примечание В примере используется функция restCommand. Это метод отправки данных в Битрикс24. Другой пример использования метода вы найдёте в примере ЭхоБота. Вы можете использовать для вызова метода свою функцию, javascript-метод BX24.callMethod или bitrix24-php-sdk. Как использовать примеры в документации true ошибка Код Описание BOT_ID_ERROR Чат-бот не найден. APP_ID_ERROR Чат-бот не принадлежит этому приложению, работать можно только с чат-ботами, установленными в рамках приложения. EVENT_MESSAGE_ADD_ERROR Ссылка обработчик события невалидная или не указана. EVENT_WELCOME_MESSAGE_ERROR Ссылка обработчик события невалидная или не указана. EVENT_BOT_DELETE_ERROR Ссылка обработчик события невалидная или не указана. NAME_ERROR Не указано одно из обязательных полей NAME или LAST_NAME чат-бота. WRONG_REQUEST Что-то пошло не так. Если вам требуется обрабатывать события с помощью разных обработчиков, то вместо EVENT_HANDLER вы можете задать каждый обработчик индивидуально: Rest API - События установки и обновления
+
+## ПРИМЕРЫ КОДА
+
+'http://www.hazz/chatApi/event.php'
+---
+
+EVENT_WELCOME_MESSAGE
+---
+
+$result = restCommand(
+    'imbot.update',
+    Array(
+        'BOT_ID' => 39,
+        'CLIENT_ID' => '',
+        'FIELDS' => Array(
+            'CODE' => 'newbot',
+            'EVENT_HANDLER' => 'http://www.hazz/chatApi/event.php',
+            'PROPERTIES' => Array(
+                'NAME' => 'UpdatedBot',
+                'LAST_NAME' => '',
+                'COLOR' => 'MINT',
+                'EMAIL' => 'test2@test.ru',
+                'PERSONAL_BIRTHDAY' => '2016-03-12',
+                'WORK_POSITION' => 'Мой второй бот',
+                'PERSONAL_WWW' => 'http://test2.ru',
+                'PERSONAL_GENDER' => 'M',
+                'PERSONAL_PHOTO' => '/* base64 image */',
+            )
+        )
+    ),
+    $_REQUEST[
+        "auth"
+    ]
+);
+---
+
+'EVENT_MESSAGE_ADD' => 'http://www.hazz/chatApi/event.php', // Ссылка на обработчик события отправки сообщения чат-боту
+'EVENT_WELCOME_MESSAGE' => 'http://www.hazz/chatApi/event.php', // Ссылка на обработчик события открытия диалога с чат-ботом или приглашения его в групповой чат
+'EVENT_BOT_DELETE' => 'http://www.hazz/chatApi/event.php', // Ссылка на обработчик события удаления чат-бота со стороны клиента
+'EVENT_MESSAGE_UPDATE' => 'http://www.hazz/chatApi/event.php', // Ссылка на обработчик события подписки на события изменения
+'EVENT_MESSAGE_DELETE' => 'http://www.hazz/chatApi/event.php', // Ссылка на обработчик события подписки на события удаления сообщений
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+BOT_ID*
+unknown | 39 | Идентификатор чат-бота, которого нужно изменить | 
+CLIENT_ID
+unknown | '' | строковый идентификатор чат-бота, используется только в режиме Вебхуков | 
+FIELDS*
+unknown |  | Данные для обновления | 
+CODE
+unknown | 'newbot' | Строковой идентификатор чат-бота, уникальный в рамках вашего приложения | 
+EVENT_...*
+unknown | 'http://www.hazz/chatApi/event.php' | Ссылка на обработчик событий, поступивших от сервера. Обработчики событий:
+EVENT_HANDLER - ссылка на обработчик события отправки сообщения чат-боту.
+или
+EVENT_MESSAGE_ADD - ссылка на обработчик события отправки сообщения чат-боту.
+EVENT_WELCOME_MESSAGE - ссылка на обработчик события открытия диалога с чат-ботом или приглашения его в групповой чат.
+EVENT_BOT_DELETE - ссылка на обработчик события удаления чат-бота со стороны клиента. | 
+PROPERTIES*
+unknown |  | Обязательное при обновлении данных бота | 
+NAME
+unknown | 'UpdatedBot' | Имя чат-бота | 
+LAST_NAME
+unknown | '' | Фамилия чат-бота | 
+COLOR
+unknown | 'MINT' | Цвет чат-бота для мобильного приложения RED, GREEN, MINT, LIGHT_BLUE, DARK_BLUE, PURPLE, AQUA, PINK, LIME, BROWN, AZURE, KHAKI, SAND, MARENGO, GRAY, GRAPHITE | 
+EMAIL
+unknown | 'test2@test.ru' | E-mail для связи | 
+PERSONAL_BIRTHDAY
+unknown | '2016-03-12' | День рождения в формате YYYY-mm-dd | 
+WORK_POSITION
+unknown | 'Мой второй бот' | Занимаемая должность, используется как описание чат-бота | 
+PERSONAL_WWW
+unknown | 'http://test2.ru' | Ссылка на сайт | 
+PERSONAL_GENDER
+unknown | 'M' | Пол бота, допустимые значения M - мужской, F - женский, пусто, если не требуется указывать | 
+PERSONAL_PHOTO
+unknown | '/* base64 image */' | Аватар чат-бота - base64 | 
+
+Таблица 1:
+BOT_ID_ERROR | Чат-бот не найден.
+APP_ID_ERROR | Чат-бот не принадлежит этому приложению, работать можно только с чат-ботами, установленными в рамках приложения.
+EVENT_MESSAGE_ADD_ERROR | Ссылка обработчик события невалидная или не указана.
+EVENT_WELCOME_MESSAGE_ERROR | Ссылка обработчик события невалидная или не указана.
+EVENT_BOT_DELETE_ERROR | Ссылка обработчик события невалидная или не указана.
+NAME_ERROR | Не указано одно из обязательных полей NAME или LAST_NAME чат-бота.
+WRONG_REQUEST | Что-то пошло не так.

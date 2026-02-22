@@ -1,0 +1,26 @@
+# https://apidocs.bitrix24.ru/api-reference/pay-system/index.html
+URL: https://apidocs.bitrix24.ru/api-reference/pay-system/index.html
+
+## ОПИСАНИЕ
+Scope: pay_system Кто может выполнять методы: в зависимости от метода Метод Описание sale.paysystem.handler.add Добавляет REST-обработчик платежной системы sale.paysystem.handler.update Обновляет REST-обработчик платежной системы sale.paysystem.handler.list Возвращает список REST-обработчиков платежной системы sale.paysystem.handler.delete Удаляет REST-обработчик платежной системы sale.paysystem.add Добавляет платежную систему sale.paysystem.update Изменяет платежную систему sale.paysystem.list Возвращает список платежных систем sale.paysystem.settings.get Возвращает настройки платежной системы sale.paysystem.settings.update Обновляет настройки платежной системы sale.paysystem.delete Удаляет платежную систему sale.paysystem.pay.payment Служит для оплаты заказа через конкретную платежную систему sale.paysystem.pay.invoice Служит для оплаты счета (старая версия) через конкретную платежную систему sale.paysystem.settings.payment.get Возвращает настройки платежной системы для конкретной оплаты sale.paysystem.settings.invoice.get Возвращает настройки платежной системы для конкретного счета (старая версия)
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+sale.paysystem.handler.add | Добавляет REST-обработчик платежной системы
+sale.paysystem.handler.update | Обновляет REST-обработчик платежной системы
+sale.paysystem.handler.list | Возвращает список REST-обработчиков платежной системы
+sale.paysystem.handler.delete | Удаляет REST-обработчик платежной системы
+sale.paysystem.add | Добавляет платежную систему
+sale.paysystem.update | Изменяет платежную систему
+sale.paysystem.list | Возвращает список платежных систем
+sale.paysystem.settings.get | Возвращает настройки платежной системы
+sale.paysystem.settings.update | Обновляет настройки платежной системы
+sale.paysystem.delete | Удаляет платежную систему
+sale.paysystem.pay.payment | Служит для оплаты заказа через конкретную платежную систему
+sale.paysystem.pay.invoice | Служит для оплаты счета (старая версия) через конкретную платежную систему
+sale.paysystem.settings.payment.get | Возвращает настройки платежной системы для конкретной оплаты
+sale.paysystem.settings.invoice.get | Возвращает настройки платежной системы для конкретного счета (старая версия)

@@ -1,0 +1,87 @@
+# https://apidocs.bitrix24.ru/api-reference/chats/index.html
+URL: https://apidocs.bitrix24.ru/api-reference/chats/index.html
+
+## ОПИСАНИЕ
+Метод Описание im.chat.add Создает чат im.chat.get Получает идентификатор чата im.counters.get Получает счетчики im.dialog.get Получает данные о чате im.recent.get Получает сокращенный список последних чатов im.recent.list Получает список чатов Метод Описание im.chat.setOwner Изменяет владельца чата im.chat.updateAvatar Изменяет аватарку чата im.chat.updateColor Изменяет цвет чата im.chat.updateTitle Изменяет заголовок чата Метод Описание im.chat.leave Покидает чат im.chat.user.add Приглашает участников в чат im.chat.user.delete Исключает участников из чата im.chat.user.list Получает идентификаторы участников чата im.dialog.users.list Получает список участников Метод Описание im.department.colleagues.list Получает список пользователей, состоящих в вашем отделе im.department.employees.get Получает список сотрудников подразделения im.department.get Получает информацию о подразделении im.department.managers.get Получает список руководителей подразделений Метод Описание im.disk.file.commit Добавляет файл в чат im.disk.file.delete Удаляет файл из папки чата im.disk.file.save Сохраняет файл на свой диск im.disk.folder.get Получает папку хранения файлов указанного чата Метод Описание im.dialog.messages.get Получает список последних сообщений im.dialog.read Устанавливает признак «прочитано» у сообщений im.dialog.unread Устанавливает признак «не прочитано» у сообщений im.dialog.writing Отправляет признак «вам пишут...» im.message.add Добавляет сообщение im.message.command Использует команду бота im.message.delete Удаляет сообщение чат-бота im.message.like Изменяет статус «Мне нравится» у сообщения im.message.share Создает объект на основании сообщения im.message.update Изменяет отправленное сообщение Метод Описание im.notify.answer Отвечает на уведомление, поддерживающее быстрый ответ im.notify.confirm Взаимодействует с кнопками нотификаций im.notify.delete Удаляет уведомления im.notify.personal.add Отправляет персональное уведомление im.notify.read.list Читает список уведомлений (кроме CONFIRM) im.notify.read Устанавливает отмену прочитанных уведомлений im.notify.system.add Отправляет системное уведомление Метод Описание im.search.chat.list Находит чаты по названиям im.search.department.list Находит подразделения im.search.last.add Добавляет поиск в историю im.search.last.delete Удаляет поиск из истории im.search.last.get Получает историю поиска im.search.user.list Находит пользователей Метод Описание im.chat.mute Отключает уведомления от чата im.dialog.read.all Устанавливает признак «прочитано» у всех чатов im.recent.hide Удаляет чат из списка последних im.recent.pin Закрепляет чат в избранном im.recent.unread Устанавливает или снимает признак «прочитано» у чата Метод Описание im.user.get Получает данные о пользователе im.user.list.get Получает данные о пользователях im.user.status.get Получает информацию об установленном статусе пользователя im.user.status.idle.end Отключает автоматический статус «Отошел» im.user.status.idle.start Устанавливает автоматический статус «Отошел» im.user.status.set Устанавливает статус пользователя
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+im.chat.add | Создает чат
+im.chat.get | Получает идентификатор чата
+im.counters.get | Получает счетчики
+im.dialog.get | Получает данные о чате
+im.recent.get | Получает сокращенный список последних чатов
+im.recent.list | Получает список чатов
+
+Таблица 1:
+im.chat.setOwner | Изменяет владельца чата
+im.chat.updateAvatar | Изменяет аватарку чата
+im.chat.updateColor | Изменяет цвет чата
+im.chat.updateTitle | Изменяет заголовок чата
+
+Таблица 2:
+im.chat.leave | Покидает чат
+im.chat.user.add | Приглашает участников в чат
+im.chat.user.delete | Исключает участников из чата
+im.chat.user.list | Получает идентификаторы участников чата
+im.dialog.users.list | Получает список участников
+
+Таблица 3:
+im.department.colleagues.list | Получает список пользователей, состоящих в вашем отделе
+im.department.employees.get | Получает список сотрудников подразделения
+im.department.get | Получает информацию о подразделении
+im.department.managers.get | Получает список руководителей подразделений
+
+Таблица 4:
+im.disk.file.commit | Добавляет файл в чат
+im.disk.file.delete | Удаляет файл из папки чата
+im.disk.file.save | Сохраняет файл на свой диск
+im.disk.folder.get | Получает папку хранения файлов указанного чата
+
+Таблица 5:
+im.dialog.messages.get | Получает список последних сообщений
+im.dialog.read | Устанавливает признак «прочитано» у сообщений
+im.dialog.unread | Устанавливает признак «не прочитано» у сообщений
+im.dialog.writing | Отправляет признак «вам пишут...»
+im.message.add | Добавляет сообщение
+im.message.command | Использует команду бота
+im.message.delete | Удаляет сообщение чат-бота
+im.message.like | Изменяет статус «Мне нравится» у сообщения
+im.message.share | Создает объект на основании сообщения
+im.message.update | Изменяет отправленное сообщение
+
+Таблица 6:
+im.notify.answer | Отвечает на уведомление, поддерживающее быстрый ответ
+im.notify.confirm | Взаимодействует с кнопками нотификаций
+im.notify.delete | Удаляет уведомления
+im.notify.personal.add | Отправляет персональное уведомление
+im.notify.read.list | Читает список уведомлений (кроме CONFIRM)
+im.notify.read | Устанавливает отмену прочитанных уведомлений
+im.notify.system.add | Отправляет системное уведомление
+
+Таблица 7:
+im.search.chat.list | Находит чаты по названиям
+im.search.department.list | Находит подразделения
+im.search.last.add | Добавляет поиск в историю
+im.search.last.delete | Удаляет поиск из истории
+im.search.last.get | Получает историю поиска
+im.search.user.list | Находит пользователей
+
+Таблица 8:
+im.chat.mute | Отключает уведомления от чата
+im.dialog.read.all | Устанавливает признак «прочитано» у всех чатов
+im.recent.hide | Удаляет чат из списка последних
+im.recent.pin | Закрепляет чат в избранном
+im.recent.unread | Устанавливает или снимает признак «прочитано» у чата
+
+Таблица 9:
+im.user.get | Получает данные о пользователе
+im.user.list.get | Получает данные о пользователях
+im.user.status.get | Получает информацию об установленном статусе пользователя
+im.user.status.idle.end | Отключает автоматический статус «Отошел»
+im.user.status.idle.start | Устанавливает автоматический статус «Отошел»
+im.user.status.set | Устанавливает статус пользователя

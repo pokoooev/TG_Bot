@@ -1,0 +1,154 @@
+# Как встроить приложение в календарь
+URL: https://apidocs.bitrix24.ru/api-reference/calendar/calendar-grid-veiw.html
+
+## ОПИСАНИЕ
+В календарь можно встроить приложение. В верхней части календаря в списке видов отображения есть место для встройки CALENDAR_GRIDVIEW, куда можно добавить свой пункт. Подробнее о виджете — в статье Виджет в календаре. Исспользуйте метод placement.bind, чтобы связать приложение с календарем. Параметры PLACEMENT, HANDLER и TITLE определяют, где и как будет отображаться ваше приложение. Если в приложении вывести все параметры, которые передаются в запросе к приложению: Можно увидеть, что передаются определенные параметры, например диапазон дат, который отображается в календаре: Эти параметры можно использовать для настройки отображения вашего приложения. Метод getEvents получает события календаря. Метод viewEvent открывает карточку для просмотра события. Метод addEvent открывает карточку для добавления нового события. Метод editEvent открывает карточку для редактирования события. Метод deleteEvent удаляет событие. События, которые можно отслеживать в месте встройки: Событие Описание Calendar.customView:refreshEntries Обновление событий Calendar.customView:decreaseViewRangeDate Нажатие на стрелочку назад, то есть открытие календаря за предыдущие даты Calendar.customView:increaseViewRangeDate Нажатие на стрелочку вперед, то есть открытие календаря на следующие даты Calendar.customView:adjustToDate Переход к конкретной дате
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  'placement.bind',
+  {
+   PLACEMENT: 'CALENDAR_GRIDVIEW',
+   HANDLER: 'http://your_site/handler.php',
+   TITLE: 'Custom tab'
+  }
+ );
+ 
+ const result = response.getData().result;
+ console.log(result);
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+echo "<pre>";
+print_r($_REQUEST);
+echo "</pre>";
+---
+
+[PLACEMENT_OPTIONS] => {
+    "viewRangeFrom":"2018-09-30",
+    "viewRangeTo":"2018-11-04"
+}
+---
+
+try
+{
+ const dateFrom = new Date();
+ const dateTo = new Date(dateFrom.getTime() + 86400 * 30 * 1000); // Умножаем на 1000, чтобы преобразовать секунды в миллисекунды
+ dateFrom.setHours(0, 0, 0, 0);
+ dateTo.setHours(0, 0, 0, 0);
+
+ const response = await $b24.callMethod(
+  'placement.getEvents',
+  {
+   dateFrom: dateFrom,
+   dateTo: dateTo
+  }
+ );
+
+ const events = response.getData().result;
+ console.log('getEvents response:');
+ console.dir(events);
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+try
+{
+ const response = await $b24.callMethod(
+  'placement.call',
+  {
+   id: "1431170", // идентификатор события
+   dateFrom: "11.07.2018" // дата события. Не обязательна, но важна для регулярных событий
+  }
+ );
+ 
+ const result = response.getData().result;
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+try
+{
+ const response = await $b24.callMethod(
+  'placement.addEvent',
+  {}
+ );
+ 
+ const result = response.getData().result;
+ // Нужная вам логика обработки данных
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+try
+{
+ const response = await $b24.callMethod(
+  'placement.call',
+  {
+   placement: 'editEvent',
+   params: {
+    uid: "1431171|19.07.2018"
+   }
+  }
+ );
+ 
+ const result = response.getData().result;
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+try
+{
+ const response = await $b24.callMethod(
+  'placement.deleteEvent',
+  {
+   id: "1431169"
+  }
+ );
+ 
+ const result = response.getData().result;
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+Calendar.customView:refreshEntries
+---
+
+Calendar.customView:decreaseViewRangeDate
+---
+
+Calendar.customView:increaseViewRangeDate
+---
+
+Calendar.customView:adjustToDate
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+Calendar.customView:refreshEntries | Обновление событий
+Calendar.customView:decreaseViewRangeDate | Нажатие на стрелочку назад, то есть открытие календаря за предыдущие даты
+Calendar.customView:increaseViewRangeDate | Нажатие на стрелочку вперед, то есть открытие календаря на следующие даты
+Calendar.customView:adjustToDate | Переход к конкретной дате

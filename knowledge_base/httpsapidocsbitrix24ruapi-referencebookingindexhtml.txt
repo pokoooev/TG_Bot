@@ -1,0 +1,68 @@
+# https://apidocs.bitrix24.ru/api-reference/booking/index.html
+URL: https://apidocs.bitrix24.ru/api-reference/booking/index.html
+
+## ОПИСАНИЕ
+Онлайн-запись — это инструмент для автоматизации бронирования ресурсов: помещений, оборудования, услуг специалистов и так далее. Вы можете переносить клиентов между листом ожидания и бронированием, управлять загруженностью, синхронизировать ресурсы с внешними системами. Быстрый переход: все методы Пользовательская документация: Битрикс24 Онлайн-запись: начало работы У онлайн-записи есть три группы методов: ресурсы, лист ожидания, бронирование. Методы связаны между собой: В коробочных Битрикс24 методы можно использовать с версии модуля booking 25.300.0. Ресурсы – это объекты, которые можно забронировать: помещения, техника, услуги. Методы этой группы позволяют: Используйте лист ожидания, когда нужный ресурс временно недоступен. Методы этой группы позволяют: Бронирование — это подтвержденная запись на ресурс. Методы этой группы позволяют: Scope: booking Кто может выполнять метод: любой пользователь Метод Описание booking.v1.resource.add Добавляет новый ресурс booking.v1.resource.delete Удаляет ресурс booking.v1.resource.get Получает ресурс booking.v1.resource.list Получает список ресурсов booking.v1.resource.update Обновляет ресурс Метод Описание booking.v1.resourceType.add Добавляет новый тип ресурса booking.v1.resourceType.delete Удаляет тип ресурса booking.v1.resourceType.get Получает тип ресурса booking.v1.resourceType.list Получает список типов ресурсов booking.v1.resourceType.update Обновляет тип ресурса Метод Описание booking.v1.resource.slots.list Получает настройку слотов для ресурса booking.v1.resource.slots.set Устанавливает слоты для ресурса booking.v1.resource.slots.unset Удаляет слоты для ресурса Метод Описание booking.v1.waitlist.add Добавляет в лист ожидания booking.v1.waitlist.createfrombooking Создает запись в листе ожидания из бронирования booking.v1.waitlist.delete Удаляет запись из листа ожидания booking.v1.waitlist.get Получает запись из листа ожидания booking.v1.waitlist.list Получает список записей из листа ожидания booking.v1.waitlist.update Обновляет запись в листе ожидания Метод Описание booking.v1.waitlist.client.list Получает список клиентов записи в лист ожидания booking.v1.waitlist.client.set Добавляет клиентов к записи в лист ожидания booking.v1.waitlist.client.unset Удаляет клиентов из записи в лист ожидания Метод Описание booking.v1.waitList.externalData.list Получает связи записи в лист ожидания booking.v1.waitlist.externalData.set Устанавливает связи для записи в лист ожидания booking.v1.waitlist.externalData.unset Удаляет связи для записи в лист ожидания Метод Описание booking.v1.booking.add Добавляет бронирование booking.v1.booking.createfromwaitlist Создает бронирование из листа ожидания booking.v1.booking.delete Удаляет бронирование booking.v1.booking.get Получает информацию о бронировании booking.v1.booking.list Получает список бронирований booking.v1.booking.update Обновляет бронирование Метод Описание booking.v1.booking.client.list Получает список клиентов бронирования booking.v1.booking.client.set Добавляет клиентав к бронированию booking.v1.booking.client.unset Удаляет клиентов из бронирования Метод Описание booking.v1.booking.externalData.list Получает связи бронирования booking.v1.booking.externalData.set Устанавливает связи для бронирования booking.v1.booking.externalData.unset Удаляет связи для бронирования Метод Описание booking.v1.clienttype.list Получает список типов клиентов
+
+## ПРИМЕРЫ КОДА
+Нет примеров кода
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+booking.v1.resource.add | Добавляет новый ресурс
+booking.v1.resource.delete | Удаляет ресурс
+booking.v1.resource.get | Получает ресурс
+booking.v1.resource.list | Получает список ресурсов
+booking.v1.resource.update | Обновляет ресурс
+
+Таблица 1:
+booking.v1.resourceType.add | Добавляет новый тип ресурса
+booking.v1.resourceType.delete | Удаляет тип ресурса
+booking.v1.resourceType.get | Получает тип ресурса
+booking.v1.resourceType.list | Получает список типов ресурсов
+booking.v1.resourceType.update | Обновляет тип ресурса
+
+Таблица 2:
+booking.v1.resource.slots.list | Получает настройку слотов для ресурса
+booking.v1.resource.slots.set | Устанавливает слоты для ресурса
+booking.v1.resource.slots.unset | Удаляет слоты для ресурса
+
+Таблица 3:
+booking.v1.waitlist.add | Добавляет в лист ожидания
+booking.v1.waitlist.createfrombooking | Создает запись в листе ожидания из бронирования
+booking.v1.waitlist.delete | Удаляет запись из листа ожидания
+booking.v1.waitlist.get | Получает запись из листа ожидания
+booking.v1.waitlist.list | Получает список записей из листа ожидания
+booking.v1.waitlist.update | Обновляет запись в листе ожидания
+
+Таблица 4:
+booking.v1.waitlist.client.list | Получает список клиентов записи в лист ожидания
+booking.v1.waitlist.client.set | Добавляет клиентов к записи в лист ожидания
+booking.v1.waitlist.client.unset | Удаляет клиентов из записи в лист ожидания
+
+Таблица 5:
+booking.v1.waitList.externalData.list | Получает связи записи в лист ожидания
+booking.v1.waitlist.externalData.set | Устанавливает связи для записи в лист ожидания
+booking.v1.waitlist.externalData.unset | Удаляет связи для записи в лист ожидания
+
+Таблица 6:
+booking.v1.booking.add | Добавляет бронирование
+booking.v1.booking.createfromwaitlist | Создает бронирование из листа ожидания
+booking.v1.booking.delete | Удаляет бронирование
+booking.v1.booking.get | Получает информацию о бронировании
+booking.v1.booking.list | Получает список бронирований
+booking.v1.booking.update | Обновляет бронирование
+
+Таблица 7:
+booking.v1.booking.client.list | Получает список клиентов бронирования
+booking.v1.booking.client.set | Добавляет клиентав к бронированию
+booking.v1.booking.client.unset | Удаляет клиентов из бронирования
+
+Таблица 8:
+booking.v1.booking.externalData.list | Получает связи бронирования
+booking.v1.booking.externalData.set | Устанавливает связи для бронирования
+booking.v1.booking.externalData.unset | Удаляет связи для бронирования
+
+Таблица 9:
+booking.v1.clienttype.list | Получает список типов клиентов

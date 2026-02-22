@@ -1,0 +1,15 @@
+# Удалить документ
+URL: https://apidocs.bitrix24.ru/api-reference/document-generator/document-generator-document-delete.html
+
+## ОПИСАНИЕ
+Scope: documentgenerator Кто может выполнять метод: любой пользователь Метод documentgenerator.document.delete удаляет документ. Параметр Описание id Идентификатор документа. Ответ пустой.
+
+## ПРИМЕРЫ КОДА
+
+documentgenerator.document.delete
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+id | Идентификатор документа.

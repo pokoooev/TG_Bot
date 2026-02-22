@@ -1,0 +1,45 @@
+# https://apidocs.bitrix24.ru/api-reference/chats/im-chat-get.html
+URL: https://apidocs.bitrix24.ru/api-reference/chats/im-chat-get.html
+
+## ОПИСАНИЕ
+Scope: im Кто может выполнять метод: любой пользователь Метод im.chat.get получает идентификатор чата. Обязательные параметры отмечены * Параметр Пример Описание ENTITY_TYPE*
+unknown CRM, LINES, LIVECHAT Идентификатор сущности. Может быть использован для поиска чата и для легкого определения контекста в обработчиках событий: ENTITY_ID*
+unknown LEAD|13 Числовой идентификатор сущности. Может быть использован для поиска чата и для легкого определения контекста в обработчиках событий: Как получить ID чата задачи описано в статье Новая карточка задач: обзор изменений Как использовать примеры в документации Результат выполнения: возвращает идентификатор чата CHAT_ID или null.
+
+## ПРИМЕРЫ КОДА
+
+try
+{
+ const response = await $b24.callMethod(
+  'im.chat.get',
+  {
+   ENTITY_TYPE: "LINES",
+   ENTITY_ID: "telegrambot|2|209607941|744"
+  }
+ );
+ 
+ const result = response.getData().result;
+ result.error()
+  ? console.error(result.error())
+  : console.info(result)
+ ;
+}
+catch( error )
+{
+ console.error('Error:', error);
+}
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+ENTITY_TYPE*
+unknown | CRM, LINES, LIVECHAT | Идентификатор сущности. Может быть использован для поиска чата и для легкого определения контекста в обработчиках событий:
+ONIMBOTMESSAGEADD,
+ONIMBOTMESSAGEUPDATE,
+ONIMBOTMESSAGEDELETE
+ENTITY_ID*
+unknown | LEAD|13 | Числовой идентификатор сущности. Может быть использован для поиска чата и для легкого определения контекста в обработчиках событий:
+ONIMBOTMESSAGEADD,
+ONIMBOTMESSAGEUPDATE,
+ONIMBOTMESSAGEDELETE

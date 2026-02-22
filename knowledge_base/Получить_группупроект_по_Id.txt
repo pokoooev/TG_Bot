@@ -1,0 +1,452 @@
+# Получить группу/проект по Id
+URL: https://apidocs.bitrix24.ru/api-reference/sonet-group/socialnetwork-api-workgroup-get.html
+
+## ОПИСАНИЕ
+Scope: socialnetwork Кто может выполнять метод: любой пользователь Метод socialnetwork.api.workgroup.get возвращает информацию о рабочей группе, проекте, скраме или коллабе по идентификатору. Администратор может получить информацию о любой группе на портале, даже если она секретная и он в ней не состоит. Обязательные параметры отмечены * Название тип Описание params* object Параметры запроса для получения группы Обязательные параметры отмечены * Название тип Описание groupId* integer Идентификатор группы. Значение для поля может быть получено методом sonet_group.get select array Список дополнительных полей для извлечения, возвращаемых в result mode string Режим запроса. Может принимать только значение mobile, которое позволяет получить дополнительные данные в массиве result[ADDITIONAL_DATA] ACTIONS Доступные текущему пользователю операции над группой AVATAR URL сжатого пользовательского аватара группы AVATAR_DATA Информация об аватаре группы AVATAR_TYPES Типы аватаров для групп COUNTERS Количество непринятых запросов и приглашений на вступление в группу DATE_CREATE Дата и время создания группы в более читаемом формате DEPARTMENTS Отделы сотрудников, добавленные в группу EFFICIENCY Эффективность группы FEATURES Доступные в группе инструменты, указанные в расширенных настройках группы GROUP_MEMBERS_LIST Список активных участников группы, приглашенных пользователей и пользователей, ожидающих подтверждения вступления в группу LIST_OF_MEMBERS Список участников группы с информацией о них LIST_OF_MEMBERS_AWAITING_INVITE Пользователи, ожидающие подтверждения вступления в группу OWNER_DATA Данные о владельце группы PIN Закреплена ли группа у текущего пользователя на странице групп и проектов. Возвращается ключом result[IS_PIN] PRIVACY_TYPE Уровень приватности группы. Возвращается ключом result[PRIVACY_CODE] SUBJECT_DATA Информация о тематике группы, указанной в расширенных настройках группы TAGS Теги группы, указанные в расширенных настройках группы USER_DATA Данные о роли текущего пользователя в группе Как использовать примеры в документации HTTP-статус: 200 Название тип Описание result object Результат выполнения запроса time time Информация о времени выполнения запроса Название тип Описание ID integer Идентификатор группы ACTIVE boolean Флаг Y/N - является ли группа активной. Активировать или деактивировать группу можно с помощью метода sonet_group.update SITE_ID string Идентификатор сайта, которому принадлежит группа SUBJECT_ID integer Идентификатор тематики группы. Тематика группы указывается в расширенных настройках группы NAME string Имя группы DESCRIPTION text Описание группы KEYWORDS string Теги группы через запятую: тег1,тег2 CLOSED boolean Флаг Y/N - является ли группа архивной VISIBLE boolean Флаг Y/N - видна ли группа в списке групп OPENED boolean Флаг Y/N - является ли группа открытой DATE_CREATE string Дата создания группы в формате DD.MM.YYYY hh:mm:ss. Если ключ DATE_CREATE запрошен в select, то дата возвращается в более читаемом формате, например: DATE_UPDATE string Дата обновления группы в формате DD.MM.YYYY hh:mm:ss DATE_ACTIVITY string Дата последней активности в группе в формате DD.MM.YYYY hh:mm:ss IMAGE_ID integer Идентификатор пользовательского аватара группы в таблице b_file. 0, если используется системное изображение в качестве аватара AVATAR_TYPE string Тип последнего установленного системного аватара: OWNER_ID user Идентификатор владельца группы INITIATE_PERMS enum Кто имеет право на приглашение пользователей в группу: NUMBER_OF_MEMBERS integer Количество участников группы NUMBER_OF_MODERATORS integer Количество модераторов группы PROJECT boolean Флаг Y/N - является ли группа проектом PROJECT_DATE_START any Дата начала проекта в формате DD.MM.YYYY hh:mm:ss. null, если не указана PROJECT_DATE_FINISH any Дата окончания проекта в формате DD.MM.YYYY hh:mm:ss. null, если не указана SEARCH_INDEX string Индекс, ключевые слова для поиска группы LANDING boolean Флаг Y/N - является ли группа группой для публикации SCRUM_MASTER_ID integer Идентификатор мастера скрама. 0, если группа не является скрамом SCRUM_SPRINT_DURATION integer Длительность спринта скрама в секундах. 0, если группа не является скрамом SCRUM_TASK_RESPONSIBLE string Исполнитель по умолчанию при постановке задач: TYPE enum Тип группы: MEMBERS array Идентификаторы участников группы CHAT_ID integer Идентификатор чата группы DIALOG_ID string Идентификатор диалога группы ORDINARY_MEMBERS array Массив идентификаторов пользователей группы, не являющимися владельцами или модераторами INVITED_MEMBERS array Массив идентификаторов пользователей портала, которым было отправлено приглашение в группу, но они его еще не приняли MODERATOR_MEMBERS array Массив идентификаторов участников группы с ролью модератора SITE_IDS array Список идентификаторов сайтов, которым принадлежит группа AVATAR string URL сжатого пользовательского аватара группы. "", если пользовательский аватар не установлен AVATAR_TYPES object Объект, содержащий аватары групп: AVATAR_DATA object Информация об аватаре группы: OWNER_DATA object Информация о владельце группы: SUBJECT_DATA object Информация о тематике группы, указанной в расширенных настройках группы: TAGS array Теги группы, аналогично KEYWORDS, но в формате массива ACTIONS object Данные о доступных текущему пользователю операциях над группой: USER_DATA object Информация о текущем пользователе относительно группы: DEPARTMENTS array Массив идентификаторов отделов добавленных в группу IS_PIN boolean Значение true/false - закреплена ли группа у текущего пользователя на странице групп и проектов PRIVACY_CODE string Уровень приватности группы: LIST_OF_MEMBERS object Массив с информацией о пользователях группы: FEATURES object Массив с информацией о фичах группы: LIST_OF_MEMBERS_AWAITING_INVITE object Информация о пользователях, ожидающих подтверждения вступления в группу: GROUP_MEMBERS_LIST object Информация о связанных с группой пользователями: COUNTERS object Счетчики: EFFICIENCY integer Эффективность группы ADDITIONAL_DATA object Дополнительные данные для текущего пользователя: HTTP-статус: 400 Название
+тип Описание error
+string Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания error_description
+error_description Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде Код Описание Статус SONET_CONTROLLER_WORKGROUP_EMPTY В массив params не передан параметр groupId 400 SONET_CONTROLLER_WORKGROUP_NOT_FOUND Группа по идентификатору params[groupId] не найдена или у текущего пользователя нет доступа к ней 400 HTTP-статус: 20х, 40x, 50x Описанные ниже ошибки могут возникнуть при вызове любого метода Статус Код
+Текст ошибки Описание 500 INTERNAL_SERVER_ERROR
+Internal server error Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 500 ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24 503 QUERY_LIMIT_EXCEEDED
+Too many requests Превышен лимит на интенсивность запросов 405 ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage Текущий метод не разрешен для вызове с помощью batch 400 ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded Превышена максимальная длина параметров, переданных в метод batch 401 NO_AUTH_FOUND
+Wrong authorization data Неверный access-токен или код вебхука 400 INVALID_REQUEST
+Https required Для вызовов методов требуется использовать протокол HTTPS 503 OVERLOAD_LIMIT
+REST API is blocked due to overload REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24 403 ACCESS_DENIED
+REST API is available only on commercial plans REST API доступен только на коммерческих планах 403 INVALID_CREDENTIALS
+Invalid request credentials У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав 404 ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available Манифест недоступен 403 insufficient_scope
+The request requires higher privileges than provided by the webhook token Запрос требует более высоких привилегий, чем предоставляет токен вебхука 401 expired_token
+The access token provided has expired Предоставленный access-токен доступа истек 403 user_access_error
+The user does not have access to the application Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям 500 PORTAL_DELETED
+Portal was deleted Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
+
+## ПРИМЕРЫ КОДА
+
+socialnetwork.api.workgroup.get
+---
+
+result[ADDITIONAL_DATA]
+---
+
+curl -X POST \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-d '{"params":{"groupId":622,"select":["DEPARTMENTS","TAGS"]}}' \
+https://**put_your_bitrix24_address**/rest/**put_your_user_id_here**/**put_your_webhook_here**/socialnetwork.api.workgroup.get
+---
+
+{
+    "result": {
+        "ID": 622,
+        "ACTIVE": "Y",
+        "SITE_ID": "s1",
+        "SUBJECT_ID": 1,
+        "NAME": "Группа для демонстрации метода",
+        "DESCRIPTION": "Первая строка описания группы\r\nВторая строка описания группы",
+        "KEYWORDS": "тег группы,еще один тег группы",
+        "CLOSED": "N",
+        "VISIBLE": "Y",
+        "OPENED": "N",
+        "DATE_CREATE": "17.04.2025 19:37:55",
+        "DATE_UPDATE": "17.04.2025 19:40:48",
+        "DATE_ACTIVITY": "17.04.2025 19:40:48",
+        "IMAGE_ID": 0,
+        "AVATAR_TYPE": "folder",
+        "OWNER_ID": 1,
+        "INITIATE_PERMS": "K",
+        "NUMBER_OF_MEMBERS": 1,
+        "NUMBER_OF_MODERATORS": 1,
+        "PROJECT": "N",
+        "PROJECT_DATE_START": null,
+        "PROJECT_DATE_FINISH": null,
+        "SEARCH_INDEX": "Группа для демонстрации метода Первая строка описания группы\r\nВторая строка описания группы тег группы #тег группы еще один тег группы #еще один тег группы group@example.com",
+        "LANDING": "N",
+        "SCRUM_OWNER_ID": 0,
+        "SCRUM_SPRINT_DURATION": 0,
+        "SCRUM_TASK_RESPONSIBLE": "",
+        "TYPE": "group",
+        "MEMBERS": [
+            1,
+            10,
+            20
+        ],
+        "CHAT_ID": 1034,
+        "DIALOG_ID": "chat1034",
+        "ORDINARY_MEMBERS": [
+            10
+        ],
+        "INVITED_MEMBERS": [
+            38
+        ],
+        "MODERATOR_MEMBERS": [
+            20
+        ],
+        "SITE_IDS": [
+            "s1"
+        ],
+        "TAGS": [
+            "еще один тег группы",
+            "тег группы"
+        ],
+        "DEPARTMENTS": [
+            8
+        ],
+        "NUMBER_OF_MEMBERS_PLURAL": 0
+    },
+    "time": {
+        "start": 1744908074.244266,
+        "finish": 1744908074.279072,
+        "duration": 0.034806013107299805,
+        "processing": 0.010703086853027344,
+        "date_start": "2025-04-17T19:41:14+03:00",
+        "date_finish": "2025-04-17T19:41:14+03:00",
+        "operating_reset_at": 1744908674,
+        "operating": 0
+    }
+}
+---
+
+AVATAR_TYPE[avatar_id][sort]
+---
+
+AVATAR_TYPE[avatar_id][mobileUrl]
+---
+
+AVATAR_TYPE[avatar_id][webCssClass]
+---
+
+AVATAR_TYPE[avatar_id][entitySelectorUrl]
+---
+
+OWNER_DATA[FORMATTED_NAME]
+---
+
+ACTIONS[EDIT_FEATURES]
+---
+
+USER_DATA[INITIATED_BY_TYPE]
+---
+
+USER_DATA[IS_SUBSCRIBED]
+---
+
+LIST_OF_MEMBERS[0][id]
+---
+
+LIST_OF_MEMBERS[0][isOwner]
+---
+
+LIST_OF_MEMBERS[0][isModerator]
+---
+
+LIST_OF_MEMBERS[0][isScrumMaster]
+---
+
+LIST_OF_MEMBERS[0][isAutoMember]
+---
+
+LIST_OF_MEMBERS[0][name]
+---
+
+LIST_OF_MEMBERS[0][lastName]
+---
+
+LIST_OF_MEMBERS[0][position]
+---
+
+LIST_OF_MEMBERS[0][photo]
+---
+
+FEATURES[0][featureName]
+---
+
+FEATURES[0][customName]
+---
+
+LIST_OF_MEMBERS_AWAITING_INVITE[0][id]
+---
+
+LIST_OF_MEMBERS_AWAITING_INVITE[0][name]
+---
+
+LIST_OF_MEMBERS_AWAITING_INVITE[0][photo]
+---
+
+GROUP_MEMBERS_LIST[0][id]
+---
+
+GROUP_MEMBERS_LIST[0][invited]
+---
+
+GROUP_MEMBERS_LIST[0][isAwaiting]
+---
+
+GROUP_MEMBERS_LIST[0][isMember]
+---
+
+COUNTERS[workgroup_requests_out]
+---
+
+COUNTERS[workgroup_requests_in]
+---
+
+ADDITIONAL_DATA[ROLE]
+---
+
+ADDITIONAL_DATA[INITIATED_BY_TYPE]
+---
+
+{
+    "error": "SONET_CONTROLLER_WORKGROUP_EMPTY",
+    "error_description": "Не передано значение ID рабочей группы."
+}
+---
+
+SONET_CONTROLLER_WORKGROUP_EMPTY
+---
+
+SONET_CONTROLLER_WORKGROUP_NOT_FOUND
+---
+
+INTERNAL_SERVER_ERROR
+---
+
+ERROR_UNEXPECTED_ANSWER
+---
+
+ERROR_BATCH_METHOD_NOT_ALLOWED
+---
+
+ERROR_BATCH_LENGTH_EXCEEDED
+---
+
+ERROR_MANIFEST_IS_NOT_AVAILABLE
+---
+
+## ТАБЛИЦЫ
+
+Таблица 0:
+params* object | Параметры запроса для получения группы
+
+Таблица 1:
+groupId* integer | Идентификатор группы. Значение для поля может быть получено методом sonet_group.get
+select array | Список дополнительных полей для извлечения, возвращаемых в result
+mode string | Режим запроса. Может принимать только значение mobile, которое позволяет получить дополнительные данные в массиве result[ADDITIONAL_DATA]
+
+Таблица 2:
+AVATAR | URL сжатого пользовательского аватара группы
+AVATAR_DATA | Информация об аватаре группы
+AVATAR_TYPES | Типы аватаров для групп
+COUNTERS | Количество непринятых запросов и приглашений на вступление в группу
+DATE_CREATE | Дата и время создания группы в более читаемом формате
+DEPARTMENTS | Отделы сотрудников, добавленные в группу
+EFFICIENCY | Эффективность группы
+FEATURES | Доступные в группе инструменты, указанные в расширенных настройках группы
+GROUP_MEMBERS_LIST | Список активных участников группы, приглашенных пользователей и пользователей, ожидающих подтверждения вступления в группу
+LIST_OF_MEMBERS | Список участников группы с информацией о них
+LIST_OF_MEMBERS_AWAITING_INVITE | Пользователи, ожидающие подтверждения вступления в группу
+OWNER_DATA | Данные о владельце группы
+PIN | Закреплена ли группа у текущего пользователя на странице групп и проектов. Возвращается ключом result[IS_PIN]
+PRIVACY_TYPE | Уровень приватности группы. Возвращается ключом result[PRIVACY_CODE]
+SUBJECT_DATA | Информация о тематике группы, указанной в расширенных настройках группы
+TAGS | Теги группы, указанные в расширенных настройках группы
+USER_DATA | Данные о роли текущего пользователя в группе
+
+Таблица 3:
+result object | Результат выполнения запроса
+time time | Информация о времени выполнения запроса
+
+Таблица 4:
+ID integer | Идентификатор группы
+ACTIVE boolean | Флаг Y/N - является ли группа активной. Активировать или деактивировать группу можно с помощью метода sonet_group.update
+SITE_ID string | Идентификатор сайта, которому принадлежит группа
+SUBJECT_ID integer | Идентификатор тематики группы. Тематика группы указывается в расширенных настройках группы
+NAME string | Имя группы
+DESCRIPTION text | Описание группы
+KEYWORDS string | Теги группы через запятую: тег1,тег2
+CLOSED boolean | Флаг Y/N - является ли группа архивной
+VISIBLE boolean | Флаг Y/N - видна ли группа в списке групп
+OPENED boolean | Флаг Y/N - является ли группа открытой
+DATE_CREATE string | Дата создания группы в формате DD.MM.YYYY hh:mm:ss. Если ключ DATE_CREATE запрошен в select, то дата возвращается в более читаемом формате, например:
+сегодня, 12:16
+вчера, 14:42
+15 апреля 14:42, если группа создана в этом году
+11 июня 2024 15:08, если группа создана не в этом году
+DATE_UPDATE string | Дата обновления группы в формате DD.MM.YYYY hh:mm:ss
+DATE_ACTIVITY string | Дата последней активности в группе в формате DD.MM.YYYY hh:mm:ss
+IMAGE_ID integer | Идентификатор пользовательского аватара группы в таблице b_file. 0, если используется системное изображение в качестве аватара
+AVATAR_TYPE string | Тип последнего установленного системного аватара:
+folder - аватар в виде папки
+checks - аватар в виде чекбокса
+pie - аватар в виде графика «пирог»
+bag - аватар в виде портфеля
+members - аватар в виде силуэтов
+"" - иной системный аватар
+OWNER_ID user | Идентификатор владельца группы
+INITIATE_PERMS enum | Кто имеет право на приглашение пользователей в группу:
+A - только владелец группы
+E - владелец группы и модераторы группы
+K - все члены группы
+NUMBER_OF_MEMBERS integer | Количество участников группы
+NUMBER_OF_MODERATORS integer | Количество модераторов группы
+PROJECT boolean | Флаг Y/N - является ли группа проектом
+PROJECT_DATE_START any | Дата начала проекта в формате DD.MM.YYYY hh:mm:ss. null, если не указана
+PROJECT_DATE_FINISH any | Дата окончания проекта в формате DD.MM.YYYY hh:mm:ss. null, если не указана
+SEARCH_INDEX string | Индекс, ключевые слова для поиска группы
+LANDING boolean | Флаг Y/N - является ли группа группой для публикации
+SCRUM_MASTER_ID integer | Идентификатор мастера скрама. 0, если группа не является скрамом
+SCRUM_SPRINT_DURATION integer | Длительность спринта скрама в секундах. 0, если группа не является скрамом
+SCRUM_TASK_RESPONSIBLE string | Исполнитель по умолчанию при постановке задач:
+A - постановщик
+M - скрам-мастер
+"" - группа не является скрамом
+TYPE enum | Тип группы:
+group - группа
+project - проект
+scrum - скрам
+collab - коллаба
+MEMBERS array | Идентификаторы участников группы
+CHAT_ID integer | Идентификатор чата группы
+DIALOG_ID string | Идентификатор диалога группы
+ORDINARY_MEMBERS array | Массив идентификаторов пользователей группы, не являющимися владельцами или модераторами
+INVITED_MEMBERS array | Массив идентификаторов пользователей портала, которым было отправлено приглашение в группу, но они его еще не приняли
+MODERATOR_MEMBERS array | Массив идентификаторов участников группы с ролью модератора
+SITE_IDS array | Список идентификаторов сайтов, которым принадлежит группа
+AVATAR string | URL сжатого пользовательского аватара группы. "", если пользовательский аватар не установлен
+AVATAR_TYPES object | Объект, содержащий аватары групп:
+AVATAR_TYPE[avatar_id][sort] integer - сортировка аватара
+AVATAR_TYPE[avatar_id][mobileUrl] string - URL для отображения аватара в мобильном приложении
+AVATAR_TYPE[avatar_id][webCssClass] string - CSS класс аватара
+AVATAR_TYPE[avatar_id][entitySelectorUrl] string - Entity selector URL
+AVATAR_DATA object | Информация об аватаре группы:
+AVATAR_DATA[type] string - тип аватара:
+icon - системный аватар
+image - пользовательское изображение
+AVATAR_DATA[id] string - идентификатор аватара:
+folder - аватар в виде папки
+tasks - аватар в виде чекбокса
+chart - аватар в виде графика «пирог»
+briefcase - аватар в виде портфеля
+group - аватар в виде силуэтов
+"" - иной системный аватар
+URL - ссылка на сжатый пользовательский аватар, если он установлен
+OWNER_DATA object | Информация о владельце группы:
+OWNER_DATA[ID] user - идентификатор владельца группы
+OWNER_DATA[PHOTO] string - URL сжатого аватара владельца группы
+OWNER_DATA[FORMATTED_NAME] string - отформатированное согласно настройкам портала имя владельца группы
+SUBJECT_DATA object | Информация о тематике группы, указанной в расширенных настройках группы:
+SUBJECT_DATA[ID] integer - идентификатор тематики
+SUBJECT_DATA[NAME] string - название тематики
+TAGS array | Теги группы, аналогично KEYWORDS, но в формате массива
+ACTIONS object | Данные о доступных текущему пользователю операциях над группой:
+ACTIONS[EDIT] boolean - Значение true/false - доступно ли редактирование группы
+ACTIONS[DELETE] boolean - Значение true/false - доступно ли удаление группы
+ACTIONS[INVITE] boolean - Значение true/false - доступно ли приглашение сторонних участников в группу
+ACTIONS[JOIN] boolean - Значение true/false - может ли пользователь присоединиться к группе
+ACTIONS[LEAVE] boolean - Значение true/false - может ли пользователь покинуть группу
+ACTIONS[FOLLOW] boolean - Значение true/false - может ли пользователь подписаться на обновления группы
+ACTIONS[PIN] boolean - Значение true/false - доступно ли закрепление группы
+ACTIONS[EDIT_FEATURES] boolean - Значение true/false - доступно ли изменение фич группы
+USER_DATA object | Информация о текущем пользователе относительно группы:
+USER_DATA[ROLE] any - роль пользователя в группе:
+A - владелец группы
+E - модератор группы
+K - участник группы
+Z - ожидает вступления
+false - значение отсутствует
+USER_DATA[INITIATED_BY_TYPE] any - кем инициирована связь пользователя с группой:
+U - пользователем, например пользователь отправил запрос на вступление в группу
+G - группой, например пользователю отправили приглашение
+false - значение отсутствует
+USER_DATA[IS_SUBSCRIBED] boolean - Значение true/false - подписан ли пользователь на обновления группы
+DEPARTMENTS array | Массив идентификаторов отделов добавленных в группу
+IS_PIN boolean | Значение true/false - закреплена ли группа у текущего пользователя на странице групп и проектов
+PRIVACY_CODE string | Уровень приватности группы:
+open - открытая группа
+closed - закрытая группа
+secret - секретная группа
+LIST_OF_MEMBERS object | Массив с информацией о пользователях группы:
+LIST_OF_MEMBERS[0][id] user - идентификатор пользователя
+LIST_OF_MEMBERS[0][isOwner] boolean - Значение true/false - является ли пользователь владельцем группы
+LIST_OF_MEMBERS[0][isModerator] boolean - Значение true/false - является ли пользователь модератором
+LIST_OF_MEMBERS[0][isScrumMaster] boolean - Значение true/false - является ли пользователь скрам-мастером (в случае скрам-групп)
+LIST_OF_MEMBERS[0][isAutoMember] boolean - Значение true/false - пользователь добавлен в группу автоматически (без приглашения)
+LIST_OF_MEMBERS[0][name] string - имя пользователя
+LIST_OF_MEMBERS[0][lastName] string - фамилия пользователя
+LIST_OF_MEMBERS[0][position] string - должность пользователя
+LIST_OF_MEMBERS[0][photo] string - URL сжатого аватара пользователя
+FEATURES object | Массив с информацией о фичах группы:
+FEATURES[0][featureName] string - символьный идентификатор фичи
+FEATURES[0][name] string - название фичи
+FEATURES[0][customName] string - пользовательское название фичи в расширенных настройках группы
+FEATURES[0][id] string - числовой идентификатор фичи
+FEATURES[0][active] boolean - Значение true / false - включена ли фича в группе
+LIST_OF_MEMBERS_AWAITING_INVITE object | Информация о пользователях, ожидающих подтверждения вступления в группу:
+LIST_OF_MEMBERS_AWAITING_INVITE[0][id] user - идентификатор пользователя
+LIST_OF_MEMBERS_AWAITING_INVITE[0][name] string - отформатированное согласно настройкам портала имя
+LIST_OF_MEMBERS_AWAITING_INVITE[0][photo] string - URL сжатого аватара пользователя
+GROUP_MEMBERS_LIST object | Информация о связанных с группой пользователями:
+GROUP_MEMBERS_LIST[0][id] user - идентификатор участника
+GROUP_MEMBERS_LIST[0][invited] boolean - Значение true/false - пользователь приглашен
+GROUP_MEMBERS_LIST[0][isAwaiting] boolean - Значение true/false - пользователь ожидает принятия в группу
+GROUP_MEMBERS_LIST[0][isMember] boolean - Значение true/false - пользователь является участником группы
+COUNTERS object | Счетчики:
+COUNTERS[workgroup_requests_out] integer - текущее количество непринятых приглашений в группу
+COUNTERS[workgroup_requests_in] integer - текущее количество запросов на вступление в группу
+EFFICIENCY integer | Эффективность группы
+ADDITIONAL_DATA object | Дополнительные данные для текущего пользователя:
+ADDITIONAL_DATA[ROLE] string - роль текущего пользователя в группе:
+A - владелец группы
+E - модератор группы
+K - участник группы
+Z - ожидает вступления
+"" - пользователь никак не относится к группе
+ADDITIONAL_DATA[INITIATED_BY_TYPE] string - кем инициирована связь пользователя с группой:
+U - пользователем, например пользователь отправил запрос на вступление в группу
+G - группой, например пользователю отправили приглашение
+"" - пользователь никак не относится к группе
+
+Таблица 5:
+error
+string | Строковый код ошибки. Может состоять из цифр, латинских букв и знака подчеркивания
+error_description
+error_description | Текстовое описание ошибки. Описание не предназначено для показа конечному пользователю в необработанном виде
+
+Таблица 6:
+SONET_CONTROLLER_WORKGROUP_EMPTY | В массив params не передан параметр groupId | 400
+SONET_CONTROLLER_WORKGROUP_NOT_FOUND | Группа по идентификатору params[groupId] не найдена или у текущего пользователя нет доступа к ней | 400
+
+Таблица 7:
+500 | INTERNAL_SERVER_ERROR
+Internal server error | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+500 | ERROR_UNEXPECTED_ANSWER
+Server returned an unexpected response | Возникла внутренняя ошибка сервера, обратитесь к администратору сервера или в техническую поддержку Битрикс24
+503 | QUERY_LIMIT_EXCEEDED
+Too many requests | Превышен лимит на интенсивность запросов
+405 | ERROR_BATCH_METHOD_NOT_ALLOWED
+Method is not allowed for batch usage | Текущий метод не разрешен для вызове с помощью batch
+400 | ERROR_BATCH_LENGTH_EXCEEDED
+Max batch length exceeded | Превышена максимальная длина параметров, переданных в метод batch
+401 | NO_AUTH_FOUND
+Wrong authorization data | Неверный access-токен или код вебхука
+400 | INVALID_REQUEST
+Https required | Для вызовов методов требуется использовать протокол HTTPS
+503 | OVERLOAD_LIMIT
+REST API is blocked due to overload | REST API заблокирован из-за перегрузки. Это ручная индивидуальная блокировка, для снятия необходимо обращаться в техническую поддержку Битрикс24
+403 | ACCESS_DENIED
+REST API is available only on commercial plans | REST API доступен только на коммерческих планах
+403 | INVALID_CREDENTIALS
+Invalid request credentials | У пользователя, с чьим access-токеном или вебхуком был вызван метод, не хватает прав
+404 | ERROR_MANIFEST_IS_NOT_AVAILABLE
+Manifest is not available | Манифест недоступен
+403 | insufficient_scope
+The request requires higher privileges than provided by the webhook token | Запрос требует более высоких привилегий, чем предоставляет токен вебхука
+401 | expired_token
+The access token provided has expired | Предоставленный access-токен доступа истек
+403 | user_access_error
+The user does not have access to the application | Пользователь не имеет доступа к приложению. Это означает, что приложение установлено, но администратор портала разрешил доступ к этому приложению только конкретным пользователям
+500 | PORTAL_DELETED
+Portal was deleted | Публичная часть сайта закрыта. Чтобы открыть публичную часть сайта на коробочной установке отключите опцию «Временное закрытие публичной части сайта». Путь к настройке: Рабочий стол > Настройки > Настройки продукта > Настройки модулей > Главный модуль > Временное закрытие публичной части сайта
